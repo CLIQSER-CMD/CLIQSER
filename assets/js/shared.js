@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Mobile Menu Toggle Setup
     initMobileMenu();
-
-    // 6. Initialize Floating WhatsApp Widget
-    initFloatingWhatsApp();
 });
 
 /**
@@ -196,31 +193,4 @@ function initMobileMenu() {
             document.body.classList.remove('overflow-hidden');
         });
     });
-}
-
-/**
- * Floating WhatsApp Widget Injector
- */
-function initFloatingWhatsApp() {
-    if (document.getElementById('whatsapp-floating-widget')) return;
-
-    const widget = document.createElement('div');
-    widget.id = 'whatsapp-floating-widget';
-    widget.className = 'fixed bottom-6 right-6 z-50 group flex items-center justify-center';
-    widget.innerHTML = `
-        <!-- Pulsing Background Ring -->
-        <span class="absolute inline-flex h-14 w-14 rounded-full bg-[#25D366]/40 animate-ping opacity-75"></span>
-        
-        <!-- Main Anchor Link -->
-        <a href="https://api.whatsapp.com/send?phone=919653202600&text=Hi%20Cliqser%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20know%20more%20about%20your%20services." 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           class="relative flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all duration-300 hover:scale-110 active:scale-95"
-           aria-label="Chat on WhatsApp">
-            <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.62.962 3.21 1.493 4.904 1.495 5.293.003 9.6-4.301 9.603-9.6.002-2.568-1.002-4.98-2.824-6.804-1.821-1.821-4.24-2.825-6.81-2.825-5.3 0-9.605 4.302-9.609 9.602-.001 1.79.48 3.502 1.395 5.016L2.146 22l6.23-1.63a9.626 9.626 0 0 0-.29-.537zm9.646-6.605c.262.13.44.208.494.304.055.096.055.548-.11.998-.165.45-.962.88-1.32.913-.357.033-.769.198-2.31-.41-1.874-.741-3.078-2.658-3.17-2.78-.09-.124-.816-.985-.816-1.88 0-.896.471-1.336.637-1.503.165-.167.357-.208.494-.208.138 0 .275 0 .385.006.115.006.27.003.424.37.165.392.55 1.336.6 1.438.05.1.082.22.016.353-.066.13-.1.21-.2.33-.1.12-.2.202-.286.302-.099.117-.2.242-.088.434.113.193.502.825 1.078 1.34.743.664 1.37.87 1.562.966.192.096.304.08.418-.05.115-.133.5-.58.632-.777.132-.196.264-.162.44-.098z"/>
-            </svg>
-        </a>
-    `;
-    document.body.appendChild(widget);
 }

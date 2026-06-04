@@ -368,16 +368,6 @@
         const timeline = document.getElementById('inq-timeline').value;
         const desc = document.getElementById('inq-desc').value;
 
-        const messageText = `*New Inquiry from Cliqser Web*\n\n` +
-            `*Name:* ${name}\n` +
-            `*Email:* ${email}\n` +
-            `*Services:* ${services || "None selected"}\n` +
-            `*Timeline:* ${timeline}\n` +
-            `*Message:* ${desc}`;
-        
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=919653202600&text=${encodeURIComponent(messageText)}`;
-        window.open(whatsappUrl, '_blank');
-
         fetch("https://formsubmit.co/ajax/Cliqser73@gmail.com", {
             method: "POST",
             headers: { 
@@ -395,15 +385,18 @@
         .then(response => {
             submitBtn.disabled = false;
             submitBtn.innerText = 'Submit Inquiry';
-            form.classList.add('hidden');
-            dialog.classList.remove('hidden');
+            if (response.ok) {
+                form.classList.add('hidden');
+                dialog.classList.remove('hidden');
+            } else {
+                alert("Failed to send inquiry. Please try again.");
+            }
         })
         .catch(error => {
             submitBtn.disabled = false;
             submitBtn.innerText = 'Submit Inquiry';
             console.error(error);
-            form.classList.add('hidden');
-            dialog.classList.remove('hidden');
+            alert("Error sending inquiry. Please try again.");
         });
     }
 
