@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Services | Cliqser Next-Gen IT Engineering</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "on-secondary": "#303030",
+              "background": "#121414",
+              "outline": "#8b90a0",
+              "surface-container-low": "#1b1c1c",
+              "tertiary-container": "#00819d",
+              "surface-variant": "#343535",
+              "surface-dim": "#121414",
+              "primary-container": "#0070f3",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#001f28",
+              "surface-tint": "#aec6ff",
+              "tertiary-fixed": "#b5ebff",
+              "surface-container-highest": "#343535",
+              "primary": "#aec6ff",
+              "on-primary-container": "#ffffff",
+              "surface-container": "#1f2020",
+              "on-tertiary-container": "#ffffff",
+              "on-surface": "#e3e2e2",
+              "secondary": "#c6c6c6",
+              "on-primary-fixed": "#001a43",
+              "error-container": "#93000a",
+              "inverse-surface": "#e3e2e2",
+              "on-secondary-fixed": "#1b1b1b",
+              "on-primary": "#002e6b",
+              "on-surface-variant": "#c1c6d7",
+              "on-tertiary-fixed-variant": "#004e60",
+              "inverse-on-surface": "#303031",
+              "surface-container-high": "#292a2a",
+              "tertiary-fixed-dim": "#43d6ff",
+              "on-error": "#690005",
+              "inverse-primary": "#0059c5",
+              "on-primary-fixed-variant": "#004397",
+              "primary-fixed": "#d8e2ff",
+              "on-secondary-fixed-variant": "#474747",
+              "on-background": "#e3e2e2",
+              "outline-variant": "#414754",
+              "primary-fixed-dim": "#aec6ff",
+              "secondary-fixed": "#e2e2e2",
+              "surface": "#121414",
+              "surface-container-lowest": "#0d0e0f",
+              "secondary-container": "#474747",
+              "on-tertiary": "#003543",
+              "error": "#ffb4ab",
+              "secondary-fixed-dim": "#c6c6c6",
+              "on-secondary-container": "#b5b5b5",
+              "surface-bright": "#383939",
+              "tertiary": "#43d6ff"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "container-max": "1200px",
+              "xs": "4px",
+              "base": "8px",
+              "sm": "12px",
+              "gutter": "24px",
+              "lg": "48px",
+              "md": "24px",
+              "xl": "80px"
+            },
+            "fontFamily": {
+              "code": ["jetbrainsMono"],
+              "label-md": ["Geist"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "display": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+              "code": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+              "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+              "display": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+              "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+              "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+    <link href="../assets/css/shared.css" rel="stylesheet"/>
+    <script src="../assets/js/shared.js" defer></script>
+</head>
+<body class="font-body-md selection:bg-primary-container selection:text-white overflow-x-hidden">
+<canvas id="particleCanvas"></canvas>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-500" id="main-nav">
+    <nav class="flex justify-between items-center w-full px-lg py-base max-w-container-max mx-auto">
+        <div class="flex items-center gap-base">
+            <a href="../index.html" class="font-display text-headline-md font-extrabold text-primary tracking-tighter cursor-pointer">Cliqser</a>
+        </div>
+        <div class="hidden md:flex items-center gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../index.html">Home</a>
+            <a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md transition-all duration-300" href="index.html">Services</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../about.html">About</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../contact.html">Contact</a>
+        </div>
+        <div class="flex items-center gap-md">
+            <a href="../contact.html" class="bg-primary text-on-primary px-md py-xs rounded-full font-label-md text-label-md font-bold btn-hover active:scale-95 text-center block">
+                Get Started
+            </a>
+            <!-- Mobile Menu Burger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-on-surface hover:text-primary transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-[32px]">menu</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-surface/95 backdrop-blur-lg flex flex-col justify-center items-center gap-lg text-center">
+    <button id="mobile-menu-close" class="absolute top-md right-md text-on-surface hover:text-primary transition-colors focus:outline-none">
+        <span class="material-symbols-outlined text-[36px]">close</span>
+    </button>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../index.html">Home</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="index.html">Services</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../about.html">About</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../contact.html">Contact</a>
+</div>
+
+<main class="relative pt-xl">
+    <!-- Header Banner -->
+    <section class="py-lg px-md max-w-container-max mx-auto text-center relative overflow-hidden">
+        <div class="glow-effect top-0 left-1/4 opacity-30"></div>
+        <div class="max-w-2xl mx-auto z-10 relative">
+            <span class="font-code text-code text-primary uppercase tracking-widest block mb-md">Our Services Directory</span>
+            <h1 class="font-display text-headline-lg text-on-surface mb-base">Precision Technical Expertise</h1>
+            <p class="text-on-surface-variant font-body-lg">
+                We bridge high-end engineering with modern creative designs to produce elite solutions.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-lg px-md max-w-container-max mx-auto reveal active">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            
+            <!-- Service 1 -->
+            <a href="website-development.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">language</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">Website Development</h3>
+                    <p class="text-on-surface-variant text-body-md">High-performance, responsive websites built with React, Next.js, and static setups optimized for SEO.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 2 -->
+            <a href="app-development.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">smartphone</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">App Development</h3>
+                    <p class="text-on-surface-variant text-body-md">Cross-platform (Flutter, React Native) and native mobile apps focusing on high-speed UI and offline capabilities.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 3 -->
+            <a href="ai-automation.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">smart_toy</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">AI Automation &amp; Bots</h3>
+                    <p class="text-on-surface-variant text-body-md">Automating corporate processes, chat infrastructure, and operations with custom AI modules.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 4 -->
+            <a href="ui-ux-design.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">design_services</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">UI/UX Design</h3>
+                    <p class="text-on-surface-variant text-body-md">Sleek, minimalist, high-fidelity wireframing and design systems aligned with developer context.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 5 -->
+            <a href="video-editing.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">movie</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">Video Editing</h3>
+                    <p class="text-on-surface-variant text-body-md">Visual storytelling, short-form editing, motion graphics, and marketing content production.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 6 -->
+            <a href="branding.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">campaign</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">Branding &amp; Presence</h3>
+                    <p class="text-on-surface-variant text-body-md">Crafting logo systems, identity brandbooks, voice assets, and social campaign guidelines.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 7 -->
+            <a href="game-development.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">sports_esports</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">Game Development</h3>
+                    <p class="text-on-surface-variant text-body-md">Building lightweight HTML5 web games and cross-platform Unity/Godot 2D/3D games.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+            <!-- Service 8 -->
+            <a href="ai-agents.html" class="service-card group p-lg rounded-xl flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-primary text-[40px] mb-md group-hover:scale-110 transition-transform">memory</span>
+                    <h3 class="text-headline-md font-bold text-on-surface mb-xs">AI Agents &amp; Systems</h3>
+                    <p class="text-on-surface-variant text-body-md">Custom agents built on top of LLMs, performing autonomous multi-step reasoning tasks.</p>
+                </div>
+                <span class="mt-md text-primary font-bold flex items-center gap-xs text-label-md group-hover:gap-sm transition-all duration-300">
+                    Explore Service <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+                </span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Work Process Section -->
+    <section class="py-xl px-md max-w-container-max mx-auto reveal">
+        <div class="text-center mb-xl">
+            <h2 class="font-display text-headline-lg text-on-surface">Our Collaboration Flow</h2>
+            <p class="text-on-surface-variant font-body-md">Structured steps to turn requirements into deployable software.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+            <div class="p-md bg-surface-container rounded-2xl border border-outline-variant/10 text-center relative">
+                <span class="absolute top-2 left-4 font-code text-lg text-primary font-bold">01</span>
+                <span class="material-symbols-outlined text-primary text-[40px] mb-sm block">forum</span>
+                <h4 class="font-bold text-on-surface mb-xs">Discovery</h4>
+                <p class="text-on-surface-variant text-sm">Aligning on features, design systems, and business goals.</p>
+            </div>
+            <div class="p-md bg-surface-container rounded-2xl border border-outline-variant/10 text-center relative">
+                <span class="absolute top-2 left-4 font-code text-lg text-primary font-bold">02</span>
+                <span class="material-symbols-outlined text-primary text-[40px] mb-sm block">palette</span>
+                <h4 class="font-bold text-on-surface mb-xs">High-Fidelity Design</h4>
+                <p class="text-on-surface-variant text-sm">Drafting interactive UI mockups and locking the typography system.</p>
+            </div>
+            <div class="p-md bg-surface-container rounded-2xl border border-outline-variant/10 text-center relative">
+                <span class="absolute top-2 left-4 font-code text-lg text-primary font-bold">03</span>
+                <span class="material-symbols-outlined text-primary text-[40px] mb-sm block">code</span>
+                <h4 class="font-bold text-on-surface mb-xs">Engineering</h4>
+                <p class="text-on-surface-variant text-sm">Coding structured files, modules, and server cloud configurations.</p>
+            </div>
+            <div class="p-md bg-surface-container rounded-2xl border border-outline-variant/10 text-center relative">
+                <span class="absolute top-2 left-4 font-code text-lg text-primary font-bold">04</span>
+                <span class="material-symbols-outlined text-primary text-[40px] mb-sm block">rocket_launch</span>
+                <h4 class="font-bold text-on-surface mb-xs">Launch &amp; Retain</h4>
+                <p class="text-on-surface-variant text-sm">Running performance audits, hosting files, and verifying logs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="py-xl px-md max-w-container-max mx-auto text-center reveal">
+        <div class="p-lg md:p-xl bg-surface-container-high rounded-3xl border border-outline-variant/20 relative overflow-hidden">
+            <div class="glow-effect -top-20 -right-20 opacity-30"></div>
+            <h2 class="font-display text-headline-lg mb-md">Ready to start?</h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto mb-lg">
+                Inquire today to get a detailed breakdown of timelines and tech stack options for your idea.
+            </p>
+            <a href="../contact.html" class="bg-primary text-on-primary px-xl py-md rounded-lg font-bold btn-hover inline-block">
+                Configure Project
+            </a>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-md gap-gutter max-w-container-max mx-auto">
+        <div class="flex flex-col gap-xs items-center md:items-start">
+            <span class="font-display text-headline-md text-primary font-bold">Cliqser</span>
+            <p class="font-body-md text-body-md text-on-surface-variant">© 2026 Cliqser. All rights reserved. Engineering the future.</p>
+        </div>
+        <div class="flex gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Security</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="../contact.html">Contact</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+

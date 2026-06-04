@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AI Agents &amp; Systems | Cliqser</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "on-secondary": "#303030",
+              "background": "#121414",
+              "outline": "#8b90a0",
+              "surface-container-low": "#1b1c1c",
+              "tertiary-container": "#00819d",
+              "surface-variant": "#343535",
+              "surface-dim": "#121414",
+              "primary-container": "#0070f3",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#001f28",
+              "surface-tint": "#aec6ff",
+              "tertiary-fixed": "#b5ebff",
+              "surface-container-highest": "#343535",
+              "primary": "#aec6ff",
+              "on-primary-container": "#ffffff",
+              "surface-container": "#1f2020",
+              "on-tertiary-container": "#ffffff",
+              "on-surface": "#e3e2e2",
+              "secondary": "#c6c6c6",
+              "on-primary-fixed": "#001a43",
+              "error-container": "#93000a",
+              "inverse-surface": "#e3e2e2",
+              "on-secondary-fixed": "#1b1b1b",
+              "on-primary": "#002e6b",
+              "on-surface-variant": "#c1c6d7",
+              "on-tertiary-fixed-variant": "#004e60",
+              "inverse-on-surface": "#303031",
+              "surface-container-high": "#292a2a",
+              "tertiary-fixed-dim": "#43d6ff",
+              "on-error": "#690005",
+              "inverse-primary": "#0059c5",
+              "on-primary-fixed-variant": "#004397",
+              "primary-fixed": "#d8e2ff",
+              "on-secondary-fixed-variant": "#474747",
+              "on-background": "#e3e2e2",
+              "outline-variant": "#414754",
+              "primary-fixed-dim": "#aec6ff",
+              "secondary-fixed": "#e2e2e2",
+              "surface": "#121414",
+              "surface-container-lowest": "#0d0e0f",
+              "secondary-container": "#474747",
+              "on-tertiary": "#003543",
+              "error": "#ffb4ab",
+              "secondary-fixed-dim": "#c6c6c6",
+              "on-secondary-container": "#b5b5b5",
+              "surface-bright": "#383939",
+              "tertiary": "#43d6ff"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "container-max": "1200px",
+              "xs": "4px",
+              "base": "8px",
+              "sm": "12px",
+              "gutter": "24px",
+              "lg": "48px",
+              "md": "24px",
+              "xl": "80px"
+            },
+            "fontFamily": {
+              "code": ["jetbrainsMono"],
+              "label-md": ["Geist"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "display": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+              "code": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+              "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+              "display": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+              "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+              "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+    <link href="../assets/css/shared.css" rel="stylesheet"/>
+    <script src="../assets/js/shared.js" defer></script>
+</head>
+<body class="font-body-md selection:bg-primary-container selection:text-white overflow-x-hidden">
+<canvas id="particleCanvas"></canvas>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-500" id="main-nav">
+    <nav class="flex justify-between items-center w-full px-lg py-base max-w-container-max mx-auto">
+        <div class="flex items-center gap-base">
+            <a href="../index.html" class="font-display text-headline-md font-extrabold text-primary tracking-tighter cursor-pointer">Cliqser</a>
+        </div>
+        <div class="hidden md:flex items-center gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../index.html">Home</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="index.html">Services</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../about.html">About</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="../contact.html">Contact</a>
+        </div>
+        <div class="flex items-center gap-md">
+            <a href="../contact.html" class="bg-primary text-on-primary px-md py-xs rounded-full font-label-md text-label-md font-bold btn-hover active:scale-95 text-center block">
+                Get Started
+            </a>
+            <!-- Mobile Menu Burger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-on-surface hover:text-primary transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-[32px]">menu</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-surface/95 backdrop-blur-lg flex flex-col justify-center items-center gap-lg text-center">
+    <button id="mobile-menu-close" class="absolute top-md right-md text-on-surface hover:text-primary transition-colors focus:outline-none">
+        <span class="material-symbols-outlined text-[36px]">close</span>
+    </button>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../index.html">Home</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="index.html">Services</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../about.html">About</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="../contact.html">Contact</a>
+</div>
+
+<main class="relative pt-xl">
+    <!-- Hero Header -->
+    <section class="py-lg px-md max-w-container-max mx-auto relative overflow-hidden">
+        <div class="glow-effect top-0 left-1/4 opacity-40"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg items-center relative z-10">
+            <div>
+                <a href="index.html" class="text-primary font-code text-code flex items-center gap-xs mb-sm hover:underline">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Services
+                </a>
+                <h1 class="font-display text-headline-lg-mobile md:text-display text-on-surface mb-md leading-tight">
+                    AI Agents <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-tertiary to-primary">&amp; Systems</span>
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">
+                    Next-generation autonomy. We construct agent loops using frameworks (LangChain, AutoGen) that read databases, execute tools, and solve complex workflows.
+                </p>
+            </div>
+            <div class="p-lg bg-surface-container rounded-3xl border border-outline-variant/10">
+                <span class="material-symbols-outlined text-primary text-[48px] mb-sm">memory</span>
+                <h3 class="text-headline-md font-bold mb-md">Key Features</h3>
+                <ul class="space-y-sm font-body-md text-on-surface-variant">
+                    <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-sm">check</span> Autonomous Multi-Agent Workflows</li>
+                    <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-sm">check</span> Custom Tool Access (APIs, Web Browsers, Files)</li>
+                    <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-sm">check</span> Vector Database Storage &amp; Long-Term Memory</li>
+                    <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-sm">check</span> Enterprise LLM fine-tuning &amp; API setups</li>
+                    <li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-sm">check</span> Multi-Step Reasoning &amp; self-correcting execution</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-md gap-gutter max-w-container-max mx-auto">
+        <div class="flex flex-col gap-xs items-center md:items-start">
+            <span class="font-display text-headline-md text-primary font-bold">Cliqser</span>
+            <p class="font-body-md text-body-md text-on-surface-variant">© 2026 Cliqser. All rights reserved. Engineering the future.</p>
+        </div>
+        <div class="flex gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Security</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="../contact.html">Contact</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+
