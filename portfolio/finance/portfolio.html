@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>QUANTFLOW | Portfolio & Assets</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+      body { background-color: #050505; color: #d4e4fa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .glass { backdrop-filter: blur(12px); background: rgba(10, 14, 23, 0.7); border: 1px solid #1e293b; }
+      .glass-panel { background: rgba(10, 14, 23, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(30, 41, 59, 0.5); }
+      .glow-border:hover { border-color: rgba(0, 219, 231, 0.3); box-shadow: 0 0 15px rgba(0, 219, 231, 0.1); }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+      ::-webkit-scrollbar { width: 4px; height: 4px; }
+      ::-webkit-scrollbar-track { background: #051424; }
+      ::-webkit-scrollbar-thumb { background: #3a494b; border-radius: 2px; }
+      ::-webkit-scrollbar-thumb:hover { background: #849495; }
+      .toast-notification {
+          transform: translateY(100px);
+          opacity: 0;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .toast-notification.show {
+          transform: translateY(0);
+          opacity: 1;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-fixed": "#002022",
+                    "on-surface-variant": "#b9cacb",
+                    "on-primary-container": "#006a71",
+                    "primary-fixed": "#74f5ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-background": "#d4e4fa",
+                    "tertiary-fixed": "#ffdadb",
+                    "primary-container": "#00f2ff",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#273647",
+                    "secondary-container": "#00a572",
+                    "surface-container-low": "#0d1c2d",
+                    "surface-tint": "#00dbe7",
+                    "inverse-surface": "#d4e4fa",
+                    "on-tertiary-fixed": "#40000d",
+                    "surface-variant": "#273647",
+                    "tertiary-container": "#ffcfd1",
+                    "outline": "#849495",
+                    "tertiary-fixed-dim": "#ffb2b7",
+                    "on-secondary-fixed": "#002113",
+                    "primary": "#e1fdff",
+                    "secondary": "#4edea3",
+                    "surface-container-high": "#1c2b3c",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-secondary-container": "#00311f",
+                    "inverse-on-surface": "#233143",
+                    "on-tertiary-container": "#be0d3c",
+                    "on-primary": "#00363a",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#92002a",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-dim": "#051424",
+                    "outline-variant": "#3a494b",
+                    "surface-bright": "#2c3a4c",
+                    "error-container": "#93000a",
+                    "surface-container": "#122131",
+                    "surface": "#051424",
+                    "on-surface": "#d4e4fa",
+                    "tertiary": "#fff5f4",
+                    "inverse-primary": "#00696f",
+                    "on-error": "#690005",
+                    "on-secondary": "#003824",
+                    "surface-container-lowest": "#010f1f",
+                    "on-tertiary": "#67001b",
+                    "background": "#051424",
+                    "primary-fixed-dim": "#00dbe7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.375rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "24px",
+                    "stack-xs": "4px",
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "container-margin-mobile": "16px",
+                    "container-margin-desktop": "32px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "display-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-sm": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="flex min-h-screen pb-12 md:pb-0">
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container border-r border-outline-variant/10 hidden md:flex flex-col p-gutter gap-stack-md">
+        <div onclick="window.location.href='index.html'" class="flex items-center gap-3 mb-stack-lg cursor-pointer">
+            <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-primary-fixed-variant" style="font-variation-settings: 'FILL' 1;">dataset</span>
+            </div>
+            <div>
+                <h1 class="font-headline-md text-headline-md text-primary tracking-tighter leading-none">QUANTFLOW</h1>
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Institutional Grade</p>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="terminal.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md text-label-md">Terminal</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="analytics.html">
+                <span class="material-symbols-outlined">query_stats</span>
+                <span class="font-label-md text-label-md">Analytics</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold transition-all active:scale-98" href="portfolio.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+                <span class="font-label-md text-label-md">Assets</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="#history">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-label-md text-label-md">History</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="#security">
+                <span class="material-symbols-outlined">verified_user</span>
+                <span class="font-label-md text-label-md">Security</span>
+            </a>
+        </nav>
+        <div class="mt-auto space-y-4">
+            <div class="p-4 rounded-xl bg-surface-variant/30 border border-outline-variant/20">
+                <p class="font-label-sm text-label-sm text-on-surface-variant mb-2 font-bold uppercase">PRO PLAN ACTIVE</p>
+                <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                    <div class="h-full bg-secondary w-2/3"></div>
+                </div>
+                <button onclick="showToast('You are already on the Pro Plan!')" class="mt-3 w-full py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg active:scale-95 transition-transform">Upgrade details</button>
+            </div>
+            <div class="pt-4 border-t border-outline-variant/10 space-y-1">
+                <a onclick="showToast('Support ticket created. We will email you shortly.')" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-secondary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">headset_mic</span>
+                    <span class="font-label-md text-label-md">Support</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-error transition-colors" href="index.html">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="font-label-md text-label-md">Sign Out</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="md:ml-64 flex-1 flex flex-col min-h-screen">
+        <!-- TopAppBar -->
+        <header class="fixed top-0 right-0 left-0 md:left-64 z-30 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 px-container-margin-desktop py-4 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-stack-lg flex-1">
+                <div class="relative group max-w-xs w-full">
+                    <input onclick="showToast('Use search on the Terminal page!')" class="bg-surface-container-lowest border-none rounded-full px-10 py-2 w-full text-body-sm text-on-surface focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search markets..." type="text"/>
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+                </div>
+                <div class="hidden lg:flex gap-6 items-center ml-4">
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Markets</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="analytics.html">Analytics</a>
+                    <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="portfolio.html">Portfolio</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="analytics.html#ai-projections">AI Insights</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="font-label-sm text-label-sm text-secondary">LIVE</span>
+                </div>
+                <span onclick="showToast('No new notifications.')" class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+                <span onclick="showToast('Configure settings on Terminal page')" class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+                <button onclick="window.location.href='terminal.html'" class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:shadow-[0_0_10px_rgba(225,253,255,0.3)] transition-all active:scale-95">Launch Terminal</button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="mt-20 p-container-margin-desktop grid grid-cols-12 gap-gutter flex-1">
+            <!-- Dashboard Header & Stats -->
+            <header class="col-span-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-stack-md mb-2">
+                <div>
+                    <h1 class="font-display-sm text-display-sm font-bold text-on-surface">Portfolio Overview</h1>
+                    <p class="text-on-surface-variant font-body-md">Real-time valuation across all institutional nodes.</p>
+                </div>
+                <div class="flex gap-stack-md">
+                    <div class="glass p-4 rounded-xl min-w-[160px]">
+                        <p class="text-label-sm font-label-sm text-outline uppercase font-bold">Total Balance</p>
+                        <p class="text-headline-md font-headline-md text-primary mt-1">$2,481,294.02</p>
+                    </div>
+                    <div class="glass p-4 rounded-xl min-w-[160px]">
+                        <p class="text-label-sm font-label-sm text-outline uppercase font-bold">24h P/L</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <p class="text-headline-md font-headline-md text-secondary font-bold">+$42,109.12</p>
+                            <span class="text-label-sm font-label-sm text-secondary font-bold">(+1.72%)</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Grid Layout -->
+            <!-- Asset List Table (Bento Style Card) -->
+            <section class="col-span-12 lg:col-span-8 glass rounded-2xl overflow-hidden flex flex-col glow-border transition-all">
+                <div class="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                        <h2 class="font-title-lg text-title-lg text-primary">Managed Assets</h2>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <div class="relative w-full">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xs">search</span>
+                            <input id="asset-search-input" oninput="filterAssetsTable()" class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg pl-9 pr-4 py-1.5 text-label-md font-label-md focus:border-primary/50 outline-none text-on-surface" placeholder="Filter assets..." type="text"/>
+                        </div>
+                        <button onclick="showToast('Filters reset')" class="glass p-2 rounded-lg hover:bg-surface-variant flex items-center justify-center">
+                            <span class="material-symbols-outlined text-sm">tune</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="assets-table">
+                        <thead>
+                            <tr class="bg-surface-container-low border-b border-outline-variant/10">
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold">Asset</th>
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold">Balance</th>
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold">Price</th>
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold">Market Value</th>
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold">24h Change</th>
+                                <th class="px-6 py-4 font-label-md text-label-md text-outline uppercase font-bold"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10">
+                            <tr class="hover:bg-primary/5 transition-colors group cursor-pointer border-asset-row">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-[#f7931a]/10 flex items-center justify-center border border-[#f7931a]/20">
+                                            <span class="material-symbols-outlined text-[#f7931a] text-lg font-bold">currency_bitcoin</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold name-col">Bitcoin</p>
+                                            <p class="font-label-sm text-label-sm text-outline symbol-col">BTC</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">12.4208 BTC</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">$68,241.10</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-primary font-bold">$847,609.42</td>
+                                <td class="px-6 py-4">
+                                    <span class="font-label-md text-label-md text-secondary font-bold">+2.4%</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="showToast('Options for BTC...')" class="opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-outline hover:text-primary">more_vert</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-primary/5 transition-colors group cursor-pointer border-asset-row">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-[#627eea]/10 flex items-center justify-center border border-[#627eea]/20">
+                                            <span class="material-symbols-outlined text-[#627eea] text-lg">water_drop</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold name-col">Ethereum</p>
+                                            <p class="font-label-sm text-label-sm text-outline symbol-col">ETH</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">142.10 ETH</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">$3,822.45</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-primary font-bold">$543,169.82</td>
+                                <td class="px-6 py-4">
+                                    <span class="font-label-md text-label-md text-error font-bold">-0.8%</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="showToast('Options for ETH...')" class="opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-outline hover:text-primary">more_vert</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-primary/5 transition-colors group cursor-pointer border-asset-row">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
+                                            <span class="material-symbols-outlined text-secondary text-lg">attach_money</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold name-col">USDC</p>
+                                            <p class="font-label-sm text-label-sm text-outline symbol-col">USDC</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">420,500.00 USDC</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-on-surface">$1.00</td>
+                                <td class="px-6 py-4 font-label-md text-label-md text-primary font-bold">$420,500.00</td>
+                                <td class="px-6 py-4">
+                                    <span class="font-label-md text-label-md text-on-surface-variant">0.0%</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button onclick="showToast('Options for USDC...')" class="opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="material-symbols-outlined text-outline hover:text-primary">more_vert</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 border-t border-outline-variant/10 text-center">
+                    <button onclick="showToast('All 42 assets synced and verified.')" class="text-label-md font-label-md text-primary hover:underline">View All 42 Assets</button>
+                </div>
+            </section>
+
+            <!-- Security Center (Right Column) -->
+            <section id="security" class="col-span-12 lg:col-span-4 flex flex-col gap-stack-lg">
+                <div class="glass rounded-2xl p-6 glow-border transition-all">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary">verified_user</span>
+                            <h2 class="font-title-lg text-title-lg text-primary">Security Center</h2>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary font-label-sm text-label-sm border border-secondary/20 font-bold">PROTECTED</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/10">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-outline">key</span>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface font-bold">API Access</p>
+                                    <p class="font-label-sm text-label-sm text-outline">3 Keys Active</p>
+                                </div>
+                            </div>
+                            <span onclick="showToast('API Manager is locked. Authenticate via Hardware wallet.')" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">chevron_right</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/10">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-outline">usb</span>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface font-bold">Hardware Wallet</p>
+                                    <p class="font-label-sm text-label-sm text-secondary flex items-center gap-1 font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> Ledger Nano X
+                                    </p>
+                                </div>
+                            </div>
+                            <span onclick="showToast('Ledger Synced successfully. Block 19828821.')" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">chevron_right</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low border border-outline-variant/10">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-outline">phonelink_lock</span>
+                                <div>
+                                    <p class="font-label-md text-label-md text-on-surface font-bold">Two-Factor Auth</p>
+                                    <p class="font-label-sm text-label-sm text-secondary font-bold">Enabled</p>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-secondary">check_circle</span>
+                        </div>
+                    </div>
+                    <button onclick="triggerSecurityAudit()" class="w-full mt-6 py-3 rounded-xl border border-outline-variant/30 text-label-md font-label-md hover:bg-surface-variant transition-all flex items-center justify-center gap-2 font-bold text-on-surface">
+                        <span class="material-symbols-outlined text-sm">security_update_good</span>
+                        Security Audit
+                    </button>
+                </div>
+                
+                <!-- Pro Upgrade Banner -->
+                <div class="relative rounded-2xl p-6 overflow-hidden min-h-[220px] flex flex-col justify-end group">
+                    <img class="absolute inset-0 w-full h-full object-cover grayscale opacity-30 scale-110 group-hover:scale-100 transition-transform duration-700" src="assets/screen_predictions.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            <p class="font-headline-md text-headline-md text-primary font-bold">Pro Trader Active</p>
+                        </div>
+                        <p class="text-body-sm font-body-sm text-on-surface-variant mb-4">You have unlocked advanced AI-driven rebalancing and dark pool features.</p>
+                        <button onclick="showToast('Your subscription is valid until Dec 2026.')" class="w-full py-3 bg-primary text-on-primary font-bold font-label-md text-label-md rounded-xl shadow-[0_0_20px_rgba(0,219,231,0.2)] hover:shadow-[0_0_30px_rgba(0,219,231,0.4)] transition-all">
+                            Manage Subscription
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Transaction History -->
+            <section id="history" class="col-span-12 glass rounded-2xl overflow-hidden glow-border transition-all">
+                <div class="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">history</span>
+                        <h2 class="font-title-lg text-title-lg text-primary">Transaction History</h2>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex rounded-lg border border-outline-variant/30 overflow-hidden" id="tx-filter-tabs">
+                            <button id="tab-all" onclick="filterTransactions('ALL')" class="px-4 py-1.5 bg-surface-container text-primary text-label-md font-label-md border-r border-outline-variant/30 font-bold">All</button>
+                            <button id="tab-trades" onclick="filterTransactions('TRADE')" class="px-4 py-1.5 hover:bg-surface-container text-on-surface-variant text-label-md font-label-md border-r border-outline-variant/30 font-bold">Trades</button>
+                            <button id="tab-transfers" onclick="filterTransactions('TRANSFER')" class="px-4 py-1.5 hover:bg-surface-container text-on-surface-variant text-label-md font-label-md font-bold">Transfers</button>
+                        </div>
+                        <button onclick="showToast('Exporting transaction database... CSV downloaded.')" class="flex items-center gap-2 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors font-bold">
+                            <span class="material-symbols-outlined text-sm">download</span> Export CSV
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse" id="transactions-table">
+                        <tbody class="divide-y divide-outline-variant/5">
+                            <!-- Trade 1 -->
+                            <tr class="hover:bg-surface-container-low transition-colors group tx-row" data-type="TRADE">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-secondary-container/10 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold">Market Buy BTC</p>
+                                            <p class="font-label-sm text-label-sm text-outline">May 24, 2026 • 14:22:10</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Asset</p>
+                                    <p class="font-label-md text-label-md text-secondary font-bold">0.0512 BTC</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Value</p>
+                                    <p class="font-label-md text-label-md text-on-surface font-bold">-$3,494.02</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm border border-secondary/20 font-bold">COMPLETED</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span onclick="openTxDetailModal('tx_btc_01', 'Market Buy BTC', '0.0512 BTC', '-$3,494.02', 'Completed', 'May 24, 2026 • 14:22:10', '0x2bf1a56f082e...')" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">receipt</span>
+                                </td>
+                            </tr>
+                            <!-- Transfer 1 -->
+                            <tr class="hover:bg-surface-container-low transition-colors group tx-row" data-type="TRANSFER">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-primary">arrow_downward</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold">Deposit USDC</p>
+                                            <p class="font-label-sm text-label-sm text-outline">May 22, 2026 • 09:15:44</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Asset</p>
+                                    <p class="font-label-md text-label-md text-primary font-bold">15,000.00 USDC</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Value</p>
+                                    <p class="font-label-md text-label-md text-secondary font-bold">+$15,000.00</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm border border-secondary/20 font-bold">COMPLETED</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span onclick="openTxDetailModal('tx_usdc_02', 'Deposit USDC', '15,000.00 USDC', '+$15,000.00', 'Completed', 'May 22, 2026 • 09:15:44', '0x17c09fbb34e1...')" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">receipt</span>
+                                </td>
+                            </tr>
+                            <!-- Trade 2 -->
+                            <tr class="hover:bg-surface-container-low transition-colors group tx-row" data-type="TRADE">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-error-container/10 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-error">sell</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-label-md text-label-md text-on-surface font-bold">Limit Sell SOL</p>
+                                            <p class="font-label-sm text-label-sm text-outline">May 21, 2026 • 11:02:19</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Asset</p>
+                                    <p class="font-label-md text-label-md text-error font-bold">-240.00 SOL</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <p class="font-label-sm text-label-sm text-outline uppercase">Value</p>
+                                    <p class="font-label-md text-label-md text-on-surface font-bold">+$40,192.11</p>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span class="px-3 py-1 rounded-full bg-error-container/20 text-error font-label-sm text-label-sm border border-error/20 font-bold">CANCELLED</span>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <span onclick="openTxDetailModal('tx_sol_03', 'Limit Sell SOL', '-240.00 SOL', '+$40,192.11', 'Cancelled', 'May 21, 2026 • 11:02:19', '0x992fa84e1b8c...')" class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">receipt</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-surface-container-lowest border-t border-outline-variant/30 px-container-margin-desktop py-8 grid grid-cols-1 md:grid-cols-4 gap-stack-lg mt-auto">
+            <div class="col-span-1">
+                <h4 class="font-title-lg text-title-lg text-primary mb-2 font-bold tracking-tighter">QUANTFLOW</h4>
+                <p class="text-on-surface-variant font-label-sm text-label-sm max-w-xs">Institutional-grade quantitative analysis and portfolio management platform for digital assets.</p>
+            </div>
+            <div class="col-span-1">
+                <h5 class="font-label-md text-label-md text-on-surface mb-3 uppercase">Platform</h5>
+                <ul class="space-y-1 text-label-sm text-body-sm text-on-surface-variant">
+                    <li><a class="hover:text-secondary" href="index.html">Home</a></li>
+                    <li><a class="hover:text-secondary" href="terminal.html">Terminal</a></li>
+                    <li><a class="hover:text-secondary" href="analytics.html">Analytics</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h5 class="font-label-md text-label-md text-on-surface mb-3 uppercase font-bold">Resources</h5>
+                <ul class="space-y-1 text-label-sm text-body-sm text-on-surface-variant">
+                    <li><a class="hover:text-secondary" href="#">Status</a></li>
+                    <li><a class="hover:text-secondary" href="#">Help Center</a></li>
+                    <li><a class="hover:text-secondary" href="#security">Security</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 text-right text-label-sm text-on-surface-variant">
+                <p class="mb-4">© 2026 QUANTFLOW TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+                <div class="flex justify-end gap-3">
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">language</span>
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">security</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-high border-t border-outline-variant/20 flex justify-around items-center py-3 px-4 z-50">
+        <div onclick="window.location.href='terminal.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-sm text-[10px]">Home</span>
+        </div>
+        <div onclick="window.location.href='analytics.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">query_stats</span>
+            <span class="font-label-sm text-[10px]">Stats</span>
+        </div>
+        <div onclick="window.location.href='portfolio.html'" class="flex flex-col items-center gap-1 text-primary cursor-pointer">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+            <span class="font-label-sm text-[10px]">Portfolio</span>
+        </div>
+        <div onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="font-label-sm text-[10px]">Logout</span>
+        </div>
+    </div>
+
+    <!-- Security Audit Progress Modal -->
+    <div id="audit-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-4">
+        <div class="glass-card w-full max-w-md rounded-2xl p-6 flex flex-col gap-4 text-left">
+            <div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+                <span class="material-symbols-outlined text-secondary animate-pulse">admin_panel_settings</span>
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">QuantFlow Security Shield</h3>
+            </div>
+            <div class="space-y-2 py-2 font-label-md text-label-md text-sm" id="audit-logs">
+                <!-- Log steps dynamically updated -->
+            </div>
+            <div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+                <div id="audit-progress" class="bg-secondary h-full w-0 transition-all duration-200"></div>
+            </div>
+            <button id="audit-close-btn" onclick="closeSecurityAuditModal()" class="w-full py-2 bg-surface-variant text-on-surface font-bold rounded-lg hover:bg-surface-variant-highest transition-all hidden">Close</button>
+        </div>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div id="tx-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+        <div class="glass w-full max-w-md rounded-2xl p-6 relative flex flex-col gap-4">
+            <button onclick="closeTxDetailModal()" class="absolute top-4 right-4 material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">close</button>
+            <div class="flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+                <span class="material-symbols-outlined text-primary text-xl">receipt_long</span>
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Transaction Receipt</h3>
+            </div>
+            <div class="space-y-3 font-label-md text-label-sm">
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Transaction ID:</span>
+                    <span id="tx-id" class="font-bold text-on-surface text-right">TX_BTC_001</span>
+                </div>
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Description:</span>
+                    <span id="tx-desc" class="font-bold text-on-surface text-right">Market Buy BTC</span>
+                </div>
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Amount:</span>
+                    <span id="tx-amount" class="font-bold text-secondary text-right">0.0512 BTC</span>
+                </div>
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Fiat Value:</span>
+                    <span id="tx-value" class="font-bold text-on-surface text-right">-$3,494.02</span>
+                </div>
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Timestamp:</span>
+                    <span id="tx-time" class="text-on-surface-variant text-right">May 24, 2026 • 14:22:10</span>
+                </div>
+                <div class="flex justify-between border-b border-outline-variant/10 pb-1">
+                    <span class="text-on-surface-variant">Status:</span>
+                    <span id="tx-status" class="px-2 py-0.5 rounded bg-secondary/15 text-secondary border border-secondary/25 font-bold uppercase text-[9px]">COMPLETED</span>
+                </div>
+                <div class="flex flex-col gap-1 pt-2">
+                    <span class="text-on-surface-variant">Blockchain Transaction Hash:</span>
+                    <span id="tx-hash" class="font-label-sm text-primary break-all bg-surface-container-low p-2.5 rounded border border-outline-variant/15 select-all text-[11px] leading-tight">0x2bf1a56f082e6ef29112a9757ce486f0db12cc</span>
+                </div>
+            </div>
+            <button onclick="closeTxDetailModal()" class="w-full py-2.5 bg-primary text-on-primary font-bold rounded-xl active:scale-98 transition-all hover:brightness-110">Done</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-secondary-container border border-secondary/40 text-on-secondary-container px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
+      <span class="material-symbols-outlined text-secondary">check_circle</span>
+      <span id="toast-message" class="font-label-md text-label-md">Action completed successfully!</span>
+    </div>
+
+    <!-- Core Portfolio Page JS -->
+    <script>
+        // Filter managed assets table search
+        function filterAssetsTable() {
+            const input = document.getElementById('asset-search-input');
+            const filter = input.value.toLowerCase().trim();
+            const rows = document.querySelectorAll('#assets-table tbody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('.name-col').textContent.toLowerCase();
+                const symbol = row.querySelector('.symbol-col').textContent.toLowerCase();
+                if (name.includes(filter) || symbol.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Transaction History Tabs Filter
+        function filterTransactions(type) {
+            const btns = document.querySelectorAll('#tx-filter-tabs button');
+            btns.forEach(btn => {
+                btn.className = 'px-4 py-1.5 hover:bg-surface-container text-on-surface-variant text-label-md font-label-md border-r border-outline-variant/30 font-bold';
+            });
+            
+            // set active tab
+            if (type === 'ALL') {
+                document.getElementById('tab-all').className = 'px-4 py-1.5 bg-surface-container text-primary text-label-md font-label-md border-r border-outline-variant/30 font-bold';
+            } else if (type === 'TRADE') {
+                document.getElementById('tab-trades').className = 'px-4 py-1.5 bg-surface-container text-primary text-label-md font-label-md border-r border-outline-variant/30 font-bold';
+            } else {
+                document.getElementById('tab-transfers').className = 'px-4 py-1.5 bg-surface-container text-primary text-label-md font-label-md font-bold';
+            }
+
+            const rows = document.querySelectorAll('#transactions-table tbody tr');
+            rows.forEach(row => {
+                const rowType = row.getAttribute('data-type');
+                if (type === 'ALL' || rowType === type) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Transaction details modal toggles
+        const txDetailModal = document.getElementById('tx-detail-modal');
+        function openTxDetailModal(id, desc, amount, value, status, time, hash) {
+            document.getElementById('tx-id').textContent = id.toUpperCase();
+            document.getElementById('tx-desc').textContent = desc;
+            document.getElementById('tx-amount').textContent = amount;
+            document.getElementById('tx-value').textContent = value;
+            document.getElementById('tx-time').textContent = time;
+            
+            const statusLabel = document.getElementById('tx-status');
+            statusLabel.textContent = status;
+            if (status.toUpperCase() === 'COMPLETED') {
+                statusLabel.className = 'px-2 py-0.5 rounded bg-secondary/15 text-secondary border border-secondary/25 font-bold uppercase text-[9px]';
+                document.getElementById('tx-amount').className = 'font-bold text-secondary text-right';
+            } else {
+                statusLabel.className = 'px-2 py-0.5 rounded bg-error-container/20 text-error border border-error/25 font-bold uppercase text-[9px]';
+                document.getElementById('tx-amount').className = 'font-bold text-error text-right';
+            }
+
+            document.getElementById('tx-hash').textContent = hash;
+            txDetailModal.classList.remove('hidden');
+        }
+
+        function closeTxDetailModal() {
+            txDetailModal.classList.add('hidden');
+        }
+
+        // Security Audit diagnostic simulation
+        const auditModal = document.getElementById('audit-modal');
+        const auditLogs = document.getElementById('audit-logs');
+        const auditProgress = document.getElementById('audit-progress');
+        const auditCloseBtn = document.getElementById('audit-close-btn');
+
+        function triggerSecurityAudit() {
+            auditModal.classList.remove('hidden');
+            auditCloseBtn.classList.add('hidden');
+            auditLogs.innerHTML = '';
+            auditProgress.style.width = '0%';
+            
+            const steps = [
+                { text: 'Checking institutional multi-sig vault authorization...', delay: 400 },
+                { text: 'Validating active Ledger Hardware keys connection...', delay: 800 },
+                { text: 'Encrypting transaction pipelines (AES-256 GCM)...', delay: 1200 },
+                { text: 'Running zero-knowledge proof wallet handshakes...', delay: 1600 },
+                { text: 'Firewall inspection & log sanitization complete.', delay: 2000 },
+                { text: 'AUDIT REPORT: System fully protected. 0 alerts found.', delay: 2300 }
+            ];
+
+            steps.forEach((step, idx) => {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = idx === steps.length - 1 ? 'text-secondary font-bold flex items-center gap-1.5' : 'text-on-surface-variant';
+                    
+                    const marker = idx === steps.length - 1 ? '<span class="material-symbols-outlined text-[15px]">check_circle</span>' : '›';
+                    line.innerHTML = `${marker} ${step.text}`;
+                    auditLogs.appendChild(line);
+                    
+                    const pct = Math.floor(((idx + 1) / steps.length) * 100);
+                    auditProgress.style.width = pct + '%';
+
+                    if (idx === steps.length - 1) {
+                        auditCloseBtn.classList.remove('hidden');
+                        showToast('Security audit complete. System verified!');
+                    }
+                }, step.delay);
+            });
+        }
+
+        function closeSecurityAuditModal() {
+            auditModal.classList.add('hidden');
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Interactive row hover animations
+            document.querySelectorAll('tbody tr').forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.transform = 'translateX(4px)';
+                    row.style.transition = 'transform 0.2s ease-out';
+                });
+                row.style.willChange = 'transform';
+                row.style.transition = 'transform 0.2s ease-out';
+                row.addEventListener('mouseleave', () => {
+                    row.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

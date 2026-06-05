@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>QUANTFLOW | Institutional Terminal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #d4e4fa;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(10, 14, 23, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(30, 41, 59, 0.5);
+        }
+        .glow-border-cyan {
+            border: 1px solid rgba(0, 219, 231, 0.3);
+            box-shadow: 0 0 15px rgba(0, 219, 231, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1c2b3c;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .toast-notification {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#005236",
+                      "on-primary-fixed": "#002022",
+                      "on-surface-variant": "#b9cacb",
+                      "on-primary-container": "#006a71",
+                      "primary-fixed": "#74f5ff",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-background": "#d4e4fa",
+                      "tertiary-fixed": "#ffdadb",
+                      "primary-container": "#00f2ff",
+                      "error": "#ffb4ab",
+                      "surface-container-highest": "#273647",
+                      "secondary-container": "#00a572",
+                      "surface-container-low": "#0d1c2d",
+                      "surface-tint": "#00dbe7",
+                      "inverse-surface": "#d4e4fa",
+                      "on-tertiary-fixed": "#40000d",
+                      "surface-variant": "#273647",
+                      "tertiary-container": "#ffcfd1",
+                      "outline": "#849495",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "on-secondary-fixed": "#002113",
+                      "primary": "#e1fdff",
+                      "secondary": "#4edea3",
+                      "surface-container-high": "#1c2b3c",
+                      "on-primary-fixed-variant": "#004f54",
+                      "on-secondary-container": "#00311f",
+                      "inverse-on-surface": "#233143",
+                      "on-tertiary-container": "#be0d3c",
+                      "on-primary": "#00363a",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "secondary-fixed": "#6ffbbe",
+                      "surface-dim": "#051424",
+                      "outline-variant": "#3a494b",
+                      "surface-bright": "#2c3a4c",
+                      "error-container": "#93000a",
+                      "surface-container": "#122131",
+                      "surface": "#051424",
+                      "on-surface": "#d4e4fa",
+                      "tertiary": "#fff5f4",
+                      "inverse-primary": "#00696f",
+                      "on-error": "#690005",
+                      "on-secondary": "#003824",
+                      "surface-container-lowest": "#010f1f",
+                      "on-tertiary": "#67001b",
+                      "background": "#051424",
+                      "primary-fixed-dim": "#00dbe7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.375rem",
+                      "xl": "0.5rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "stack-xs": "4px",
+                      "unit": "4px",
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "gutter": "16px",
+                      "container-margin-mobile": "16px",
+                      "container-margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "label-md": ["JetBrains Mono"],
+                      "display-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "display-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-lg": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-sm": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex min-h-screen pb-12 md:pb-0">
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-0 h-full w-64 z-40 bg-surface-container border-r border-outline-variant/10 hidden md:flex flex-col p-gutter gap-stack-md">
+        <div onclick="window.location.href='index.html'" class="flex items-center gap-3 mb-stack-lg cursor-pointer">
+            <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-primary-fixed-variant" style="font-variation-settings: 'FILL' 1;">dataset</span>
+            </div>
+            <div>
+                <h1 class="font-headline-md text-headline-md text-primary tracking-tighter leading-none">QUANTFLOW</h1>
+                <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Institutional Grade</p>
+            </div>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold transition-all active:scale-98" href="terminal.html">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                <span class="font-label-md text-label-md">Terminal</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="analytics.html">
+                <span class="material-symbols-outlined">query_stats</span>
+                <span class="font-label-md text-label-md">Analytics</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="portfolio.html">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+                <span class="font-label-md text-label-md">Assets</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="portfolio.html#history">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-label-md text-label-md">History</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 rounded-xl transition-all active:scale-98" href="portfolio.html#security">
+                <span class="material-symbols-outlined">verified_user</span>
+                <span class="font-label-md text-label-md">Security</span>
+            </a>
+        </nav>
+        <div class="mt-auto space-y-4">
+            <div class="p-4 rounded-xl bg-surface-variant/30 border border-outline-variant/20">
+                <p class="font-label-sm text-label-sm text-on-surface-variant mb-2 font-bold uppercase">PRO PLAN ACTIVE</p>
+                <div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                    <div class="h-full bg-secondary w-2/3"></div>
+                </div>
+                <button onclick="showToast('You are already on the Pro Plan!')" class="mt-3 w-full py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg active:scale-95 transition-transform">Upgrade details</button>
+            </div>
+            <div class="pt-4 border-t border-outline-variant/10 space-y-1">
+                <a onclick="showToast('Support ticket created. We will email you shortly.')" class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-secondary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">headset_mic</span>
+                    <span class="font-label-md text-label-md">Support</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-error transition-colors" href="index.html">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="font-label-md text-label-md">Sign Out</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Canvas -->
+    <main class="md:ml-64 flex-1 flex flex-col min-h-screen">
+        <!-- TopAppBar -->
+        <header class="fixed top-0 right-0 left-0 md:left-64 z-30 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 px-container-margin-desktop py-4 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-stack-lg flex-1">
+                <div class="relative group max-w-xs w-full">
+                    <input id="search-input" class="bg-surface-container-lowest border-none rounded-full px-10 py-2 w-full text-body-sm text-on-surface focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search markets (Ctrl + K)" type="text"/>
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+                </div>
+                <div class="hidden lg:flex gap-6 items-center ml-4">
+                    <a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="index.html">Markets</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="analytics.html">Analytics</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="portfolio.html">Portfolio</a>
+                    <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="analytics.html#ai-projections">AI Insights</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    <span class="font-label-sm text-label-sm text-secondary">LIVE</span>
+                </div>
+                <span onclick="showToast('No new notifications.')" class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+                <span onclick="showToast('Settings panel is premium only.')" class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+                <button onclick="openTradeModal()" class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:shadow-[0_0_10px_rgba(225,253,255,0.3)] transition-all active:scale-95">Quick Trade</button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="mt-20 p-container-margin-desktop grid grid-cols-12 gap-gutter flex-1">
+            <!-- Row 1: Portfolio Overview -->
+            <section class="col-span-12 grid grid-cols-1 md:grid-cols-4 gap-gutter mb-2">
+                <div class="glass-panel p-stack-md rounded-xl flex flex-col gap-1 glow-border-cyan">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Net Worth</span>
+                    <div class="flex items-end gap-2">
+                        <span id="stat-net-worth" class="font-display-sm text-display-sm text-primary">$1,248,392.40</span>
+                        <span class="font-label-md text-label-md text-secondary mb-2">+12.4%</span>
+                    </div>
+                    <!-- Mini sparks -->
+                    <div class="mt-4 h-6 w-full opacity-60">
+                        <svg class="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
+                            <path d="M0,15 L10,12 L20,18 L30,8 L40,14 L50,5 L60,11 L70,3 L80,12 L90,6 L100,2" fill="none" stroke="#00dbe7" stroke-width="1.5"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="glass-panel p-stack-md rounded-xl flex flex-col gap-1">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">24h Unrealized PnL</span>
+                    <div class="flex items-end gap-2">
+                        <span class="font-display-sm text-display-sm text-secondary">+$14,204.12</span>
+                        <span class="material-symbols-outlined text-secondary text-sm mb-2">trending_up</span>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-auto">Best Performer: <span class="text-secondary font-bold">NVDA (+4.2%)</span></p>
+                </div>
+                
+                <div class="glass-panel p-stack-md rounded-xl flex flex-col gap-1">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Buying Power</span>
+                    <div class="flex items-end gap-2">
+                        <span class="font-display-sm text-display-sm text-on-surface">$240,103.00</span>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-2 py-1 bg-surface-container-highest rounded text-[10px] font-bold font-label-md text-primary-container">MARGIN: 4X</span>
+                        <span class="px-2 py-1 bg-surface-container-highest rounded text-[10px] font-bold font-label-md text-secondary">TIER: PLATINUM</span>
+                    </div>
+                </div>
+                
+                <div class="glass-panel p-stack-md rounded-xl flex flex-col justify-between">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Asset Distribution</span>
+                    <div class="flex items-center gap-4 flex-1">
+                        <div class="relative w-16 h-16">
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                <circle cx="18" cy="18" r="15.915" fill="none" stroke="#273647" stroke-width="3.5"></circle>
+                                <circle cx="18" cy="18" r="15.915" fill="none" stroke="#e1fdff" stroke-width="3.5" stroke-dasharray="60, 100"></circle>
+                                <circle cx="18" cy="18" r="15.915" fill="none" stroke="#4edea3" stroke-width="3.5" stroke-dasharray="25, 100" stroke-dashoffset="-60"></circle>
+                            </svg>
+                        </div>
+                        <div class="grid grid-cols-1 gap-1 text-[11px] font-label-sm">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-on-surface font-bold">STOCKS (60%)</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                <span class="text-on-surface font-bold">CRYPTO (25%)</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-outline"></span>
+                                <span class="text-on-surface-variant">FOREX (15%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Row 2: Main Terminal View -->
+            <div class="col-span-12 lg:col-span-9 grid grid-cols-1 gap-gutter">
+                <!-- Main Chart Section -->
+                <div class="glass-panel rounded-xl flex flex-col h-[500px] overflow-hidden">
+                    <div class="flex items-center justify-between p-4 border-b border-outline-variant/10">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <span id="chart-asset-symbol" class="font-label-md text-label-md bg-primary/10 border border-primary/20 text-primary px-2.5 py-1 rounded font-bold uppercase tracking-wider">BTC / USD</span>
+                            </div>
+                            <h2 id="chart-asset-price" class="font-headline-md text-headline-md text-secondary">$64,231.50</h2>
+                            <span id="chart-asset-change" class="text-secondary font-label-md text-label-md font-bold">+2.45%</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="flex bg-surface-container-lowest rounded-lg p-1" id="timeframe-selector">
+                                <button class="px-3 py-1 text-[10px] bg-surface-container-highest text-primary rounded-md font-bold active-btn" onclick="changeTimeframe('1H')">1H</button>
+                                <button class="px-3 py-1 text-[10px] text-on-surface-variant hover:text-primary font-bold" onclick="changeTimeframe('4H')">4H</button>
+                                <button class="px-3 py-1 text-[10px] text-on-surface-variant hover:text-primary font-bold" onclick="changeTimeframe('1D')">1D</button>
+                                <button class="px-3 py-1 text-[10px] text-on-surface-variant hover:text-primary font-bold" onclick="changeTimeframe('1W')">1W</button>
+                            </div>
+                            <button onclick="showToast('Chart styles updated.')" class="p-2 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">chart_data</span></button>
+                            <button onclick="showToast('Fullscreen feature is Pro only.')" class="p-2 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">fullscreen</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 relative bg-surface-container-lowest/30 p-4">
+                        <canvas id="terminal-chart" class="w-full h-full"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                            <span class="font-display-lg text-display-lg select-none tracking-widest font-extrabold text-[#00dbe7]">QUANTFLOW</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom Grid: Watchlist & Transactions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                    <!-- Watchlist -->
+                    <div class="glass-panel rounded-xl flex flex-col">
+                        <div class="p-4 border-b border-outline-variant/10 flex justify-between items-center">
+                            <h3 class="font-title-lg text-title-lg text-primary">Market Watchlist</h3>
+                            <button onclick="showToast('Watchlist editing disabled in Demo mode.')" class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">add_circle</span></button>
+                        </div>
+                        <div class="p-2 overflow-y-auto custom-scrollbar max-h-[300px]">
+                            <table class="w-full text-left font-label-md">
+                                <thead class="text-on-surface-variant text-[10px] uppercase tracking-widest border-b border-outline-variant/10">
+                                    <tr>
+                                        <th class="p-3">Asset</th>
+                                        <th class="p-3">Price</th>
+                                        <th class="p-3 text-right">Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant/5">
+                                    <tr onclick="selectAsset('BTC')" class="hover:bg-surface-variant/20 transition-colors cursor-pointer group">
+                                        <td class="p-3 flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-secondary-container/20 flex items-center justify-center text-[10px] font-bold text-secondary">B</div>
+                                            <span>BTC/USD</span>
+                                        </td>
+                                        <td class="p-3 font-label-md" id="price-BTC">$64,231.50</td>
+                                        <td class="p-3 text-right text-secondary font-bold" id="change-BTC">+2.45%</td>
+                                    </tr>
+                                    <tr onclick="selectAsset('ETH')" class="hover:bg-surface-variant/20 transition-colors cursor-pointer group">
+                                        <td class="p-3 flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center text-[10px] font-bold text-primary">E</div>
+                                            <span>ETH/USD</span>
+                                        </td>
+                                        <td class="p-3 font-label-md" id="price-ETH">$3,412.10</td>
+                                        <td class="p-3 text-right text-error font-bold" id="change-ETH">-1.05%</td>
+                                    </tr>
+                                    <tr onclick="selectAsset('NVDA')" class="hover:bg-surface-variant/20 transition-colors cursor-pointer group">
+                                        <td class="p-3 flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface">N</div>
+                                            <span>NVDA.O</span>
+                                        </td>
+                                        <td class="p-3 font-label-md" id="price-NVDA">$124.50</td>
+                                        <td class="p-3 text-right text-secondary font-bold" id="change-NVDA">+4.21%</td>
+                                    </tr>
+                                    <tr onclick="selectAsset('AAPL')" class="hover:bg-surface-variant/20 transition-colors cursor-pointer group">
+                                        <td class="p-3 flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface">A</div>
+                                            <span>AAPL.O</span>
+                                        </td>
+                                        <td class="p-3 font-label-md" id="price-AAPL">$189.20</td>
+                                        <td class="p-3 text-right text-secondary font-bold" id="change-AAPL">+0.85%</td>
+                                    </tr>
+                                    <tr onclick="selectAsset('TSLA')" class="hover:bg-surface-variant/20 transition-colors cursor-pointer group">
+                                        <td class="p-3 flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface">T</div>
+                                            <span>TSLA.O</span>
+                                        </td>
+                                        <td class="p-3 font-label-md" id="price-TSLA">$175.40</td>
+                                        <td class="p-3 text-right text-error font-bold" id="change-TSLA">-2.11%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Transactions -->
+                    <div class="glass-panel rounded-xl flex flex-col">
+                        <div class="p-4 border-b border-outline-variant/10 flex justify-between items-center">
+                            <h3 class="font-title-lg text-title-lg text-primary">Recent Activity</h3>
+                            <button onclick="clearActivity()" class="text-on-surface-variant hover:text-error text-xs font-bold font-label-md">Clear</button>
+                        </div>
+                        <div class="p-4 space-y-4 overflow-y-auto custom-scrollbar max-h-[300px]" id="activity-container">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+                                        <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-label-md text-label-md text-on-surface">Buy BTC</p>
+                                        <p class="font-label-sm text-label-sm text-on-surface-variant">2 mins ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-label-md text-label-md text-primary">+0.045 BTC</p>
+                                    <span class="px-2 py-0.5 bg-secondary-container/30 text-secondary text-[10px] rounded uppercase font-bold">Filled</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-error-container/20 flex items-center justify-center text-error">
+                                        <span class="material-symbols-outlined text-sm">sell</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-label-md text-label-md text-on-surface">Sell SOL</p>
+                                        <p class="font-label-sm text-label-sm text-on-surface-variant">1 hour ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-label-md text-label-md text-primary">-120.00 SOL</p>
+                                    <span class="px-2 py-0.5 bg-secondary-container/30 text-secondary text-[10px] rounded uppercase font-bold">Filled</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between opacity-60">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-sm">swap_horiz</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-label-md text-label-md text-on-surface">Transfer to Cold</p>
+                                        <p class="font-label-sm text-label-sm text-on-surface-variant">3 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-label-md text-label-md text-primary">2.4 ETH</p>
+                                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[10px] rounded uppercase font-bold">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Sidebar: AI Insights & Smart Alerts -->
+            <aside class="col-span-12 lg:col-span-3 flex flex-col gap-gutter">
+                <!-- AI Insights Panel -->
+                <div class="glass-panel rounded-xl p-4 flex flex-col gap-stack-md glow-border-cyan">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        <h3 class="font-title-lg text-title-lg text-primary uppercase tracking-tighter">AI Market Pulse</h3>
+                    </div>
+                    <div class="bg-primary/5 rounded-lg p-3 border border-primary/10">
+                        <p id="ai-insight-text" class="font-body-sm text-body-sm text-primary leading-relaxed">
+                            "Bitcoin is exhibiting a strong bullish divergence on the 4H timeframe. Key resistance at $65,500 remains the final barrier before a potential move to $69k. Institutional inflow has increased by 12% in the last 48 hours."
+                        </p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex gap-3">
+                            <span class="w-1 h-10 bg-secondary rounded-full"></span>
+                            <div>
+                                <p class="font-label-md text-label-md text-secondary">BULLISH SENTIMENT</p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">High confidence model (89%)</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="w-1 h-10 bg-error rounded-full"></span>
+                            <div>
+                                <p class="font-label-md text-label-md text-error">VOLATILITY RISK</p>
+                                <p class="font-label-sm text-label-sm text-on-surface-variant">High frequency fluctuation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Smart Alerts -->
+                <div class="glass-panel rounded-xl flex flex-col flex-1 justify-between">
+                    <div>
+                        <div class="p-4 border-b border-outline-variant/10">
+                            <h3 class="font-title-lg text-title-lg text-primary">Smart Alerts</h3>
+                        </div>
+                        <div class="p-4 space-y-4" id="alerts-container">
+                            <div class="p-3 bg-surface-container-highest/30 rounded-lg border-l-2 border-primary">
+                                <p class="font-label-md text-label-md text-primary mb-1">PRICE ALERT: BTC</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Crossed above $64,000 threshold with significant volume spike.</p>
+                            </div>
+                            <div class="p-3 bg-surface-container-highest/30 rounded-lg border-l-2 border-secondary">
+                                <p class="font-label-md text-label-md text-secondary mb-1">RSI OVERBOUGHT: NVDA</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant">Daily RSI reached 78. Potential mean reversion trade opportunity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openConfigureAlertsModal()" class="m-4 py-2 border border-outline-variant/20 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-variant transition-all">Configure Alerts</button>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-surface-container-lowest border-t border-outline-variant/30 px-container-margin-desktop py-8 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+            <div class="col-span-1">
+                <h4 class="font-title-lg text-title-lg text-primary mb-2">QUANTFLOW</h4>
+                <p class="font-label-sm text-label-sm text-on-surface-variant max-w-xs">Building the next generation of institutional-grade trading infrastructure for private capital.</p>
+            </div>
+            <div class="col-span-1">
+                <h5 class="font-label-md text-label-md text-on-surface mb-3 uppercase">Platform</h5>
+                <ul class="space-y-1 text-label-sm text-body-sm text-on-surface-variant">
+                    <li><a class="hover:text-secondary" href="index.html">Home</a></li>
+                    <li><a class="hover:text-secondary" href="analytics.html">Analytics</a></li>
+                    <li><a class="hover:text-secondary" href="portfolio.html">Assets</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h5 class="font-label-md text-label-md text-on-surface mb-3 uppercase">Compliance</h5>
+                <ul class="space-y-1 text-label-sm text-body-sm text-on-surface-variant">
+                    <li><a class="hover:text-secondary" href="#">Terms</a></li>
+                    <li><a class="hover:text-secondary" href="#">Privacy</a></li>
+                    <li><a class="hover:text-secondary" href="#">Regulatory</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 text-right text-label-sm text-on-surface-variant">
+                <p class="mb-4">© 2026 QUANTFLOW TECHNOLOGIES. ALL RIGHTS RESERVED.</p>
+                <div class="flex justify-end gap-3">
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">language</span>
+                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">security</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Floating Action Button (FAB) -->
+    <button onclick="openTradeModal()" class="fixed bottom-10 right-10 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group">
+        <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+        <div class="absolute right-16 px-4 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            New Trade Entry
+        </div>
+    </button>
+
+    <!-- Mobile Navigation Bar (Fixed bottom for small screens) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-high border-t border-outline-variant/20 flex justify-around items-center py-3 px-4 z-40">
+        <div onclick="window.location.href='terminal.html'" class="flex flex-col items-center gap-1 text-primary cursor-pointer">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="font-label-sm text-[10px]">Home</span>
+        </div>
+        <div onclick="window.location.href='analytics.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">query_stats</span>
+            <span class="font-label-sm text-[10px]">Stats</span>
+        </div>
+        <div onclick="window.location.href='portfolio.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+            <span class="font-label-sm text-[10px]">Portfolio</span>
+        </div>
+        <div onclick="window.location.href='index.html'" class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="font-label-sm text-[10px]">Logout</span>
+        </div>
+    </div>
+
+    <!-- Interactive Trade Modal -->
+    <div id="trade-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+        <div class="glass-card w-full max-w-lg rounded-[1.5rem] p-6 relative flex flex-col gap-4">
+            <button onclick="closeTradeModal()" class="absolute top-4 right-4 material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">close</button>
+            <div class="flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+                <span class="material-symbols-outlined text-primary text-2xl">swap_horizontal_circle</span>
+                <h3 class="font-title-lg text-title-lg text-primary">New Trade Ticket</h3>
+            </div>
+            
+            <form id="trade-form" onsubmit="handleTradeSubmit(event)" class="space-y-4">
+                <!-- Transaction Action -->
+                <div>
+                    <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Action</label>
+                    <div class="flex bg-surface-container-low p-1 rounded-lg">
+                        <button type="button" id="trade-buy-btn" onclick="setTradeAction('BUY')" class="flex-1 py-2 text-center rounded bg-secondary text-on-secondary font-bold text-label-md">BUY</button>
+                        <button type="button" id="trade-sell-btn" onclick="setTradeAction('SELL')" class="flex-1 py-2 text-center rounded text-on-surface-variant font-bold text-label-md">SELL</button>
+                    </div>
+                </div>
+                
+                <!-- Asset Select & Price Readout -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Asset</label>
+                        <select id="trade-asset" onchange="updateTradeCalculation()" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary">
+                            <option value="BTC" selected>BTC (Bitcoin)</option>
+                            <option value="ETH">ETH (Ethereum)</option>
+                            <option value="NVDA">NVDA (NVIDIA)</option>
+                            <option value="AAPL">AAPL (Apple)</option>
+                            <option value="TSLA">TSLA (Tesla)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Order Type</label>
+                        <select id="trade-order-type" onchange="toggleLimitPrice()" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary">
+                            <option value="MARKET" selected>Market Order</option>
+                            <option value="LIMIT">Limit Order</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Limit Price and Size -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Order Size (Quantity)</label>
+                        <input id="trade-size" required type="number" step="any" min="0.00000001" oninput="updateTradeCalculation()" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm focus:outline-none focus:border-primary text-on-surface" placeholder="0.0"/>
+                    </div>
+                    <div id="limit-price-group" class="hidden">
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Limit Price ($)</label>
+                        <input id="trade-limit-price" type="number" step="any" oninput="updateTradeCalculation()" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm focus:outline-none focus:border-primary text-on-surface" placeholder="0.00"/>
+                    </div>
+                </div>
+
+                <!-- Calculation Panel -->
+                <div class="bg-surface-container/60 p-4 rounded-xl border border-outline-variant/10 space-y-2">
+                    <div class="flex justify-between text-body-sm text-on-surface-variant">
+                        <span>Current Market Price:</span>
+                        <span id="trade-current-price" class="text-on-surface font-label-md">$64,231.50</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-headline-md pt-2 border-t border-outline-variant/10 text-primary">
+                        <span>Estimated Total:</span>
+                        <span id="trade-total-price">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex gap-stack-md justify-end">
+                    <button type="button" onclick="closeTradeModal()" class="px-4 py-2 border border-outline-variant rounded-lg text-label-md hover:bg-surface-variant transition-colors">Cancel</button>
+                    <button type="submit" id="trade-submit-btn" class="px-6 py-2 bg-primary text-on-primary font-bold rounded-lg text-label-md hover:brightness-110 active:scale-95 transition-all">Submit BUY Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Configure Alerts Modal -->
+    <div id="alerts-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+        <div class="glass-card w-full max-w-md rounded-[1.5rem] p-6 relative flex flex-col gap-4">
+            <button onclick="closeConfigureAlertsModal()" class="absolute top-4 right-4 material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">close</button>
+            <div class="flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+                <span class="material-symbols-outlined text-primary text-2xl">notifications_active</span>
+                <h3 class="font-title-lg text-title-lg text-primary">Configure Price Alerts</h3>
+            </div>
+            <form onsubmit="handleAlertSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Asset</label>
+                    <select id="alert-asset" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary">
+                        <option value="BTC">BTC/USD</option>
+                        <option value="ETH">ETH/USD</option>
+                        <option value="NVDA">NVDA</option>
+                        <option value="AAPL">AAPL</option>
+                        <option value="TSLA">TSLA</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Trigger Condition</label>
+                        <select id="alert-condition" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm text-on-surface focus:outline-none focus:border-primary">
+                            <option value="ABOVE">Goes Above</option>
+                            <option value="BELOW">Goes Below</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-label-sm text-on-surface-variant mb-1 font-bold uppercase">Price Threshold ($)</label>
+                        <input id="alert-price" required type="number" step="any" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-3 py-2 text-body-sm focus:outline-none focus:border-primary text-on-surface" placeholder="65000"/>
+                    </div>
+                </div>
+                <div class="pt-4 flex gap-stack-md justify-end">
+                    <button type="button" onclick="closeConfigureAlertsModal()" class="px-4 py-2 border border-outline-variant rounded-lg text-label-md hover:bg-surface-variant transition-colors">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-primary text-on-primary font-bold rounded-lg text-label-md hover:brightness-110 active:scale-95 transition-all">Create Alert</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Overlay Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex justify-center bg-black/85 backdrop-blur-md hidden p-4 pt-24">
+        <div class="glass-card w-full max-w-2xl rounded-2xl p-6 relative flex flex-col gap-4 max-h-[70vh]">
+            <button onclick="closeSearchModal()" class="absolute top-4 right-4 material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">close</button>
+            <div class="relative">
+                <input id="search-modal-input" oninput="handleSearchQuery()" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl pl-12 pr-4 py-3 text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Type an asset name (e.g. BTC, Ethereum, Apple)..." type="text"/>
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+            </div>
+            
+            <div class="text-label-sm text-on-surface-variant font-bold uppercase tracking-widest mt-2 border-b border-outline-variant/10 pb-1">Search Results</div>
+            
+            <div id="search-results-list" class="overflow-y-auto custom-scrollbar flex-1 space-y-1 pr-2">
+                <!-- Results rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-secondary-container border border-secondary/40 text-on-secondary-container px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
+        <span class="material-symbols-outlined text-secondary">check_circle</span>
+        <span id="toast-message" class="font-label-md text-label-md">Checkout completed successfully!</span>
+    </div>
+
+    <!-- Core Terminal JS -->
+    <script>
+        // Asset Prices & Metadata
+        const assets = {
+            BTC: { name: 'Bitcoin', symbol: 'BTC / USD', price: 64231.50, change: 2.45, chartData: [62800, 63100, 62900, 63400, 63900, 63600, 64231.50] },
+            ETH: { name: 'Ethereum', symbol: 'ETH / USD', price: 3412.10, change: -1.05, chartData: [3490, 3470, 3450, 3420, 3390, 3425, 3412.10] },
+            NVDA: { name: 'NVIDIA', symbol: 'NVDA.O', price: 124.50, change: 4.21, chartData: [118, 120, 119, 121, 122, 123, 124.50] },
+            AAPL: { name: 'Apple', symbol: 'AAPL.O', price: 189.20, change: 0.85, chartData: [187.5, 188.0, 186.9, 188.1, 189.0, 188.5, 189.20] },
+            TSLA: { name: 'Tesla', symbol: 'TSLA.O', price: 175.40, change: -2.11, chartData: [182.1, 180.0, 179.2, 176.5, 178.0, 174.9, 175.40] }
+        };
+
+        let activeAsset = 'BTC';
+        let currentChart = null;
+
+        // Initialize Chart.js
+        function initChart(assetCode) {
+            const ctx = document.getElementById('terminal-chart').getContext('2d');
+            const data = assets[assetCode].chartData;
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(0, 219, 231, 0.35)');
+            gradient.addColorStop(1, 'rgba(0, 219, 231, 0)');
+
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            const chartConfig = {
+                type: 'line',
+                data: {
+                    labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', 'Current'],
+                    datasets: [{
+                        label: assets[assetCode].symbol,
+                        data: data,
+                        borderColor: '#00dbe7',
+                        borderWidth: 2,
+                        backgroundColor: gradient,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#00dbe7',
+                        pointBorderColor: '#050505',
+                        pointHoverRadius: 6,
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#122131',
+                            titleColor: '#e1fdff',
+                            bodyColor: '#d4e4fa',
+                            borderColor: '#3a494b',
+                            borderWidth: 1,
+                            titleFont: { family: 'JetBrains Mono' },
+                            bodyFont: { family: 'JetBrains Mono' },
+                            callbacks: {
+                                label: function(context) {
+                                    return ' $' + context.raw.toLocaleString(undefined, {minimumFractionDigits: 2});
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(30, 41, 59, 0.15)' },
+                            ticks: { color: '#849495', font: { family: 'JetBrains Mono', size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(30, 41, 59, 0.15)' },
+                            ticks: { 
+                                color: '#849495', 
+                                font: { family: 'JetBrains Mono', size: 10 },
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            currentChart = new Chart(ctx, chartConfig);
+        }
+
+        // Live Price Ticking (Random Walk Simulation)
+        function startLiveTicker() {
+            setInterval(() => {
+                // Pick random asset to update
+                const assetCodes = Object.keys(assets);
+                assetCodes.forEach(code => {
+                    const asset = assets[code];
+                    const deltaPercent = (Math.random() - 0.49) * 0.002; // slight upward bias
+                    const delta = asset.price * deltaPercent;
+                    asset.price += delta;
+                    
+                    // update percentage change slightly
+                    asset.change += (Math.random() - 0.5) * 0.05;
+                    
+                    // Update watchlist UI
+                    const priceEl = document.getElementById(`price-${code}`);
+                    if (priceEl) {
+                        priceEl.textContent = '$' + asset.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    }
+
+                    const changeEl = document.getElementById(`change-${code}`);
+                    if (changeEl) {
+                        const plus = asset.change >= 0 ? '+' : '';
+                        changeEl.textContent = plus + asset.change.toFixed(2) + '%';
+                        if (asset.change >= 0) {
+                            changeEl.className = 'p-3 text-right text-secondary font-bold';
+                        } else {
+                            changeEl.className = 'p-3 text-right text-error font-bold';
+                        }
+                    }
+
+                    // If it is the active chart asset, update header and add tick to chart
+                    if (code === activeAsset) {
+                        document.getElementById('chart-asset-price').textContent = '$' + asset.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                        const plus = asset.change >= 0 ? '+' : '';
+                        const changeLabel = document.getElementById('chart-asset-change');
+                        changeLabel.textContent = plus + asset.change.toFixed(2) + '%';
+                        if (asset.change >= 0) {
+                            changeLabel.className = 'text-secondary font-label-md text-label-md font-bold';
+                        } else {
+                            changeLabel.className = 'text-error font-label-md text-label-md font-bold';
+                        }
+
+                        // Update Chart.js last data point
+                        if (currentChart) {
+                            const dataset = currentChart.data.datasets[0];
+                            dataset.data[dataset.data.length - 1] = asset.price;
+                            currentChart.update('none'); // silent update
+                        }
+                    }
+                });
+            }, 2500);
+        }
+
+        // Switch Main Asset Displayed
+        function selectAsset(assetCode) {
+            activeAsset = assetCode;
+            const asset = assets[assetCode];
+            
+            document.getElementById('chart-asset-symbol').textContent = asset.symbol;
+            document.getElementById('chart-asset-price').textContent = '$' + asset.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            const plus = asset.change >= 0 ? '+' : '';
+            const changeLabel = document.getElementById('chart-asset-change');
+            changeLabel.textContent = plus + asset.change.toFixed(2) + '%';
+            if (asset.change >= 0) {
+                changeLabel.className = 'text-secondary font-label-md text-label-md font-bold';
+            } else {
+                changeLabel.className = 'text-error font-label-md text-label-md font-bold';
+            }
+
+            // Sync with trade modal asset select
+            document.getElementById('trade-asset').value = assetCode;
+            updateTradeCalculation();
+
+            // Re-render chart
+            initChart(assetCode);
+
+            // Generate a random AI market text
+            generateAIMarketText(assetCode);
+        }
+
+        // AI Insight Text generator
+        function generateAIMarketText(code) {
+            const texts = {
+                BTC: 'Bitcoin exhibits high institutional buy pressure. Target resistance sits at $65.5k. Consolidation range has narrowed indicating a breakout risk.',
+                ETH: 'Ethereum gas fees hit 12-month lows. Smart contract deployers have increased by 8% weekly. Supporting floor sits solid at $3,350.',
+                NVDA: 'Nvidia GPU shipment lead times drop to 4 weeks. AI chip demand remains structurally resilient. Trend line remains bullish above $120.00.',
+                AAPL: 'Apple announces local AI core integration. Global device replacement cycle estimates revised upward by analysts. Neutral trading stance.',
+                TSLA: 'Tesla Q2 delivery counts beat consensus. Margin compression risks are slowly pricing in. Strong resistance near $185.00 limit.'
+            };
+            document.getElementById('ai-insight-text').textContent = `"${texts[code]}"`;
+        }
+
+        // Change timeframe buttons UI active state
+        function changeTimeframe(timeframe) {
+            const btns = document.querySelectorAll('#timeframe-selector button');
+            btns.forEach(btn => {
+                btn.className = 'px-3 py-1 text-[10px] text-on-surface-variant hover:text-primary font-bold';
+            });
+            event.currentTarget.className = 'px-3 py-1 text-[10px] bg-surface-container-highest text-primary rounded-md font-bold';
+            showToast(`Timeframe changed to ${timeframe}. Simulating query...`);
+        }
+
+        // Trade Modal Actions
+        let tradeAction = 'BUY';
+
+        const tradeModal = document.getElementById('trade-modal');
+        const tradeSubmitBtn = document.getElementById('trade-submit-btn');
+        const tradeBuyBtn = document.getElementById('trade-buy-btn');
+        const tradeSellBtn = document.getElementById('trade-sell-btn');
+
+        function openTradeModal() {
+            tradeModal.classList.remove('hidden');
+            updateTradeCalculation();
+        }
+
+        function closeTradeModal() {
+            tradeModal.classList.add('hidden');
+            document.getElementById('trade-form').reset();
+        }
+
+        function setTradeAction(action) {
+            tradeAction = action;
+            if (action === 'BUY') {
+                tradeBuyBtn.className = 'flex-1 py-2 text-center rounded bg-secondary text-on-secondary font-bold text-label-md';
+                tradeSellBtn.className = 'flex-1 py-2 text-center rounded text-on-surface-variant font-bold text-label-md';
+                tradeSubmitBtn.className = 'px-6 py-2 bg-primary text-on-primary font-bold rounded-lg text-label-md hover:brightness-110 active:scale-95 transition-all';
+                tradeSubmitBtn.textContent = 'Submit BUY Order';
+            } else {
+                tradeBuyBtn.className = 'flex-1 py-2 text-center rounded text-on-surface-variant font-bold text-label-md';
+                tradeSellBtn.className = 'flex-1 py-2 text-center rounded bg-error text-on-error font-bold text-label-md';
+                tradeSubmitBtn.className = 'px-6 py-2 bg-error text-on-error font-bold rounded-lg text-label-md hover:brightness-110 active:scale-95 transition-all';
+                tradeSubmitBtn.textContent = 'Submit SELL Order';
+            }
+        }
+
+        function toggleLimitPrice() {
+            const orderType = document.getElementById('trade-order-type').value;
+            const limitGroup = document.getElementById('limit-price-group');
+            if (orderType === 'LIMIT') {
+                limitGroup.classList.remove('hidden');
+                document.getElementById('trade-limit-price').value = assets[document.getElementById('trade-asset').value].price.toFixed(2);
+            } else {
+                limitGroup.classList.add('hidden');
+            }
+            updateTradeCalculation();
+        }
+
+        function updateTradeCalculation() {
+            const assetCode = document.getElementById('trade-asset').value;
+            const asset = assets[assetCode];
+            const size = parseFloat(document.getElementById('trade-size').value) || 0;
+            const orderType = document.getElementById('trade-order-type').value;
+            
+            let price = asset.price;
+            document.getElementById('trade-current-price').textContent = '$' + price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            if (orderType === 'LIMIT') {
+                const limitPrice = parseFloat(document.getElementById('trade-limit-price').value);
+                if (!isNaN(limitPrice) && limitPrice > 0) {
+                    price = limitPrice;
+                }
+            }
+
+            const total = size * price;
+            document.getElementById('trade-total-price').textContent = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        function handleTradeSubmit(e) {
+            e.preventDefault();
+            const assetCode = document.getElementById('trade-asset').value;
+            const size = document.getElementById('trade-size').value;
+            const orderType = document.getElementById('trade-order-type').value;
+            
+            closeTradeModal();
+            showToast(`Order submitted: ${tradeAction} ${size} ${assetCode} via ${orderType}. Status: FILLED`);
+
+            // Add item to activity panel dynamically
+            addRecentActivity(tradeAction, assetCode, size);
+        }
+
+        function addRecentActivity(action, assetCode, size) {
+            const container = document.getElementById('activity-container');
+            const newDiv = document.createElement('div');
+            newDiv.className = 'flex items-center justify-between animate-pulse';
+
+            const bgClass = action === 'BUY' ? 'bg-secondary-container/20 text-secondary' : 'bg-error-container/20 text-error';
+            const icon = action === 'BUY' ? 'shopping_cart' : 'sell';
+
+            newDiv.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg ${bgClass} flex items-center justify-center">
+                        <span class="material-symbols-outlined text-sm">${icon}</span>
+                    </div>
+                    <div>
+                        <p class="font-label-md text-label-md text-on-surface">${action === 'BUY' ? 'Buy' : 'Sell'} ${assetCode}</p>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant">Just now</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="font-label-md text-label-md text-primary">${action === 'BUY' ? '+' : '-'}${parseFloat(size).toLocaleString(undefined, {maximumFractionDigits: 4})} ${assetCode}</p>
+                    <span class="px-2 py-0.5 bg-secondary-container/30 text-secondary text-[10px] rounded uppercase font-bold">Filled</span>
+                </div>
+            `;
+            container.insertBefore(newDiv, container.firstChild);
+        }
+
+        function clearActivity() {
+            document.getElementById('activity-container').innerHTML = `
+                <div class="text-center py-6 text-on-surface-variant text-label-sm">No recent activity.</div>
+            `;
+        }
+
+        // Configure Alerts Modal Functions
+        const alertsModal = document.getElementById('alerts-modal');
+        function openConfigureAlertsModal() {
+            alertsModal.classList.remove('hidden');
+        }
+        function closeConfigureAlertsModal() {
+            alertsModal.classList.add('hidden');
+        }
+        function handleAlertSubmit(e) {
+            e.preventDefault();
+            const asset = document.getElementById('alert-asset').value;
+            const cond = document.getElementById('alert-condition').value;
+            const price = document.getElementById('alert-price').value;
+            
+            closeConfigureAlertsModal();
+            showToast(`Alert created: Trigger if ${asset} goes ${cond.toLowerCase()} $${parseFloat(price).toLocaleString()}`);
+
+            // Add alert to list UI
+            const alertCont = document.getElementById('alerts-container');
+            const alertDiv = document.createElement('div');
+            const borderCol = cond === 'ABOVE' ? 'border-primary' : 'border-secondary';
+            const textCol = cond === 'ABOVE' ? 'text-primary' : 'text-secondary';
+            alertDiv.className = `p-3 bg-surface-container-highest/30 rounded-lg border-l-2 ${borderCol}`;
+            alertDiv.innerHTML = `
+                <p class="font-label-md text-label-md ${textCol} mb-1">TRIGGER: ${asset}</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Notify when price goes ${cond.toLowerCase()} $${parseFloat(price).toLocaleString()}.</p>
+            `;
+            alertCont.insertBefore(alertDiv, alertCont.firstChild);
+        }
+
+        // Search Overlay Functions (Cmd/Ctrl + K shortcut)
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const searchModalInput = document.getElementById('search-modal-input');
+
+        function openSearchModal() {
+            searchModal.classList.remove('hidden');
+            searchModalInput.focus();
+            handleSearchQuery(); // show default list
+        }
+
+        function closeSearchModal() {
+            searchModal.classList.add('hidden');
+            searchModalInput.value = '';
+        }
+
+        // Handle typing inside search modal
+        function handleSearchQuery() {
+            const query = searchModalInput.value.toLowerCase().trim();
+            const resultsList = document.getElementById('search-results-list');
+            resultsList.innerHTML = '';
+
+            const matches = Object.keys(assets).filter(key => {
+                const asset = assets[key];
+                return key.toLowerCase().includes(query) || asset.name.toLowerCase().includes(query);
+            });
+
+            if (matches.length === 0) {
+                resultsList.innerHTML = `<div class="p-4 text-center text-on-surface-variant text-label-sm">No assets match your query.</div>`;
+                return;
+            }
+
+            matches.forEach(key => {
+                const asset = assets[key];
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant/30 cursor-pointer transition-colors';
+                div.onclick = () => {
+                    selectAsset(key);
+                    closeSearchModal();
+                };
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center font-bold text-primary text-xs">${key[0]}</div>
+                        <div>
+                            <div class="font-label-md text-on-surface">${asset.name}</div>
+                            <div class="text-[10px] text-on-surface-variant font-label-sm">${asset.symbol}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-label-md text-on-surface">$${asset.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                        <div class="text-[10px] font-bold ${asset.change >= 0 ? 'text-secondary' : 'text-error'}">${asset.change >= 0 ? '+' : ''}${asset.change.toFixed(2)}%</div>
+                    </div>
+                `;
+                resultsList.appendChild(div);
+            });
+        }
+
+        // Key shortcuts
+        window.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearchModal();
+            }
+        });
+
+        // Trigger search modal when clicking top navbar input
+        if (searchInput) {
+            searchInput.addEventListener('click', (e) => {
+                e.preventDefault();
+                openSearchModal();
+            });
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize and setup document
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render initial chart
+            initChart('BTC');
+            
+            // Start live random ticking
+            startLiveTicker();
+
+            // Panel hover physics (gradient coordinate follow)
+            const panels = document.querySelectorAll('.glass-panel');
+            panels.forEach(panel => {
+                panel.addEventListener('mousemove', (e) => {
+                    const rect = panel.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    panel.style.setProperty('--mouse-x', `${x}px`);
+                    panel.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

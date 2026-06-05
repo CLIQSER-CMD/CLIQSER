@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VELORA LUXE | Artisan Gastronomy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#775a19",
+              "primary-container": "#c5a059",
+              "on-primary-container": "#4e3700",
+              secondary: "#705a4c",
+              tertiary: "#5f5e5e",
+              background: "#fcf9f3",
+              "on-background": "#1c1c18",
+              surface: "#fcf9f3",
+              "on-surface": "#1c1c18",
+              "on-surface-variant": "#4e4639",
+              outline: "#7f7667",
+              "outline-variant": "#d1c5b4",
+              "inverse-surface": "#31312d",
+              "surface-container-low": "#f6f3ed",
+              "surface-container-high": "#ebe8e2",
+              "surface-container-highest": "#e5e2dc"
+            },
+            spacing: {
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "16px",
+              "margin-desktop": "80px",
+              "margin-mobile": "24px",
+              gutter: "24px"
+            },
+            maxHeight: {
+              "screen-80": "80vh"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 z-[60] bg-primary text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-90" id="backToTop">
+        <span class="material-symbols-outlined">north</span>
+    </button>
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-700 ease-in-out py-6" id="mainNav">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+                <img alt="VELORA" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="assets/images/logo.png"/>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="index.html">Home</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="menu.html">Menu</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="about.html">Philosophy</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="reservation.html">Reservations</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+            
+            <!-- Desktop Action -->
+            <div class="hidden md:block">
+                <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 inline-block rounded-sm">
+                    Book A Table
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-on-surface hover:text-primary transition-colors duration-300 z-50" id="mobileMenuToggle">
+                <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="fixed inset-0 bg-background/98 z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden" id="mobileMenu">
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="about.html">Philosophy</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="reservation.html">Reservations</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="contact.html">Contact</a>
+            <a href="reservation.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 mt-4 rounded-sm">
+                Book A Table
+            </a>
+        </div>
+    </nav>
+
+    <!-- Cinematic Hero -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="home">
+        <div class="parallax-container z-0">
+            <div class="parallax-bg" id="heroBg" style="background-image: url('assets/images/hero-bg.png')"></div>
+            <div class="absolute inset-0 bg-black/45"></div>
+        </div>
+        <div class="relative z-10 text-center px-margin-mobile md:px-0 max-w-4xl reveal active">
+            <h1 class="font-display-lg text-4xl md:text-7xl lg:text-8xl text-white mb-stack-sm leading-tight font-serif">
+                An Elevated Fine Dining Experience
+            </h1>
+            <p class="font-body-lg text-lg md:text-xl text-white/90 mb-stack-lg max-w-2xl mx-auto font-sans font-light">
+                Experience handcrafted cuisine, elegant ambiance, and unforgettable moments at Velora Dining.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="menu.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 rounded-sm">
+                    Explore Menu
+                </a>
+                <a href="reservation.html" class="border border-white text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-tertiary transition-all duration-400 rounded-sm">
+                    Reserve Seating
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culinary Heritage / Philosophy -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+            <div class="space-y-stack-md reveal">
+                <span class="font-label-md text-label-md text-primary uppercase tracking-widest">Our Heritage</span>
+                <h2 class="font-headline-xl text-4xl md:text-6xl text-on-surface font-serif">Artisan Gastronomy &amp; World-Class Service</h2>
+                <div class="w-20 h-1 bg-primary-container"></div>
+                <p class="font-body-lg text-lg text-on-surface-variant leading-relaxed font-light font-sans">
+                    At Velora, we believe dining is a symphony of the senses. Each ingredient is sourced from ethical micro-producers, ensuring a farm-to-table journey that honors the integrity of nature. Our culinary team blends traditional techniques with avant-garde innovation to create dishes that tell a story of land, sea, and seasonal cycles.
+                </p>
+                <p class="font-body-md text-base text-on-surface-variant italic font-serif">
+                    "Gastronomy is the art of using food to create happiness."
+                </p>
+                <a href="about.html" class="inline-flex items-center gap-2 text-primary font-label-md uppercase tracking-widest hover:text-primary-container transition-colors">
+                    Our Philosophy <span class="material-symbols-outlined">arrow_right_alt</span>
+                </a>
+            </div>
+            <div class="relative h-[450px] md:h-[600px] group overflow-hidden rounded-sm reveal">
+                <div class="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-1000 z-10"></div>
+                <img alt="Signature Dish" class="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110" src="assets/images/signature-dish.png"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section class="py-stack-lg bg-surface-container-low" id="menu">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal">
+                <h2 class="font-headline-lg text-4xl md:text-5xl text-on-surface mb-4 font-serif">Menu Highlights</h2>
+                <p class="font-body-md text-base text-on-surface-variant max-w-xl mx-auto font-sans">Explore our curated selections of the season's finest offerings.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <!-- Starters -->
+                <a href="menu.html?cat=starters" class="group cursor-pointer menu-card reveal block" style="transition-delay: 100ms;">
+                    <div class="aspect-[3/4] overflow-hidden mb-stack-sm rounded-sm relative">
+                        <div class="absolute inset-0 border-0 group-hover:border-2 border-primary/30 transition-all duration-700 z-20 pointer-events-none"></div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s]" src="assets/images/starter.png" alt="Starters"/>
+                    </div>
+                    <h3 class="font-headline-sm text-2xl text-on-surface group-hover:text-primary transition-colors duration-500 font-serif">Starters</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Light, refreshing seasonal palettes.</p>
+                </a>
+                
+                <!-- Mains -->
+                <a href="menu.html?cat=mains" class="group cursor-pointer menu-card reveal block" style="transition-delay: 200ms;">
+                    <div class="aspect-[3/4] overflow-hidden mb-stack-sm rounded-sm relative">
+                        <div class="absolute inset-0 border-0 group-hover:border-2 border-primary/30 transition-all duration-700 z-20 pointer-events-none"></div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s]" src="assets/images/main.png" alt="Mains"/>
+                    </div>
+                    <h3 class="font-headline-sm text-2xl text-on-surface group-hover:text-primary transition-colors duration-500 font-serif">Mains</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Bold, complex masterworks of flavor.</p>
+                </a>
+                
+                <!-- Desserts -->
+                <a href="menu.html?cat=desserts" class="group cursor-pointer menu-card reveal block" style="transition-delay: 300ms;">
+                    <div class="aspect-[3/4] overflow-hidden mb-stack-sm rounded-sm relative">
+                        <div class="absolute inset-0 border-0 group-hover:border-2 border-primary/30 transition-all duration-700 z-20 pointer-events-none"></div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s]" src="assets/images/dessert.png" alt="Desserts"/>
+                    </div>
+                    <h3 class="font-headline-sm text-2xl text-on-surface group-hover:text-primary transition-colors duration-500 font-serif">Desserts</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Artistic sweets and decadent finishes.</p>
+                </a>
+                
+                <!-- Signature Drinks -->
+                <a href="menu.html?cat=drinks" class="group cursor-pointer menu-card reveal block" style="transition-delay: 400ms;">
+                    <div class="aspect-[3/4] overflow-hidden mb-stack-sm rounded-sm relative">
+                        <div class="absolute inset-0 border-0 group-hover:border-2 border-primary/30 transition-all duration-700 z-20 pointer-events-none"></div>
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s]" src="assets/images/drinks.png" alt="Drinks"/>
+                    </div>
+                    <h3 class="font-headline-sm text-2xl text-on-surface group-hover:text-primary transition-colors duration-500 font-serif">Signature Drinks</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Handcrafted infusions and rare vintages.</p>
+                </a>
+            </div>
+            
+            <div class="text-center mt-stack-md">
+                <a href="menu.html" class="inline-block border border-primary text-primary px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-400 rounded-sm">
+                    View Full Menu
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chef's Section -->
+    <section class="py-stack-lg bg-inverse-surface text-white overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center relative reveal">
+            <div class="order-2 md:order-1 relative group">
+                <div class="absolute -inset-4 border border-primary/20 scale-95 group-hover:scale-100 transition-transform duration-1000 pointer-events-none"></div>
+                <img alt="Executive Chef" class="rounded-sm shadow-2xl transition-transform duration-[2s] group-hover:scale-[1.03] w-full max-h-[500px] object-cover" src="assets/images/chef.png"/>
+            </div>
+            <div class="order-1 md:order-2 space-y-stack-md">
+                <span class="font-label-md text-label-md text-primary-container uppercase tracking-widest">Master of the Kitchen</span>
+                <h2 class="font-headline-xl text-4xl md:text-6xl font-serif">Culinary Philosophy</h2>
+                <p class="font-body-lg text-lg text-surface-variant leading-relaxed font-light font-sans">
+                    Under the visionary leadership of our Executive Chef, Velora Dining has redefined the boundaries of artisan gastronomy. His philosophy centers on 'Honest Complexity'—the idea that the finest dishes are those that strip away the unnecessary to reveal the soul of the ingredient, enhanced through rigorous technique.
+                </p>
+                <div class="pt-stack-sm reveal" style="transition-delay: 200ms;">
+                    <h4 class="font-headline-sm text-2xl text-primary-container font-serif">Chef Julian Vane</h4>
+                    <p class="font-label-md text-label-md uppercase tracking-widest text-surface-variant">Executive Chef &amp; Founder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bento -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div class="glass-card p-10 flex flex-col items-center text-center reveal" style="transition-delay: 100ms;">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-stack-sm transition-transform duration-700 hover:rotate-[360deg]">eco</span>
+                    <h3 class="font-headline-sm text-2xl mb-2 font-serif">Premium Ingredients</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Sourced daily from the world's most prestigious small-batch producers.</p>
+                </div>
+                <div class="glass-card p-10 flex flex-col items-center text-center border-primary/30 reveal" style="transition-delay: 200ms;">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-stack-sm transition-transform duration-700 hover:scale-110">skillet</span>
+                    <h3 class="font-headline-sm text-2xl mb-2 font-serif">Expert Chefs</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">A world-class team trained in the world's most celebrated Michelin kitchens.</p>
+                </div>
+                <div class="glass-card p-10 flex flex-col items-center text-center reveal" style="transition-delay: 300ms;">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-stack-sm transition-transform duration-700 hover:translate-y-[-8px]">bedroom_parent</span>
+                    <h3 class="font-headline-sm text-2xl mb-2 font-serif">Private Dining</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">Exclusive chambers for intimate celebrations and corporate summits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations CTA Section -->
+    <section class="py-stack-lg bg-surface-container-high" id="reservations">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="glass-card max-w-4xl mx-auto p-12 md:p-20 relative reveal">
+                <div class="text-center mb-stack-lg">
+                    <h2 class="font-headline-lg text-4xl md:text-5xl text-on-surface font-serif">Experience Velora Luxe</h2>
+                    <p class="font-body-md text-base text-on-surface-variant mt-2">Secure your table for an unforgettable evening of sensory gastronomy.</p>
+                </div>
+                <div class="text-center">
+                    <a href="reservation.html" class="shimmer-btn inline-block bg-primary text-white px-10 py-5 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 rounded-sm">
+                        Go to Seating Chart &amp; Book Table
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Contact Preview -->
+    <section class="py-stack-lg" id="contact">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-gutter items-center">
+            <div class="md:col-span-2 h-[450px] bg-surface-container rounded-sm overflow-hidden border border-outline-variant/30 reveal">
+                <div class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000 group">
+                    <img class="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110" data-alt="District Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUbSY-XetVvw3p6JdwjDFhU3QWZgIPdZcPQLSWDj-0ydrYFM-c7zHanDCA7bQRM2YG9j5T0p29KJCbObZa3xMbHDBo12rYW7_y0aEhIB1_OtDhEzW11xLiLv94rP8m7OsECX6Cu7lGykcfqKeG6zE6YVug6rAJrm-1QY3OndZ3-BhFaeQUEhNQbyMlj__NK2XTk3tRUGNikxyjr-fdwnwRWMg6viDNl4BQOatu5r3WSxnda6ORAHqT30wZM0pJiqpK1XVjh3tn__w"/>
+                </div>
+            </div>
+            <div class="space-y-stack-md flex flex-col justify-center reveal" style="transition-delay: 200ms;">
+                <div class="hover:translate-x-2 transition-transform duration-500">
+                    <h3 class="font-headline-md text-2xl mb-2 font-serif">Visit Us</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">
+                        42 Artisan Avenue, Gastronomy District<br/>
+                        Paris, France 75001
+                    </p>
+                </div>
+                <div class="hover:translate-x-2 transition-transform duration-500">
+                    <h3 class="font-headline-md text-2xl mb-2 font-serif">Inquiries</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">
+                        +33 (0) 1 23 45 67 89<br/>
+                        concierge@veloradining.com
+                    </p>
+                </div>
+                <div class="hover:translate-x-2 transition-transform duration-500">
+                    <h3 class="font-headline-md text-2xl mb-2 font-serif">Hours</h3>
+                    <p class="font-body-md text-base text-on-surface-variant font-light">
+                        Tuesday – Sunday<br/>
+                        18:00 – 23:30
+                    </p>
+                </div>
+                <div>
+                    <a href="contact.html" class="inline-flex items-center gap-2 text-primary font-label-md uppercase tracking-widest hover:text-primary-container transition-colors">
+                        Get In Touch <span class="material-symbols-outlined">arrow_right_alt</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-surface-variant/80 py-stack-lg border-t border-outline-variant/20">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="md:col-span-1 reveal">
+                    <span class="font-headline-md text-3xl text-primary block mb-4 font-serif">VELORA</span>
+                    <p class="font-body-md text-base font-light">Refining the art of culinary excellence through sensory innovation and artisan heritage.</p>
+                </div>
+                <div class="flex flex-col gap-3 reveal" style="transition-delay: 100ms;">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Explore</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="menu.html">Menu</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="about.html">Our Philosophy</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="reservation.html">Reservations</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="contact.html">Contact Us</a>
+                </div>
+                <div class="flex flex-col gap-3 reveal" style="transition-delay: 200ms;">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Connect</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Instagram</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Facebook</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-3 reveal" style="transition-delay: 300ms;">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Newsletter</span>
+                    <div class="relative group">
+                        <input class="w-full bg-white/5 border-0 border-b border-white/20 focus:ring-0 focus:border-primary py-2 text-white transition-all duration-500 group-focus-within:border-primary" placeholder="Email Address" type="email"/>
+                        <button class="absolute right-0 bottom-2 text-primary transition-transform duration-500 hover:translate-x-1">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-stack-md border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body-md text-sm uppercase tracking-widest">© 2026 VELORA DINING. ARTISAN GASTRONOMY.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">public</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">restaurant</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">wine_bar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Navbar scroll interaction
+        const mainNav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                mainNav.classList.remove('bg-transparent', 'py-6', 'border-transparent');
+                mainNav.classList.add('bg-surface/90', 'backdrop-blur-xl', 'py-3', 'border-primary/10', 'shadow-lg');
+            } else {
+                mainNav.classList.add('bg-transparent', 'py-6', 'border-transparent');
+                mainNav.classList.remove('bg-surface/90', 'backdrop-blur-xl', 'py-3', 'border-primary/10', 'shadow-lg');
+            }
+        });
+
+        // Parallax Hero
+        const heroBg = document.getElementById('heroBg');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (scrolled < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+
+        // Back to Top functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // Handle initial state on page load
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>NEURAVOX AI | Developer API Docs</title>
+    <!-- Tailwind CSS with Forms and Container Queries plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --color-primary: #d3bbff;
+            --color-secondary: #4cd7f6;
+            --glass-bg: rgba(10, 15, 30, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: #050505;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(109, 40, 217, 0.06) 0, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(76, 215, 246, 0.05) 0, transparent 40%);
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .glow-button-primary {
+            background: linear-gradient(135deg, #6d28d9 0%, #a78bfa 100%);
+            box-shadow: 0 0 15px rgba(109, 40, 217, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .glow-button-primary:hover {
+            box-shadow: 0 0 25px rgba(109, 40, 217, 0.6);
+        }
+
+        /* Nav item active states */
+        .doc-nav-item.active {
+            color: #4cd7f6;
+            border-left: 2px solid #4cd7f6;
+            padding-left: 10px;
+        }
+
+        /* Syntax Highlighter Mock Colors */
+        .token-keyword { color: #f472b6; font-weight: bold; }
+        .token-string { color: #34d399; }
+        .token-number { color: #60a5fa; }
+        .token-comment { color: #9ca3af; font-style: italic; }
+        .token-property { color: #a78bfa; }
+
+        /* Custom scrollbar for terminal */
+        .scrollbar-terminal::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollbar-terminal::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .scrollbar-terminal::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary selection:text-on-primary min-h-screen flex">
+
+    <!-- Sidebar Documentation Navigation -->
+    <aside class="w-64 bg-surface-container-lowest/80 border-r border-white/10 flex flex-col shrink-0">
+        <!-- Logo & Header -->
+        <div class="p-md border-b border-white/10">
+            <div class="flex items-center gap-xs cursor-pointer" onclick="window.location.href='./index.html'">
+                <svg class="h-8 w-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="#4cd7f6" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="#6d28d9" fill-opacity="0.8"/>
+                    <circle cx="20" cy="20" r="3" fill="#FFFFFF"/>
+                </svg>
+                <div>
+                    <span class="font-bold text-md text-white block tracking-tighter leading-none">NEURAVOX AI</span>
+                    <span class="text-[9px] text-on-surface-variant font-code mt-0.5 block">DEVELOPER PORTAL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Navigation Tree -->
+        <div class="flex-grow overflow-y-auto p-md space-y-md">
+            <div>
+                <h4 class="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest mb-sm">Getting Started</h4>
+                <ul class="space-y-xs text-xs">
+                    <li><a href="#quickstart" class="doc-nav-item active block py-1 text-on-surface-variant hover:text-white transition-colors">Quickstart Guide</a></li>
+                    <li><a href="#auth" class="doc-nav-item block py-1 text-on-surface-variant hover:text-white transition-colors">Authentication</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest mb-sm">API Reference</h4>
+                <ul class="space-y-xs text-xs">
+                    <li><a href="#deploy-agent" class="doc-nav-item block py-1 text-on-surface-variant hover:text-white transition-colors">Deploy Neural Agent</a></li>
+                    <li><a href="#workflow-runs" class="doc-nav-item block py-1 text-on-surface-variant hover:text-white transition-colors">Trigger Workflows</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[10px] uppercase font-bold text-on-surface-variant tracking-widest mb-sm">Console Links</h4>
+                <ul class="space-y-xs text-xs">
+                    <li><a href="./dashboard.html" class="block py-1 text-secondary hover:text-primary transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">construction</span>
+                        Command Dashboard
+                    </a></li>
+                    <li><a href="./index.html" class="block py-1 text-on-surface-variant hover:text-white transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">home</span>
+                        Main Home Page
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <div class="flex-grow flex flex-col min-w-0">
+        <!-- Top Horizontal Header Bar -->
+        <header class="h-16 border-b border-white/10 flex items-center justify-between px-lg shrink-0">
+            <div class="flex items-center gap-sm flex-grow max-w-md">
+                <span class="material-symbols-outlined text-on-surface-variant text-md">search</span>
+                <input type="text" placeholder="Search API guides, SDKs, parameters..." class="w-full bg-transparent border-none text-xs text-white placeholder-on-surface-variant focus:ring-0 focus:outline-none"/>
+            </div>
+            <div class="flex items-center gap-sm">
+                <span class="bg-primary/10 text-primary border border-primary/20 text-[10px] px-sm py-0.5 rounded-full font-bold">
+                    REST API v4.2 Live
+                </span>
+                <a href="./dashboard.html" class="glow-button-primary px-sm py-1.5 rounded-lg text-xs font-bold text-on-primary-fixed block text-center">Dashboard Console</a>
+            </div>
+        </header>
+
+        <!-- Documentation Core Body -->
+        <div class="flex-grow grid grid-cols-1 xl:grid-cols-2 gap-lg p-lg overflow-y-auto min-h-0">
+            
+            <!-- Left Side: Markdown Descriptions -->
+            <div class="space-y-lg max-w-2xl pr-md">
+                
+                <!-- Quickstart Section -->
+                <section id="quickstart" class="space-y-sm">
+                    <h2 class="text-xl font-bold text-white tracking-tight">Quickstart Guide</h2>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">
+                        Welcome to the Neuravox API v4.2 reference. The Neuravox AI platform leverages secure REST endpoints and WebSockets to orchestrate distributed neural clusters, manage localized code bases, and query active task telemetry streams.
+                    </p>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">
+                        To get up and running:
+                    </p>
+                    <ol class="list-decimal list-inside text-xs text-on-surface-variant space-y-xs">
+                        <li>Log into your <a href="./dashboard.html" class="text-secondary font-bold hover:underline">Command Console</a> and generate an operations API key.</li>
+                        <li>Authenticate requests by including the token in your headers.</li>
+                        <li>Initialize your first neural agent using the endpoints below.</li>
+                    </ol>
+                </section>
+
+                <hr class="border-white/10"/>
+
+                <!-- Authentication Section -->
+                <section id="auth" class="space-y-sm">
+                    <h2 class="text-xl font-bold text-white tracking-tight">Authentication</h2>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">
+                        Every REST API request directed to the Neuravox cluster must include your secret API key in the request headers under the name <code class="font-code text-xs text-primary bg-white/5 px-1.5 py-0.5 rounded border border-white/5">Authorization</code>.
+                    </p>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-md space-y-xs">
+                        <div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Example Header Structure</div>
+                        <div class="font-code text-[11px] text-white">
+                            Authorization: Bearer nvx_live_51xLq8Fq89XyZ4T7bV90jK1
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-white/10"/>
+
+                <!-- Deploy Agent Endpoint -->
+                <section id="deploy-agent" class="space-y-sm">
+                    <div class="flex items-center gap-xs">
+                        <span class="bg-secondary/15 text-secondary border border-secondary/35 text-[9px] px-2 py-0.5 rounded font-code font-bold">POST</span>
+                        <h2 class="text-lg font-bold text-white tracking-tight font-code text-sm">/v4/agents/deploy</h2>
+                    </div>
+                    <p class="text-xs text-on-surface-variant leading-relaxed">
+                        Deploys a custom neural agent node directly to your allocated workspace stack. Once compiled, this agent starts listening for pipeline triggers or API instructions.
+                    </p>
+                    <h4 class="text-xs font-bold text-white mt-md">Request Body Parameters</h4>
+                    <table class="w-full text-left text-xs text-on-surface-variant border-collapse border border-white/5 rounded-xl overflow-hidden">
+                        <thead>
+                            <tr class="bg-white/5 border-b border-white/5 text-[10px] uppercase font-bold text-white">
+                                <th class="p-sm">Parameter</th>
+                                <th class="p-sm">Type</th>
+                                <th class="p-sm">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-white/5">
+                                <td class="p-sm font-code text-secondary">name</td>
+                                <td class="p-sm font-code">string</td>
+                                <td class="p-sm">The logical name of your new agent. Must be unique.</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="p-sm font-code text-secondary">model</td>
+                                <td class="p-sm font-code">string</td>
+                                <td class="p-sm">Framework code, e.g. <code class="font-code text-[10px] text-white bg-white/5 border border-white/10 px-1 py-0.5 rounded">engine-v4.2</code>.</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="p-sm font-code text-secondary">instructions</td>
+                                <td class="p-sm font-code">string</td>
+                                <td class="p-sm">System prompt instructions guiding task behavior.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+            </div>
+
+            <!-- Right Side: Interactive Code Blocks & Sandbox Playground -->
+            <div class="space-y-md">
+                
+                <!-- Tabbed Code Viewer -->
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="bg-black/35 px-md py-sm border-b border-white/10 flex justify-between items-center">
+                        <div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-wider">Request Code Example</div>
+                        <!-- Language Tabs -->
+                        <div class="flex gap-xs">
+                            <button id="btn-curl" onclick="switchCodeLanguage('curl')" class="bg-white/10 border border-white/10 text-[10px] text-white px-2.5 py-1 rounded-lg font-code">cURL</button>
+                            <button id="btn-js" onclick="switchCodeLanguage('js')" class="bg-transparent border border-transparent text-[10px] text-on-surface-variant hover:text-white px-2.5 py-1 rounded-lg font-code">JavaScript</button>
+                            <button id="btn-py" onclick="switchCodeLanguage('py')" class="bg-transparent border border-transparent text-[10px] text-on-surface-variant hover:text-white px-2.5 py-1 rounded-lg font-code">Python</button>
+                        </div>
+                    </div>
+                    <!-- Code content -->
+                    <div class="p-md bg-black/60 font-code text-xs text-on-surface-variant leading-relaxed overflow-x-auto" id="code-block-container">
+                        <!-- Code injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- API Sandbox Playground -->
+                <div class="glass-card p-md rounded-2xl space-y-md">
+                    <div>
+                        <h3 class="text-sm font-bold text-white">API Sandbox Playground</h3>
+                        <p class="text-[10px] text-on-surface-variant">Execute simulated API calls directly in this UI environment to verify payload responses.</p>
+                    </div>
+                    
+                    <div class="space-y-sm">
+                        <div class="grid grid-cols-2 gap-sm">
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[9px] uppercase font-bold text-on-surface-variant">Select Endpoint</label>
+                                <select id="sandbox-endpoint" onchange="loadSandboxTemplate()" class="bg-black/50 border border-white/15 text-xs text-white rounded-xl px-sm py-1.5 focus:border-secondary focus:ring-1 focus:ring-secondary">
+                                    <option value="deploy">POST /v4/agents/deploy</option>
+                                    <option value="telemetry">GET /v4/telemetry</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="text-[9px] uppercase font-bold text-on-surface-variant">Sandbox Authorization</label>
+                                <input type="text" value="Bearer nvx_live_51xLq8..." disabled class="bg-white/5 border border-white/10 text-xs text-on-surface-variant/50 rounded-xl px-sm py-1.5 cursor-not-allowed"/>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label class="text-[9px] uppercase font-bold text-on-surface-variant">JSON Payload Body</label>
+                            <textarea id="sandbox-payload" rows="4" class="bg-black/50 border border-white/15 font-code text-xs text-white rounded-xl px-sm py-2 focus:border-secondary focus:ring-1 focus:ring-secondary"></textarea>
+                        </div>
+
+                        <button onclick="runSandboxQuery()" class="w-full py-2 glow-button-primary rounded-xl font-bold text-xs text-on-primary-fixed flex items-center gap-1 justify-center">
+                            <span class="material-symbols-outlined text-sm">send</span>
+                            Send Sandbox Request
+                        </button>
+                    </div>
+
+                    <!-- Output Response Console -->
+                    <div class="space-y-xs">
+                        <div class="text-[10px] uppercase font-bold text-on-surface-variant">Response Output Console</div>
+                        <div class="h-40 bg-black/60 border border-white/5 p-sm rounded-xl font-code text-[11px] text-on-surface-variant overflow-y-auto" id="sandbox-output">
+                            <span class="opacity-45">// Hit Send Sandbox Request to trigger execution</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Code Language templates
+        const codeTemplates = {
+            curl: `<span class="token-keyword">curl</span> -X POST https://api.neuravox.ai/v4/agents/deploy \\<br/>
+  -H <span class="token-string">"Authorization: Bearer YOUR_API_KEY"</span> \\<br/>
+  -H <span class="token-string">"Content-Type: application/json"</span> \\<br/>
+  -d <span class="token-string">'{<br/>
+    <span class="token-property">"name"</span>: <span class="token-string">"GitHubLinter"</span>,<br/>
+    <span class="token-property">"model"</span>: <span class="token-string">"engine-v4.2"</span>,<br/>
+    <span class="token-property">"instructions"</span>: <span class="token-string">"Parse security leaks in commits"</span><br/>
+  }'</span>`,
+
+            js: `<span class="token-keyword">const</span> payload = {<br/>
+  name: <span class="token-string">'GitHubLinter'</span>,<br/>
+  model: <span class="token-string">'engine-v4.2'</span>,<br/>
+  instructions: <span class="token-string">'Parse security leaks in commits'</span><br/>
+};<br/>
+<br/>
+<span class="token-keyword">fetch</span>(<span class="token-string">'https://api.neuravox.ai/v4/agents/deploy'</span>, {<br/>
+  method: <span class="token-string">'POST'</span>,<br/>
+  headers: {<br/>
+    <span class="token-string">'Authorization'</span>: <span class="token-string">'Bearer YOUR_API_KEY'</span>,<br/>
+    <span class="token-string">'Content-Type'</span>: <span class="token-string">'application/json'</span><br/>
+  },<br/>
+  body: JSON.stringify(payload)<br/>
+})<br/>
+.then(res => res.json())<br/>
+.then(data => console.log(data));`,
+
+            py: `<span class="token-keyword">import</span> requests<br/>
+<br/>
+url = <span class="token-string">'https://api.neuravox.ai/v4/agents/deploy'</span><br/>
+headers = {<br/>
+    <span class="token-string">'Authorization'</span>: <span class="token-string">'Bearer YOUR_API_KEY'</span>,<br/>
+    <span class="token-string">'Content-Type'</span>: <span class="token-string">'application/json'</span><br/>
+}<br/>
+payload = {<br/>
+    <span class="token-string">'name'</span>: <span class="token-string">'GitHubLinter'</span>,<br/>
+    <span class="token-string">'model'</span>: <span class="token-string">'engine-v4.2'</span>,<br/>
+    <span class="token-string">'instructions'</span>: <span class="token-string">'Parse security leaks in commits'</span><br/>
+}<br/>
+<br/>
+res = requests.post(url, json=payload, headers=headers)<br/>
+print(res.json())`
+        };
+
+        // Switch Code Language Tab
+        function switchCodeLanguage(lang) {
+            const btnCurl = document.getElementById('btn-curl');
+            const btnJs = document.getElementById('btn-js');
+            const btnPy = document.getElementById('btn-py');
+            const container = document.getElementById('code-block-container');
+
+            // Reset tabs styling
+            [btnCurl, btnJs, btnPy].forEach(btn => {
+                btn.className = "bg-transparent border border-transparent text-[10px] text-on-surface-variant hover:text-white px-2.5 py-1 rounded-lg font-code";
+            });
+
+            // Highlight chosen tab
+            let targetBtn = btnCurl;
+            if (lang === 'js') targetBtn = btnJs;
+            if (lang === 'py') targetBtn = btnPy;
+            targetBtn.className = "bg-white/10 border border-white/10 text-[10px] text-white px-2.5 py-1 rounded-lg font-code";
+
+            // Inject code snippet
+            container.innerHTML = codeTemplates[lang];
+        }
+
+        // Sandbox Payload Templates
+        const sandboxTemplates = {
+            deploy: `{
+  "name": "GitHubLinter",
+  "model": "engine-v4.2",
+  "instructions": "Parse security leaks in commits"
+}`,
+            telemetry: `{
+  "scope": "global",
+  "limit": 5,
+  "filter": "warnings"
+}`
+        };
+
+        function loadSandboxTemplate() {
+            const ep = document.getElementById('sandbox-endpoint').value;
+            document.getElementById('sandbox-payload').value = sandboxTemplates[ep];
+        }
+
+        // Run Sandbox Query (Simulates loading and outputs streamed text response)
+        let isRunningQuery = false;
+        function runSandboxQuery() {
+            if (isRunningQuery) return;
+            isRunningQuery = true;
+
+            const endpoint = document.getElementById('sandbox-endpoint').value;
+            const payloadStr = document.getElementById('sandbox-payload').value;
+            const output = document.getElementById('sandbox-output');
+
+            output.innerHTML = `<span class="text-secondary">Sending sandbox request to: https://api.neuravox.ai/v4/agents/${endpoint}...</span><br/>
+            <span class="text-on-surface-variant animate-pulse font-bold flex items-center gap-1 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> executing query...</span>`;
+
+            // Prepare mock JSON output responses
+            let responseJson = '';
+            if (endpoint === 'deploy') {
+                responseJson = `{
+  <span class="token-property">"status"</span>: <span class="token-string">"success"</span>,
+  <span class="token-property">"code"</span>: <span class="token-number">200</span>,
+  <span class="token-property">"agent"</span>: {
+    <span class="token-property">"name"</span>: <span class="token-string">"GitHubLinter"</span>,
+    <span class="token-property">"node_id"</span>: <span class="token-string">"nv_nd_882x"</span>,
+    <span class="token-property">"provisioned"</span>: <span class="token-keyword">true</span>,
+    <span class="token-property">"uptime_sec"</span>: <span class="token-number">0.024</span>
+  },
+  <span class="token-property">"telemetry"</span>: <span class="token-string">"active"</span>
+}`;
+            } else {
+                responseJson = `{
+  <span class="token-property">"status"</span>: <span class="token-string">"success"</span>,
+  <span class="token-property">"queries"</span>: [
+    { <span class="token-property">"endpoint"</span>: <span class="token-string">"/v4/query"</span>, <span class="token-property">"latency_ms"</span>: <span class="token-number">12</span> },
+    { <span class="token-property">"endpoint"</span>: <span class="token-string">"/users/metrics"</span>, <span class="token-property">"latency_ms"</span>: <span class="token-number">8</span> }
+  ],
+  <span class="token-property">"cluster_uptime"</span>: <span class="token-number">124800</span>
+}`;
+            }
+
+            setTimeout(() => {
+                // Clear console and print header info
+                output.innerHTML = `<span class="text-secondary">HTTP/1.1 200 OK</span><br/>
+                <span class="text-on-surface-variant font-bold text-[10px]">Content-Type: application/json</span><br/><br/>`;
+
+                // Stream character by character simulating slow network resolution
+                let i = 0;
+                let charBuffer = '';
+                
+                // Helper to resolve HTML tags during streaming
+                const interval = setInterval(() => {
+                    // Peek ahead for HTML tags to copy them entirely (so we don't break color tags during stream)
+                    if (responseJson.charAt(i) === '<') {
+                        let tag = '';
+                        while (responseJson.charAt(i) !== '>') {
+                            tag += responseJson.charAt(i);
+                            i++;
+                        }
+                        tag += '>';
+                        i++;
+                        charBuffer += tag;
+                    }
+                    
+                    charBuffer += responseJson.charAt(i);
+                    i++;
+                    
+                    // Replace new lines and inject
+                    output.innerHTML = `<span class="text-secondary">HTTP/1.1 200 OK</span><br/>
+                    <span class="text-on-surface-variant font-bold text-[10px]">Content-Type: application/json</span><br/><br/>` + charBuffer;
+                    output.scrollTop = output.scrollHeight;
+
+                    if (i >= responseJson.length) {
+                        clearInterval(interval);
+                        isRunningQuery = false;
+                    }
+                }, 3);
+
+            }, 1000);
+        }
+
+        // Initialize templates
+        window.onload = () => {
+            switchCodeLanguage('curl');
+            loadSandboxTemplate();
+        };
+
+        // Scroll active class sidebar highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.doc-nav-item');
+
+        window.addEventListener('scroll', () => {
+            let currentSec = '';
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top <= 100) {
+                    currentSec = sec.getAttribute('id');
+                }
+            });
+
+            if (currentSec) {
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${currentSec}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

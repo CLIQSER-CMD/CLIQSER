@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Product Detail | AUREN WEAR</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .reveal-on-hover { opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+        .group:hover .reveal-on-hover { opacity: 1; transform: translateY(0); }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .btn-interact {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+        }
+        .btn-interact:active {
+            transform: scale(0.96);
+        }
+        .mini-cart-overlay {
+            background-color: rgba(0,0,0,0.4);
+            transition: opacity 0.3s ease;
+        }
+        .mini-cart-panel {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mini-cart-panel.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300 ease-in-out" id="top-nav">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto" id="nav-container">
+            <div class="flex items-center gap-8">
+                <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:opacity-70 transition-opacity duration-300" href="index.html">Home</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-primary border-b border-primary pb-1 transition-opacity duration-300" href="shop.html">Shop</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:opacity-70 transition-opacity duration-300" href="shop.html">Collections</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:opacity-70 transition-opacity duration-300" href="#">About</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:opacity-70 transition-opacity duration-300" href="#">Contact</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-6 text-primary">
+                <button class="hover:opacity-70 transition-opacity" onclick="toggleSearchModal()"><span class="material-symbols-outlined">search</span></button>
+                <button class="hover:opacity-70 transition-opacity relative" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] w-3 h-3 flex items-center justify-center rounded-full cart-badge">0</span>
+                </button>
+                <button class="md:hidden hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined">menu</span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-stack-lg">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <!-- Product Shell -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+                <!-- Left: Media Gallery (8 cols) -->
+                <div class="md:col-span-8 flex flex-col md:flex-row-reverse gap-4">
+                    <!-- Main Image -->
+                    <div class="w-full aspect-[3/4] overflow-hidden bg-surface-container-low relative group cursor-crosshair">
+                        <img alt="Sculpted Wool Overcoat" class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.08]" id="main-product-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeHDPJU2nVRRQ-76WVAGVbXLCViFty7T2o5HiC7YFAxWqnNF4iueujl0g1vSO6XKrSu9ahae0g_8kflrUgO4IYqDAo3qCdk9ZblEKv4-sLq3TWkJVDmrEWz18ZlQ1awV8NL78XLC3_k1RM7sgnSFDQkHtRmW1fAOzbdytttvIhiTcUFhLzymepwhXHs9U44U7NbyE0jIrg8mJx2mShO8y17DvZDghf39JyrUwSMn-aS_I9JG1FSkv_UVKWSpH5G0j1Egd6gmdCh00"/>
+                    </div>
+                    <!-- Thumbnails -->
+                    <div class="flex md:flex-col gap-4 overflow-x-auto no-scrollbar md:w-32" id="thumbnailsContainer">
+                        <div class="w-24 md:w-full aspect-[3/4] overflow-hidden bg-surface-container-low cursor-pointer border border-primary transition-all duration-300" onclick="updateMainImage(this.children[0].src)">
+                            <img class="w-full h-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeHDPJU2nVRRQ-76WVAGVbXLCViFty7T2o5HiC7YFAxWqnNF4iueujl0g1vSO6XKrSu9ahae0g_8kflrUgO4IYqDAo3qCdk9ZblEKv4-sLq3TWkJVDmrEWz18ZlQ1awV8NL78XLC3_k1RM7sgnSFDQkHtRmW1fAOzbdytttvIhiTcUFhLzymepwhXHs9U44U7NbyE0jIrg8mJx2mShO8y17DvZDghf39JyrUwSMn-aS_I9JG1FSkv_UVKWSpH5G0j1Egd6gmdCh00" alt="Sculpted Wool Overcoat view 1"/>
+                        </div>
+                        <div class="w-24 md:w-full aspect-[3/4] overflow-hidden bg-surface-container-low cursor-pointer border border-transparent hover:border-outline transition-all duration-300" onclick="updateMainImage(this.children[0].src)">
+                            <img class="w-full h-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhFedyJEs96VjYBkkc72I7qf17GVdFlsfMZuQ0amYlSCSjEko_s09c-wYz46mdv5spJVo77nce48_9ChMCXIHUflXrwIbD7kCFKYivGNy5nTGMffVZGs8eGO3Pp6u9qcDo4z3VFMr6BYbT3bRHSK-D5G5Zje6FaHdhqWij6nwR-HdYhMXqOWjPi3SeuSWtOUmzdvuNpLqWMTaz8iSjtGH78kznTPHl8lpcCQqNsvvLCvTVI6KCaETU3J5odcpf-f7DKf8cni1B--w" alt="Sculpted Wool Overcoat view 2"/>
+                        </div>
+                        <div class="w-24 md:w-full aspect-[3/4] overflow-hidden bg-surface-container-low cursor-pointer border border-transparent hover:border-outline transition-all duration-300" onclick="updateMainImage(this.children[0].src)">
+                            <img class="w-full h-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLDWut5a1-V8lIdCfh6wrhZcphXwBwYk5DDNlfBRHwdPbnVmJ3aKtK_ED_wJr63_vrl2dcCfoqEo9AQaiopCfo7xS467mRfirXLJeh12Wy21ywO4T0IBbT2ym_KuNV1CgzsRnNxd6htqV8VU4hDZvLi2WEU0KTaITOIyP9TpaX6TvWL7dq1Q_61Bms2abKba6502-JQv3mLHY9fYkiaoX_xgYUFttykZKFm_V0ocqX99DNL3d_vKBtSPsH9FpOAwxhLjU3pP00FiM" alt="Sculpted Wool Overcoat view 3"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right: Product Information (4 cols) -->
+                <div class="md:col-span-4 md:sticky md:top-32 space-y-8 animate-slide-in-right" style="animation-delay: 200ms;">
+                    <div class="space-y-2">
+                        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.2em]" id="productCategory">Jackets & Coats</p>
+                        <h1 class="font-headline-lg text-headline-lg text-primary" id="productName">Sculpted Wool Overcoat</h1>
+                        <p class="font-headline-md text-headline-md text-primary" id="productPrice">$1,250.00</p>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-on-surface-variant font-body-md leading-relaxed" id="productDescription">
+                            A masterclass in modern tailoring. This overcoat is crafted from ethically sourced virgin wool with a double-faced finish for exceptional warmth without the weight. Designed for a sharp, architectural silhouette that transcends seasonal trends.
+                        </p>
+                    </div>
+                    <!-- Color Swatches -->
+                    <div class="space-y-4">
+                        <p class="font-label-sm text-label-sm uppercase tracking-widest text-primary" id="colorLabel">Color: Charcoal</p>
+                        <div class="flex gap-3" id="colorSwatches">
+                            <button class="w-8 h-8 rounded-full border border-outline-variant ring-1 ring-offset-2 ring-primary hover:ring-outline transition-all btn-interact" style="background-color: #2C2C2C;" title="Charcoal" onclick="selectColor('Charcoal', this)"></button>
+                            <button class="w-8 h-8 rounded-full border border-outline-variant ring-1 ring-offset-2 ring-transparent hover:ring-outline transition-all btn-interact" style="background-color: #E5E5E0;" title="Beige" onclick="selectColor('Beige', this)"></button>
+                            <button class="w-8 h-8 rounded-full border border-outline-variant ring-1 ring-offset-2 ring-transparent hover:ring-outline transition-all btn-interact" style="background-color: #1A1A1A;" title="Black" onclick="selectColor('Black', this)"></button>
+                        </div>
+                    </div>
+                    <!-- Size Selector -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <p class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Select Size</p>
+                            <button class="text-[10px] uppercase underline underline-offset-4 tracking-tighter opacity-60 hover:opacity-100 transition-opacity">Size Guide</button>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2" id="sizeSelectors">
+                            <button class="py-3 border border-outline-variant hover:border-primary transition-colors text-label-sm btn-interact" onclick="selectSize('S', this)">S</button>
+                            <button class="py-3 border border-primary bg-primary text-on-primary text-label-sm btn-interact" onclick="selectSize('M', this)">M</button>
+                            <button class="py-3 border border-outline-variant hover:border-primary transition-colors text-label-sm btn-interact" onclick="selectSize('L', this)">L</button>
+                            <button class="py-3 border border-outline-variant hover:border-primary transition-colors text-label-sm btn-interact" onclick="selectSize('XL', this)">XL</button>
+                        </div>
+                    </div>
+                    <!-- Actions -->
+                    <div class="space-y-3 pt-4">
+                        <button class="w-full bg-primary text-on-primary py-5 font-label-sm uppercase tracking-widest hover:bg-on-surface-variant transition-colors btn-interact" id="addToBagBtn">Add to Bag</button>
+                        <button class="w-full border border-primary text-primary py-5 font-label-sm uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all btn-interact" id="buyNowBtn">Buy it now</button>
+                    </div>
+                    <!-- Delivery/Returns Minimalist List -->
+                    <div class="pt-8 border-t border-outline-variant/30 space-y-4">
+                        <div class="flex items-center gap-3 text-on-surface-variant">
+                            <span class="material-symbols-outlined">local_shipping</span>
+                            <span class="text-label-sm font-medium">Complimentary Express Shipping</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-on-surface-variant">
+                            <span class="material-symbols-outlined">undo</span>
+                            <span class="text-label-sm font-medium">30-Day Bespoke Returns</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features & Materials Section -->
+            <section class="mt-stack-lg border-t border-outline-variant/30 pt-stack-md">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <div class="md:col-span-4">
+                        <h2 class="font-headline-md text-headline-md mb-6">Features &amp; Materials</h2>
+                    </div>
+                    <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-12">
+                        <div class="space-y-3">
+                            <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary">The Material</h3>
+                            <p class="text-on-surface-variant" id="materialText">100% Super 140s Virgin Wool. Sourced from the prestigious Biella region in Italy. Naturally water-repellent and temperature-regulating.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary">The Construction</h3>
+                            <p class="text-on-surface-variant" id="constructionText">Half-canvased construction for a natural drape. Hand-finished collar and silk-blend internal piping for ultimate interior comfort.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Care</h3>
+                            <p class="text-on-surface-variant" id="careText">Dry clean only. Store on a wide-shoulder cedar hanger to maintain the garment's structural integrity over decades.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Origin</h3>
+                            <p class="text-on-surface-variant" id="originText">Designed in Stockholm. Tailored in our carbon-neutral atelier in Portugal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Style With Recommendations -->
+            <section class="mt-stack-lg border-t border-outline-variant/30 pt-stack-md">
+                <div class="flex justify-between items-end mb-12">
+                    <h2 class="font-headline-md text-headline-md">Style With</h2>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest border-b border-primary pb-1 hover:opacity-70 transition-opacity" href="shop.html">Shop The Look</a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+                    <!-- Product 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-4 relative">
+                            <a href="product.html?id=cashmere-crew">
+                                <img alt="Cashmere Crew" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwfKJcmAVQLymeGUWlkih5myuQIMNK3KDI3uSvIc_RZI2J3NubSyf41sS81AyWvLP823JMZZiMLngxnU57HbaBSZWRPQIEscjpMAQoennrAXQvpfPdjqhPJN5nsuvNLPiBOs9WApldI1plXuOodne-q_5M8XzHWXnwJFNZPrhqVFZjgHfa3s18B_Wwh5y9yZSnN-MYGKZNYHJkZHaUe9a0znFme_M5QL9f5OT_YJPNTM9Nygul330zXDc3BIr5sS-d7PMUI16RClc"/>
+                            </a>
+                            <div class="absolute bottom-0 left-0 w-full p-4 reveal-on-hover">
+                                <button class="w-full bg-white/90 backdrop-blur-sm text-primary py-3 text-label-sm uppercase tracking-widest border border-primary/10 btn-interact" onclick="event.stopPropagation(); addToCart({id: 'cashmere-crew', name: 'Cashmere Crew', price: 310.00, size: 'M', color: 'Charcoal Grey', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAwfKJcmAVQLymeGUWlkih5myuQIMNK3KDI3uSvIc_RZI2J3NubSyf41sS81AyWvLP823JMZZiMLngxnU57HbaBSZWRPQIEscjpMAQoennrAXQvpfPdjqhPJN5nsuvNLPiBOs9WApldI1plXuOodne-q_5M8XzHWXnwJFNZPrhqVFZjgHfa3s18B_Wwh5y9yZSnN-MYGKZNYHJkZHaUe9a0znFme_M5QL9f5OT_YJPNTM9Nygul330zXDc3BIr5sS-d7PMUI16RClc', quantity: 1})">Quick Add</button>
+                            </div>
+                        </div>
+                        <a href="product.html?id=cashmere-crew" class="hover:underline"><h4 class="font-body-md text-primary">Cashmere Crew</h4></a>
+                        <p class="text-on-surface-variant opacity-70">$310</p>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-4 relative">
+                            <a href="product.html?id=raw-selvedge-denim">
+                                <img alt="Raw Selvedge Denim" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGMkBpdOiRxh6zs-y2sD5wgxKXkNKWcO3VDj-gFLNxbqWY5Zo-PHF4DgNeiTWCrOYutJFPxGkUuq38yR9ktCZXf-99ZESjR_oQXg47dbsa5zY4MDQ8AOE6Bmj8li8EU443wshcl-znXJlIx46cEEvjXdMC-MRl0UxTbzTNvn8bm-qbVwYHCpQxfmsJeR026Y6KNag_E5SdhojsyifHka7ZszWt63ttAqIT8WmFu32yH175G-6TrSHqOLfwD7IrMutmNg-bLyAz40Y"/>
+                            </a>
+                            <div class="absolute bottom-0 left-0 w-full p-4 reveal-on-hover">
+                                <button class="w-full bg-white/90 backdrop-blur-sm text-primary py-3 text-label-sm uppercase tracking-widest border border-primary/10 btn-interact" onclick="event.stopPropagation(); addToCart({id: 'raw-selvedge-denim', name: 'Raw Selvedge Denim', price: 320.00, size: '32', color: 'Indigo', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGMkBpdOiRxh6zs-y2sD5wgxKXkNKWcO3VDj-gFLNxbqWY5Zo-PHF4DgNeiTWCrOYutJFPxGkUuq38yR9ktCZXf-99ZESjR_oQXg47dbsa5zY4MDQ8AOE6Bmj8li8EU443wshcl-znXJlIx46cEEvjXdMC-MRl0UxTbzTNvn8bm-qbVwYHCpQxfmsJeR026Y6KNag_E5SdhojsyifHka7ZszWt63ttAqIT8WmFu32yH175G-6TrSHqOLfwD7IrMutmNg-bLyAz40Y', quantity: 1})">Quick Add</button>
+                            </div>
+                        </div>
+                        <a href="product.html?id=raw-selvedge-denim" class="hover:underline"><h4 class="font-body-md text-primary">Pleated Raw Denim</h4></a>
+                        <p class="text-on-surface-variant opacity-70">$320</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-stack-md bg-surface-container-lowest border-t border-outline-variant/50">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+            <div class="space-y-6">
+                <a class="font-display-lg text-headline-md text-primary" href="index.html">AUREN</a>
+                <p class="text-on-surface-variant text-body-md max-w-xs">Curating the essentials of the modern wardrobe through a lens of timeless minimalism.</p>
+            </div>
+            <div class="space-y-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Quick Links</h5>
+                <ul class="space-y-2">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="shop.html">New Arrivals</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="#">The Journal</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="#">Archive</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Customer Support</h5>
+                <ul class="space-y-2">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="#">Shipping &amp; Returns</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="#">Size Guide</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-200 hover:underline underline-offset-4 decoration-1" href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Newsletter</h5>
+                <p class="text-on-surface-variant text-label-sm">Join the circle for exclusive access.</p>
+                <form class="flex flex-col gap-2" onsubmit="event.preventDefault(); alert('Subscribed.'); this.reset();">
+                    <input class="bg-transparent border-b border-outline text-label-sm py-2 focus:outline-none focus:border-primary transition-colors" placeholder="Your Email" type="email" required/>
+                    <button class="text-left font-label-sm uppercase tracking-widest text-primary mt-2" type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="mt-stack-md pt-8 border-t border-outline-variant/30 px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-on-surface-variant text-label-sm opacity-60">© 2024 AUREN WEAR. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-6">
+                <a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="text-on-surface-variant text-label-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal Overlay -->
+    <div id="searchModal" class="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm hidden flex items-start justify-center pt-24 px-4" onclick="toggleSearchModal()">
+        <div class="bg-white w-full max-w-2xl p-8 border-b border-outline shadow-2xl relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-primary pb-2">
+                <input type="text" class="w-full bg-transparent border-none text-2xl font-body-md focus:ring-0 outline-none placeholder:text-outline p-0" placeholder="Search AUREN WEAR..."/>
+                <button onclick="toggleSearchModal()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+            </div>
+            <div class="mt-8 space-y-4">
+                <p class="font-label-sm text-secondary uppercase tracking-widest text-[10px]">Popular Searches</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="product.html?id=sculpted-wool-overcoat" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Wool Overcoat</a>
+                    <a href="product.html?id=essential-heavy-hoodie" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Heavy Hoodie</a>
+                    <a href="product.html?id=classic-minimal-tee" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Minimal Tee</a>
+                    <a href="product.html?id=urban-tech-sneaker" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Tech Sneaker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenuDrawer" class="fixed inset-0 z-[100] bg-white hidden flex flex-col p-8 transition-all duration-300">
+        <div class="flex justify-between items-center mb-12">
+            <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+            <button onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+        </div>
+        <nav class="flex flex-col gap-6 text-2xl font-label-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Home</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Shop</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Collections</a>
+            <a href="#" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4" onclick="toggleMobileMenu()">About</a>
+            <a href="#" class="hover:text-primary transition-colors pb-4" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+        <div class="mt-auto space-y-6">
+            <button onclick="toggleMobileMenu(); toggleSearchModal();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left pb-4 border-b border-outline-variant/10">
+                <span class="material-symbols-outlined">search</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">Search Catalog</span>
+            </button>
+            <button onclick="toggleMobileMenu(); toggleMiniCart();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">View Bag (<span class="cart-badge">0</span>)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mini-Cart Drawer (Slide-out panel) -->
+    <div class="fixed inset-0 z-[100] mini-cart-overlay hidden" id="miniCartOverlay" onclick="toggleMiniCart()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-[450px] bg-white shadow-2xl flex flex-col mini-cart-panel" id="miniCartPanel" onclick="event.stopPropagation()">
+            <div class="p-8 flex justify-between items-center border-b border-outline-variant/30">
+                <h2 class="font-headline-md uppercase tracking-tight" id="miniCartTitle">Your Cart (0)</h2>
+                <button class="hover:opacity-50 transition-opacity" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <!-- Cart Items (Rendered by cart.js) -->
+            <div class="flex-grow overflow-y-auto p-8 space-y-8" id="miniCartItems">
+                <!-- Dynamic Items -->
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="p-8 border-t border-outline-variant/30 bg-surface-container-low">
+                <div class="flex justify-between font-headline-md mb-6 uppercase tracking-tight">
+                    <span>Subtotal</span>
+                    <span id="miniCartSubtotal">$0.00</span>
+                </div>
+                <a href="checkout.html" class="block w-full bg-primary text-on-primary py-5 font-label-sm uppercase tracking-widest text-center hover:opacity-90 mb-4 transition-all duration-300">
+                    Checkout Now
+                </a>
+                <p class="text-center text-xs text-on-surface-variant uppercase tracking-tighter">
+                    Taxes and shipping calculated at checkout
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+    <script>
+        let currentProduct = null;
+        let selectedSize = "";
+        let selectedColor = "";
+
+        // Function to update the main product image from thumbnail
+        function updateMainImage(src) {
+            const mainImg = document.getElementById('main-product-image');
+            
+            // Smooth fade transition
+            mainImg.style.transition = 'opacity 300ms ease-in-out, transform 700ms ease-out';
+            mainImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainImg.src = src;
+                mainImg.onload = () => {
+                    mainImg.style.opacity = '1';
+                };
+            }, 300);
+            
+            // Update active state of thumbnails
+            const thumbnails = document.querySelectorAll('#thumbnailsContainer > div');
+            thumbnails.forEach(thumb => {
+                if (thumb.querySelector('img').src === src) {
+                    thumb.classList.add('border-primary');
+                    thumb.classList.remove('border-transparent');
+                } else {
+                    thumb.classList.remove('border-primary');
+                    thumb.classList.add('border-transparent');
+                }
+            });
+        }
+
+        // Dynamically load product details from PRODUCTS_DB based on ID in URL
+        document.addEventListener('DOMContentLoaded', () => {
+            // Read ?id= from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let productId = urlParams.get('id');
+
+            // Default to 'sculpted-wool-overcoat' if product is invalid or missing
+            if (!productId || !PRODUCTS_DB[productId]) {
+                productId = 'sculpted-wool-overcoat';
+            }
+
+            currentProduct = PRODUCTS_DB[productId];
+
+            if (productId === 'sculpted-wool-overcoat') {
+                // Pre-rendered HTML is already correct, just set state variables
+                selectedColor = "Charcoal";
+                selectedSize = "M";
+                document.title = "Sculpted Wool Overcoat | AUREN WEAR";
+            } else {
+                // Otherwise, dynamically rewrite DOM for other product IDs
+                document.title = `${currentProduct.name} | AUREN WEAR`;
+
+                // Update text details
+                document.getElementById('productCategory').textContent = currentProduct.category;
+                document.getElementById('productName').textContent = currentProduct.name;
+                document.getElementById('productPrice').textContent = `$${currentProduct.price.toFixed(2)}`;
+                document.getElementById('productDescription').textContent = currentProduct.description;
+
+                // Render main image
+                const mainImg = document.getElementById('main-product-image');
+                mainImg.src = currentProduct.image;
+                mainImg.alt = currentProduct.name;
+
+                // Render thumbnails
+                const thumbContainer = document.getElementById('thumbnailsContainer');
+                if (currentProduct.images && currentProduct.images.length > 1) {
+                    thumbContainer.classList.remove('hidden');
+                    let thumbHtml = '';
+                    currentProduct.images.forEach((imgSrc, idx) => {
+                        const borderClass = idx === 0 ? 'border-primary' : 'border-transparent';
+                        thumbHtml += `
+                            <div class="w-24 md:w-full aspect-[3/4] overflow-hidden bg-surface-container-low cursor-pointer border ${borderClass} transition-all duration-300" onclick="updateMainImage(this.children[0].src)">
+                                <img class="w-full h-full object-cover hover:opacity-80 transition-opacity" src="${imgSrc}" alt="${currentProduct.name} View ${idx+1}"/>
+                            </div>
+                        `;
+                    });
+                    thumbContainer.innerHTML = thumbHtml;
+                } else {
+                    thumbContainer.classList.add('hidden');
+                }
+
+                // Render Color Swatches
+                const colorContainer = document.getElementById('colorSwatches');
+                if (currentProduct.colors && currentProduct.colors.length > 0) {
+                    selectedColor = currentProduct.colors[0]; // default selection
+                    document.getElementById('colorLabel').textContent = `Color: ${selectedColor}`;
+                    colorContainer.parentElement.classList.remove('hidden');
+                    document.getElementById('colorLabel').classList.remove('hidden');
+
+                    let colorHtml = '';
+                    currentProduct.colors.forEach((colorName, idx) => {
+                        const hex = currentProduct.colorHexes[idx] || '#7E7576';
+                        const activeRing = idx === 0 ? 'ring-primary' : 'ring-transparent';
+                        colorHtml += `
+                            <button class="w-8 h-8 rounded-full border border-outline-variant ring-1 ring-offset-2 ${activeRing} hover:ring-outline transition-all btn-interact" 
+                                    style="background-color: ${hex};"
+                                    title="${colorName}"
+                                    onclick="selectColor('${colorName}', this)">
+                            </button>
+                        `;
+                    });
+                    colorContainer.innerHTML = colorHtml;
+                } else {
+                    selectedColor = "Standard";
+                    document.getElementById('colorLabel').classList.add('hidden');
+                    colorContainer.parentElement.classList.add('hidden');
+                }
+
+                // Render Size Selectors
+                const sizeContainer = document.getElementById('sizeSelectors');
+                if (currentProduct.sizes && currentProduct.sizes.length > 0) {
+                    selectedSize = currentProduct.sizes[0];
+                    sizeContainer.parentElement.classList.remove('hidden');
+
+                    let sizeHtml = '';
+                    currentProduct.sizes.forEach((sizeName, idx) => {
+                        const borderClass = idx === 0 ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant hover:border-primary';
+                        sizeHtml += `
+                            <button class="py-3 border ${borderClass} transition-colors text-label-sm btn-interact"
+                                    onclick="selectSize('${sizeName}', this)">
+                                ${sizeName}
+                            </button>
+                        `;
+                    });
+                    sizeContainer.innerHTML = sizeHtml;
+                } else {
+                    selectedSize = "One Size";
+                    sizeContainer.parentElement.classList.add('hidden');
+                }
+
+                // Render Features & Materials Detail Block
+                if (currentProduct.details) {
+                    document.getElementById('materialText').textContent = currentProduct.details.material || '';
+                    document.getElementById('constructionText').textContent = currentProduct.details.construction || '';
+                    document.getElementById('careText').textContent = currentProduct.details.care || '';
+                    document.getElementById('originText').textContent = currentProduct.details.origin || '';
+                }
+            }
+
+            // Connect action buttons
+            document.getElementById('addToBagBtn').addEventListener('click', () => {
+                addToBag();
+            });
+
+            document.getElementById('buyNowBtn').addEventListener('click', () => {
+                addToBag();
+                window.location.href = "checkout.html";
+            });
+        });
+
+        // Color selection handler
+        function selectColor(colorName, el) {
+            selectedColor = colorName;
+            document.getElementById('colorLabel').textContent = `Color: ${colorName}`;
+            
+            const buttons = document.querySelectorAll('#colorSwatches > button');
+            buttons.forEach(btn => {
+                btn.classList.remove('ring-primary');
+                btn.classList.add('ring-transparent');
+            });
+            el.classList.add('ring-primary');
+            el.classList.remove('ring-transparent');
+        }
+
+        // Size selection handler
+        function selectSize(sizeName, el) {
+            selectedSize = sizeName;
+            
+            const buttons = document.querySelectorAll('#sizeSelectors > button');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-primary', 'bg-primary', 'text-on-primary');
+                btn.classList.add('border-outline-variant', 'hover:border-primary');
+            });
+            el.classList.add('border-primary', 'bg-primary', 'text-on-primary');
+            el.classList.remove('border-outline-variant', 'hover:border-primary');
+        }
+
+        // Add currently displayed product to cart
+        function addToBag() {
+            if (!currentProduct) return;
+            
+            const itemToAdd = {
+                id: currentProduct.id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                size: selectedSize,
+                color: selectedColor,
+                image: currentProduct.image,
+                quantity: 1
+            };
+            
+            addToCart(itemToAdd);
+        }
+    </script>
+</body>
+</html>

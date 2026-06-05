@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>IRON PEAK FITNESS | Memberships</title>
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a4e6ff",
+                        "primary-container": "#00d1ff",
+                        "secondary": "#ffb4ab",
+                        "secondary-container": "#d30017",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e2e2e2",
+                        "on-surface-variant": "#bbc9cf",
+                        "on-primary-container": "#00566a",
+                        "on-secondary-container": "#ffe2de"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem"
+                    },
+                    spacing: {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "container-max": "1280px"
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Custom Kinetic Noir Styling -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,209,255,0.1)]">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+            <a class="font-display-lg text-[24px] md:text-[32px] font-black text-primary-container tracking-tighter" href="index.html">IRON PEAK</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="index.html">Home</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="programs.html">Programs</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="trainers.html">Trainers</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="membership.html">Membership</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="contact.html">Contact</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1 text-glow" href="dashboard.html">Dashboard</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="scrollToCalculator()" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-button text-xs uppercase tracking-widest glow-blue active:scale-95 transition-all btn-pulse hover:brightness-110 hidden sm:block">
+                    JOIN NOW
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden text-on-surface-variant hover:text-primary focus:outline-none">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col p-10 transform translate-x-full transition-transform duration-300 md:hidden border-l border-white/10">
+        <div class="flex justify-between items-center mb-10">
+            <span class="font-display-lg text-[24px] font-black text-primary-container tracking-tighter">IRON PEAK</span>
+            <button id="mobile-close-btn" class="text-on-surface hover:text-primary">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-6 text-xl uppercase tracking-widest font-semibold">
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="index.html">Home</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="programs.html">Programs</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="trainers.html">Trainers</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="membership.html">Membership</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="contact.html">Contact</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5 text-glow" href="dashboard.html">Dashboard</a>
+        </div>
+        <button onclick="scrollToCalculator()" class="mt-auto bg-primary-container text-on-primary-container py-4 rounded-full font-button text-button uppercase tracking-widest glow-blue">
+            JOIN NOW
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-32 min-h-screen">
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24">
+            <div class="text-center mb-16">
+                <span class="text-primary-container font-label-caps text-xs uppercase tracking-[0.2em] mb-4 block">Financial Commitment</span>
+                <h1 class="text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Membership Options</h1>
+                <p class="font-body-md text-on-surface-variant max-w-xl mx-auto opacity-80">
+                    Invest in physical optimization. Select your base membership tier, or customize your setup using the interactive calculator below.
+                </p>
+            </div>
+
+            <!-- Tiers Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start mb-24">
+                
+                <!-- Core Tier -->
+                <div class="glass-panel p-8 rounded-xl flex flex-col items-center border border-white/5 hover:border-white/20 transition-all">
+                    <div class="font-label-caps uppercase mb-4 text-on-surface-variant text-xs font-semibold">Core Membership</div>
+                    <div class="flex items-baseline mb-8">
+                        <span class="text-2xl font-bold text-on-surface">₹</span>
+                        <span class="text-5xl font-black text-on-surface">4,999</span>
+                        <span class="text-on-surface-variant ml-2 text-sm">/mo</span>
+                    </div>
+                    <ul class="w-full space-y-4 mb-10 text-xs text-on-surface-variant font-medium">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> Unlimited Gym Access</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> Locker Room &amp; Premium Showers</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> Mobile Metrics Tracker</li>
+                        <li class="flex items-center gap-3 opacity-30"><span class="material-symbols-outlined text-sm">cancel</span> Bio-Feedback Recovery Spa</li>
+                    </ul>
+                    <button onclick="selectTierDirect('Core')" class="w-full border border-white/20 py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold hover:bg-white/5 transition-all active:scale-95">
+                        Select Core
+                    </button>
+                </div>
+
+                <!-- Elite Tier -->
+                <div class="relative glass-panel p-8 rounded-xl flex flex-col items-center border-2 border-primary-container glow-blue md:scale-105 z-10 bg-surface-container-low">
+                    <div class="absolute -top-4 bg-primary-container text-on-primary-container font-label-caps py-1 px-4 rounded-full text-[9px] tracking-[0.2em] font-bold">RECOMMENDED</div>
+                    <div class="font-label-caps uppercase mb-4 text-primary-container text-xs font-semibold">Elite Membership</div>
+                    <div class="flex items-baseline mb-8">
+                        <span class="text-2xl font-bold text-primary-container">₹</span>
+                        <span class="text-5xl font-black text-primary-container">9,999</span>
+                        <span class="text-on-surface-variant ml-2 text-sm">/mo</span>
+                    </div>
+                    <ul class="w-full space-y-4 mb-10 text-xs text-on-surface font-medium">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> Unlimited Access + All Classes</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> 2x Personal Training / Month</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> Nutritional Diagnostics</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> Recovery Zone Access</li>
+                    </ul>
+                    <button onclick="selectTierDirect('Elite')" class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold glow-blue hover:brightness-110 active:scale-95 transition-all">
+                        Select Elite
+                    </button>
+                </div>
+
+                <!-- Apex Tier -->
+                <div class="glass-panel p-8 rounded-xl flex flex-col items-center border border-white/5 hover:border-white/20 transition-all">
+                    <div class="font-label-caps uppercase mb-4 text-on-surface-variant text-xs font-semibold">Apex Membership</div>
+                    <div class="flex items-baseline mb-8">
+                        <span class="text-2xl font-bold text-on-surface">₹</span>
+                        <span class="text-5xl font-black text-on-surface">19,999</span>
+                        <span class="text-on-surface-variant ml-2 text-sm">/mo</span>
+                    </div>
+                    <ul class="w-full space-y-4 mb-10 text-xs text-on-surface-variant font-medium">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> 24/7 Priority Facility Access</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> Unlimited Coach MetCons</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> Biometric Portal Integrations</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-container text-sm">check_circle</span> VIP Spa &amp; Recovery Suites</li>
+                    </ul>
+                    <button onclick="selectTierDirect('Apex')" class="w-full border border-white/20 py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold hover:bg-white/5 transition-all active:scale-95">
+                        Select Apex
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Interactive Pricing Calculator -->
+            <div id="calculator-section" class="max-w-3xl mx-auto glass-panel p-8 rounded-xl border border-white/10">
+                <h2 class="text-2xl md:text-3xl font-black uppercase text-center mb-8">Interactive Calculator</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Configurator -->
+                    <div class="space-y-6">
+                        <!-- Select Base Tier -->
+                        <div>
+                            <label class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant block mb-3">Select Base Tier</label>
+                            <select id="calc-tier" class="w-full bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:border-primary-container focus:ring-0 py-3">
+                                <option value="4999" data-name="Core">Core - ₹4,999/mo</option>
+                                <option value="9999" data-name="Elite" selected>Elite - ₹9,999/mo</option>
+                                <option value="19999" data-name="Apex">Apex - ₹19,999/mo</option>
+                            </select>
+                        </div>
+
+                        <!-- Select Term -->
+                        <div>
+                            <label class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant block mb-3">Select Term Duration</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button class="term-btn active-pill py-3 rounded-lg border text-xs font-bold text-center" data-months="1" data-discount="0">1 Month</button>
+                                <button class="term-btn py-3 rounded-lg border border-white/10 hover:bg-white/5 text-xs font-bold text-center" data-months="6" data-discount="10">6 Mo (10% Off)</button>
+                                <button class="term-btn py-3 rounded-lg border border-white/10 hover:bg-white/5 text-xs font-bold text-center" data-months="12" data-discount="20">1 Year (20% Off)</button>
+                            </div>
+                        </div>
+
+                        <!-- Add-ons -->
+                        <div>
+                            <label class="text-xs uppercase tracking-wider font-semibold text-on-surface-variant block mb-3">Custom Add-ons</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low/50 border border-white/5 hover:border-white/10 cursor-pointer">
+                                    <input type="checkbox" class="addon-checkbox text-primary-container focus:ring-0 bg-transparent border-white/20 rounded" value="1500"/>
+                                    <div class="text-xs">
+                                        <span class="font-bold block">Priority Trainer Booking</span>
+                                        <span class="text-on-surface-variant font-medium">+₹1,500/mo</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low/50 border border-white/5 hover:border-white/10 cursor-pointer">
+                                    <input type="checkbox" class="addon-checkbox text-primary-container focus:ring-0 bg-transparent border-white/20 rounded" value="3500"/>
+                                    <div class="text-xs">
+                                        <span class="font-bold block">VIP Spa &amp; Bio-Bed Recovery Suite</span>
+                                        <span class="text-on-surface-variant font-medium">+₹3,500/mo</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-low/50 border border-white/5 hover:border-white/10 cursor-pointer">
+                                    <input type="checkbox" class="addon-checkbox text-primary-container focus:ring-0 bg-transparent border-white/20 rounded" value="1000"/>
+                                    <div class="text-xs">
+                                        <span class="font-bold block">Biometric Port Syncing (Wearable data integration)</span>
+                                        <span class="text-on-surface-variant font-medium">+₹1,000/mo</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Output Screen -->
+                    <div class="bg-surface-container-low p-6 rounded-xl border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-on-surface-variant block mb-4 font-semibold">Configured Monthly Allocation</span>
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-3xl font-black text-primary-container">₹</span>
+                                <span id="total-monthly" class="text-6xl font-black text-primary-container text-glow">9,999</span>
+                                <span class="text-on-surface-variant text-sm ml-2 font-medium">/mo</span>
+                            </div>
+                            
+                            <div class="space-y-4 pt-6 border-t border-white/5 text-xs">
+                                <div class="flex justify-between">
+                                    <span class="text-on-surface-variant font-medium">Base Contract</span>
+                                    <span id="out-base-term" class="font-bold">1 Month Contract</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-on-surface-variant font-medium">Total Contract Allocation</span>
+                                    <span id="total-upfront" class="font-bold text-primary-container text-sm">₹9,999 upfront</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="checkoutCalculatorPlan()" class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-button text-xs uppercase tracking-widest font-semibold glow-blue mt-8 active:scale-95 transition-all">
+                            Initialize Protocol
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel p-8 rounded-xl max-w-md w-full border border-white/10 mx-margin-mobile transform scale-95 transition-transform duration-300" id="checkout-modal-panel">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold uppercase tracking-wider">Initialize Contract</h3>
+                <button onclick="closeCheckout()" class="text-on-surface-variant hover:text-primary">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <form id="checkout-form" class="space-y-4 text-xs" onsubmit="submitCheckout(event)">
+                <!-- Plan description readout -->
+                <div class="bg-surface-container-low p-4 rounded-lg space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-on-surface-variant uppercase tracking-wider font-semibold">Tier Configured</span>
+                        <span id="check-tier-name" class="font-bold text-primary-container">Elite Plan</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-on-surface-variant uppercase tracking-wider font-semibold">Total Price</span>
+                        <span id="check-price" class="font-bold text-primary-container">₹9,999 / month</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="font-label-caps text-on-surface-variant text-[10px]">FULL NAME</label>
+                    <input required class="w-full bg-surface-container-lowest border border-white/10 rounded focus:border-primary focus:ring-0 text-on-surface py-3" placeholder="John Doe" type="text"/>
+                </div>
+                <div class="space-y-2">
+                    <label class="font-label-caps text-on-surface-variant text-[10px]">EMAIL ADDRESS</label>
+                    <input required class="w-full bg-surface-container-lowest border border-white/10 rounded focus:border-primary focus:ring-0 text-on-surface py-3" placeholder="john@performance.com" type="email"/>
+                </div>
+                <div class="space-y-2">
+                    <label class="font-label-caps text-on-surface-variant text-[10px]">PAYMENT METHOD</label>
+                    <div class="relative">
+                        <input required class="w-full bg-surface-container-lowest border border-white/10 rounded focus:border-primary focus:ring-0 text-on-surface py-3 pl-10" placeholder="•••• •••• •••• ••••" type="text" pattern="[0-9\s]{13,19}"/>
+                        <span class="material-symbols-outlined text-on-surface-variant text-sm absolute left-3 top-3">credit_card</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-button text-xs uppercase tracking-widest font-semibold glow-blue active:scale-95 transition-all mt-6">
+                    Activate Contract
+                </button>
+            </form>
+
+            <!-- Loading indicator -->
+            <div id="checkout-loading" class="hidden flex flex-col items-center justify-center py-10 space-y-4">
+                <span class="material-symbols-outlined text-primary-container text-5xl animate-spin">refresh</span>
+                <span class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">Connecting Biometric Registry...</span>
+            </div>
+
+            <!-- Success screen -->
+            <div id="checkout-success" class="hidden flex flex-col items-center justify-center text-center py-6 space-y-6">
+                <span class="material-symbols-outlined text-green-400 text-6xl animate-bounce">verified</span>
+                <div>
+                    <h4 class="text-2xl font-black uppercase text-glow mb-2">Protocol Active</h4>
+                    <p class="text-on-surface-variant leading-relaxed font-medium">Your credentials have been generated. Welcome to the laboratory.</p>
+                </div>
+                <button onclick="window.location.href='dashboard.html'" class="bg-primary-container text-on-primary-container px-8 py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold glow-blue w-full">
+                    Enter Biometric Portal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-white/5 w-full py-16 mt-24">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="col-span-1 md:col-span-1">
+                <div class="font-display-lg text-2xl font-black text-primary-container mb-6">IRON PEAK</div>
+                <p class="font-body-md text-on-surface-variant opacity-80 mb-6">Engineering the next generation of physical potential through technical mastery and elite environments.</p>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="terminal">terminal</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="precision_manufacturing">precision_manufacturing</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="psychology">psychology</span>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Navigation</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="index.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="programs.html">Programs</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="trainers.html">Trainers</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Legal</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Updates</h4>
+                <p class="font-body-md text-on-surface-variant mb-4">Receive tactical performance updates.</p>
+                <div class="flex bg-surface-container-low rounded-lg overflow-hidden border border-white/10">
+                    <input class="bg-transparent border-0 focus:ring-0 px-4 py-2 w-full text-on-surface placeholder:text-white/20" placeholder="Email" type="email"/>
+                    <button class="bg-primary-container text-on-primary-container px-4 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/5 text-center px-margin-mobile">
+            <p class="font-body-md text-on-surface-variant text-xs opacity-60">© 2026 IRON PEAK FITNESS. ENGINEERED FOR PEAK PERFORMANCE.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Interactive Pricing Code
+        let selectedBasePrice = 9999;
+        let selectedTerm = 1;
+        let selectedDiscount = 0;
+
+        function scrollToCalculator() {
+            document.getElementById('calculator-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Active state directly triggers selection in calculator
+        function selectTierDirect(tierName) {
+            const dropdown = document.getElementById('calc-tier');
+            for(let i=0; i<dropdown.options.length; i++) {
+                if(dropdown.options[i].getAttribute('data-name') === tierName) {
+                    dropdown.selectedIndex = i;
+                    break;
+                }
+            }
+            // Trigger recalculate
+            recalculate();
+            scrollToCalculator();
+        }
+
+        const recalculate = () => {
+            const dropdown = document.getElementById('calc-tier');
+            selectedBasePrice = parseInt(dropdown.value, 10);
+            
+            // Addons
+            const addons = document.querySelectorAll('.addon-checkbox');
+            let addonCost = 0;
+            addons.forEach(ch => {
+                if (ch.checked) {
+                    addonCost += parseInt(ch.value, 10);
+                }
+            });
+
+            // Base + Addons
+            let costPerMonth = selectedBasePrice + addonCost;
+            
+            // Discount term calculation
+            let discountedCost = costPerMonth * (1 - (selectedDiscount / 100));
+            let totalBilling = Math.ceil(discountedCost * selectedTerm);
+
+            // Display math with animations (fades/text update)
+            document.getElementById('total-monthly').innerText = Math.ceil(discountedCost).toLocaleString('en-IN');
+            document.getElementById('out-base-term').innerText = `${selectedTerm} Month Contract${selectedDiscount > 0 ? ` (${selectedDiscount}% Off)` : ''}`;
+            document.getElementById('total-upfront').innerText = `₹${totalBilling.toLocaleString('en-IN')} total billing`;
+        };
+
+        // Term Buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const termBtns = document.querySelectorAll('.term-btn');
+            
+            termBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    termBtns.forEach(b => {
+                        b.classList.remove('active-pill');
+                        b.classList.add('border-white/10', 'hover:bg-white/5');
+                    });
+                    
+                    btn.classList.add('active-pill');
+                    btn.classList.remove('border-white/10', 'hover:bg-white/5');
+                    
+                    selectedTerm = parseInt(btn.getAttribute('data-months'), 10);
+                    selectedDiscount = parseInt(btn.getAttribute('data-discount'), 10);
+                    
+                    recalculate();
+                });
+            });
+
+            const dropdown = document.getElementById('calc-tier');
+            dropdown.addEventListener('change', recalculate);
+
+            const addons = document.querySelectorAll('.addon-checkbox');
+            addons.forEach(ch => ch.addEventListener('change', recalculate));
+
+            recalculate();
+        });
+
+        // Checkout Modal Functions
+        function openCheckout(tierName, monthlyCost) {
+            document.getElementById('check-tier-name').innerText = `${tierName} Plan`;
+            document.getElementById('check-price').innerText = `₹${monthlyCost} / month`;
+            
+            // Show form, hide loader and success
+            document.getElementById('checkout-form').classList.remove('hidden');
+            document.getElementById('checkout-loading').classList.add('hidden');
+            document.getElementById('checkout-success').classList.add('hidden');
+
+            const modal = document.getElementById('checkout-modal');
+            const panel = document.getElementById('checkout-modal-panel');
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }
+
+        function checkoutCalculatorPlan() {
+            const dropdown = document.getElementById('calc-tier');
+            const tierName = dropdown.options[dropdown.selectedIndex].getAttribute('data-name');
+            const monthlyCost = document.getElementById('total-monthly').innerText;
+            openCheckout(tierName, monthlyCost);
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const panel = document.getElementById('checkout-modal-panel');
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            panel.classList.remove('scale-100');
+            panel.classList.add('scale-95');
+        }
+
+        function submitCheckout(e) {
+            e.preventDefault();
+            // Hide form, show loading
+            document.getElementById('checkout-form').classList.add('hidden');
+            document.getElementById('checkout-loading').classList.remove('hidden');
+
+            // Simulate server network latency
+            setTimeout(() => {
+                document.getElementById('checkout-loading').classList.add('hidden');
+                document.getElementById('checkout-success').classList.remove('hidden');
+                
+                // Store registration state locally
+                localStorage.setItem('ironpeak_member_active', 'true');
+            }, 2500);
+        }
+    </script>
+    <style>
+        /* Shared variables from style.css */
+        .active-pill {
+            background-color: var(--color-primary-container, #00d1ff) !important;
+            color: #003543 !important;
+            border-color: var(--color-primary-container, #00d1ff) !important;
+            box-shadow: 0 0 15px rgba(0, 209, 255, 0.4);
+        }
+    </style>
+</body>
+</html>

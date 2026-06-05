@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Portfolio | Cliqser</title>
+    <meta name="description" content="Explore Cliqser's portfolio of custom e-commerce web applications, fintech platforms, SaaS dashboards, and modern interactive solutions."/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "on-secondary": "#303030",
+              "background": "#121414",
+              "outline": "#8b90a0",
+              "surface-container-low": "#1b1c1c",
+              "tertiary-container": "#00819d",
+              "surface-variant": "#343535",
+              "surface-dim": "#121414",
+              "primary-container": "#0070f3",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#001f28",
+              "surface-tint": "#aec6ff",
+              "tertiary-fixed": "#b5ebff",
+              "surface-container-highest": "#343535",
+              "primary": "#aec6ff",
+              "on-primary-container": "#ffffff",
+              "surface-container": "#1f2020",
+              "on-tertiary-container": "#ffffff",
+              "on-surface": "#e3e2e2",
+              "secondary": "#c6c6c6",
+              "on-primary-fixed": "#001a43",
+              "error-container": "#93000a",
+              "inverse-surface": "#e3e2e2",
+              "on-secondary-fixed": "#1b1b1b",
+              "on-primary": "#002e6b",
+              "on-surface-variant": "#c1c6d7",
+              "on-tertiary-fixed-variant": "#004e60",
+              "inverse-on-surface": "#303031",
+              "surface-container-high": "#292a2a",
+              "tertiary-fixed-dim": "#43d6ff",
+              "on-error": "#690005",
+              "inverse-primary": "#0059c5",
+              "on-primary-fixed-variant": "#004397",
+              "primary-fixed": "#d8e2ff",
+              "on-secondary-fixed-variant": "#474747",
+              "on-background": "#e3e2e2",
+              "outline-variant": "#414754",
+              "primary-fixed-dim": "#aec6ff",
+              "secondary-fixed": "#e2e2e2",
+              "surface": "#121414",
+              "surface-container-lowest": "#0d0e0f",
+              "secondary-container": "#474747",
+              "on-tertiary": "#003543",
+              "error": "#ffb4ab",
+              "secondary-fixed-dim": "#c6c6c6",
+              "on-secondary-container": "#b5b5b5",
+              "surface-bright": "#383939",
+              "tertiary": "#43d6ff"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "container-max": "1200px",
+              "xs": "4px",
+              "base": "8px",
+              "sm": "12px",
+              "gutter": "24px",
+              "lg": "48px",
+              "md": "24px",
+              "xl": "80px"
+            },
+            "fontFamily": {
+              "code": ["jetbrainsMono"],
+              "label-md": ["Geist"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              "display": ["Inter"],
+              "headline-md": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+              "code": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+              "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+              "display": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+              "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+              "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+    <link href="assets/css/shared.css" rel="stylesheet"/>
+    <script src="assets/js/shared.js" defer></script>
+</head>
+<body class="font-body-md selection:bg-primary-container selection:text-white overflow-x-hidden">
+<canvas id="particleCanvas"></canvas>
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-transparent border-b border-transparent transition-all duration-500" id="main-nav">
+    <nav class="flex justify-between items-center w-full px-lg py-base max-w-container-max mx-auto">
+        <div class="flex items-center gap-base">
+            <a href="index.html" class="font-display text-headline-md font-extrabold text-primary tracking-tighter cursor-pointer">Cliqser</a>
+        </div>
+        <div class="hidden md:flex items-center gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="index.html">Home</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="index.html#services">Services</a>
+            <a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md transition-all duration-300" href="portfolio.html">Portfolio</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="about.html">About</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md hover:text-primary transition-all duration-300" href="contact.html">Contact</a>
+        </div>
+        <div class="flex items-center gap-md">
+            <a href="contact.html" class="bg-primary text-on-primary px-md py-xs rounded-full font-label-md text-label-md font-bold btn-hover active:scale-95 text-center block">
+                Get Started
+            </a>
+            <!-- Mobile Menu Burger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-on-surface hover:text-primary transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-[32px]">menu</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-surface/95 backdrop-blur-lg flex flex-col justify-center items-center gap-lg text-center">
+    <button id="mobile-menu-close" class="absolute top-md right-md text-on-surface hover:text-primary transition-colors focus:outline-none">
+        <span class="material-symbols-outlined text-[36px]">close</span>
+    </button>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="index.html#services">Services</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="portfolio.html">Portfolio</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="about.html">About</a>
+    <a class="text-headline-md font-display font-semibold hover:text-primary transition-colors" href="contact.html">Contact</a>
+</div>
+
+<main class="relative pt-xl">
+    <!-- Website Development & About Us Sections -->
+    <section class="py-xl px-md max-w-container-max mx-auto relative overflow-hidden">
+        <div class="glow-effect top-0 left-1/4 opacity-40"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center relative z-10">
+            
+            <!-- Left Info Panel (Informative Content) -->
+            <div class="lg:col-span-7 space-y-md">
+                <span class="font-code text-code text-primary uppercase tracking-widest block">Core Technical Domain</span>
+                <h1 class="font-display text-headline-lg-mobile md:text-display text-on-surface leading-tight">
+                    Website <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-tertiary to-primary">Development</span>
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    At Cliqser, we believe a website is more than just a digital brochure—it is the central nervous system of your business. We engineer high-performance, responsive web ecosystems utilizing modern architectures and clean coding practices.
+                </p>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">
+                    From lightning-fast static pages to complex database integrations and custom serverless backends, our platforms are optimized for extreme load speed, search engine presence (SEO), and conversion. We avoid bloated frameworks to deliver military-grade codebases that scale infinitely as you grow.
+                </p>
+            </div>
+            
+            <!-- Right Info Panel (About Us Integration) -->
+            <div class="lg:col-span-5 p-lg bg-surface-container rounded-3xl border border-outline-variant/10 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-xs mb-sm">
+                        <span class="material-symbols-outlined text-primary text-[28px]">groups</span>
+                        <h3 class="text-headline-md font-bold text-on-surface">About Cliqser</h3>
+                    </div>
+                    <p class="text-on-surface-variant font-body-md leading-relaxed mb-md">
+                        Cliqser is an elite technical agency consisting of dedicated programmers, UI/UX architects, and automation specialists.
+                    </p>
+                    <p class="text-on-surface-variant font-body-md leading-relaxed">
+                        Our engineering philosophy is centered around technical refinement and aesthetic beauty. We collaborate with startup founders and modern enterprises worldwide to convert complex concepts into elegant, premium digital realities.
+                    </p>
+                </div>
+                <div class="mt-lg pt-md border-t border-outline-variant/10 grid grid-cols-2 gap-sm">
+                    <div>
+                        <span class="text-primary font-display font-extrabold text-headline-md">150+</span>
+                        <span class="text-on-surface-variant text-[11px] block uppercase font-code">Projects Done</span>
+                    </div>
+                    <div>
+                        <span class="text-tertiary font-display font-extrabold text-headline-md">99.9%</span>
+                        <span class="text-on-surface-variant text-[11px] block uppercase font-code">Uptime Scale</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Project Portfolio Grid Section -->
+    <section class="py-xl px-md max-w-container-max mx-auto reveal" id="portfolio">
+        <div class="mb-xl text-center">
+            <h2 class="font-display text-headline-lg text-on-surface mb-base">Featured Projects</h2>
+            <p class="text-on-surface-variant font-body-md max-w-xl mx-auto">Explore some of our recently engineered web ecosystems, scaling businesses to new heights.</p>
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-sm mt-lg" id="portfolio-filters">
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-primary text-on-primary shadow-lg shadow-primary/10 border border-primary/20" data-filter="all">All Projects</button>
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-outline-variant/10" data-filter="ecomm">E-Commerce</button>
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-outline-variant/10" data-filter="finance">FinTech</button>
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-outline-variant/10" data-filter="gym">Fitness</button>
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-outline-variant/10" data-filter="restaurant">Restaurant</button>
+                <button class="px-md py-xs rounded-full font-label-md text-label-md font-bold transition-all duration-300 bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-outline-variant/10" data-filter="saas">SaaS Cloud</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter transition-all duration-500" id="portfolio-grid">
+            <!-- Project 1: E-Commerce -->
+            <div class="project-card group bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden flex flex-col justify-between transition-all duration-300" data-category="ecomm">
+                <div class="relative overflow-hidden aspect-[4/3] bg-surface-container-low">
+                    <img alt="Auren Wear E-Commerce" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="portfolio/ecomm/screenshots/auren_wear_home_screen.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-md left-md bg-primary-container text-white text-[10px] font-code uppercase tracking-widest px-sm py-[2px] rounded-full">E-Commerce</span>
+                </div>
+                <div class="p-lg flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Auren Wear</h3>
+                        <p class="text-on-surface-variant text-body-md mb-md">A premium, minimalist e-commerce ecosystem designed with micro-animations, high-fidelity cart operations, and refined product cataloging.</p>
+                        
+                        <div class="flex flex-wrap gap-xs mb-lg">
+                            <span class="font-code text-[11px] text-primary bg-primary/10 border border-primary/20 px-sm py-[2px] rounded-md">TailwindCSS</span>
+                            <span class="font-code text-[11px] text-tertiary bg-tertiary/10 border border-tertiary/20 px-sm py-[2px] rounded-md">Vanilla JS</span>
+                            <span class="font-code text-[11px] text-on-surface bg-white/5 border border-white/10 px-sm py-[2px] rounded-md">HTML5 / CSS3</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-md pt-md border-t border-outline-variant/10">
+                        <a href="portfolio/ecomm/index.html" target="_blank" class="flex-1 text-center bg-primary text-on-primary py-xs rounded-lg font-bold text-label-md btn-hover hover:shadow-[0_0_20px_rgba(174,198,255,0.25)] flex items-center justify-center gap-xs">
+                            Live Demo <span class="material-symbols-outlined text-body-md">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Finance -->
+            <div class="project-card group bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden flex flex-col justify-between transition-all duration-300" data-category="finance">
+                <div class="relative overflow-hidden aspect-[4/3] bg-surface-container-low">
+                    <img alt="QuantFlow FinTech" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="portfolio/finance/assets/screen_landing.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-md left-md bg-tertiary-container text-white text-[10px] font-code uppercase tracking-widest px-sm py-[2px] rounded-full">FinTech</span>
+                </div>
+                <div class="p-lg flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">QuantFlow Finance</h3>
+                        <p class="text-on-surface-variant text-body-md mb-md">An AI-powered quantitative analytics portal, featuring live SVG trading charts, terminal simulator, risk modeling, and bento dashboard layouts.</p>
+                        
+                        <div class="flex flex-wrap gap-xs mb-lg">
+                            <span class="font-code text-[11px] text-primary bg-primary/10 border border-primary/20 px-sm py-[2px] rounded-md">TailwindCSS</span>
+                            <span class="font-code text-[11px] text-tertiary bg-tertiary/10 border border-tertiary/20 px-sm py-[2px] rounded-md">Chart.js</span>
+                            <span class="font-code text-[11px] text-on-surface bg-white/5 border border-white/10 px-sm py-[2px] rounded-md">SVG Animation</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-md pt-md border-t border-outline-variant/10">
+                        <a href="portfolio/finance/index.html" target="_blank" class="flex-1 text-center bg-primary text-on-primary py-xs rounded-lg font-bold text-label-md btn-hover hover:shadow-[0_0_20px_rgba(174,198,255,0.25)] flex items-center justify-center gap-xs">
+                            Live Demo <span class="material-symbols-outlined text-body-md">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: GYM -->
+            <div class="project-card group bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden flex flex-col justify-between transition-all duration-300" data-category="gym">
+                <div class="relative overflow-hidden aspect-[4/3] bg-surface-container-low">
+                    <img alt="Vigor Gym & Fitness" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="portfolio/gym/assets/images/screen_1.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-md left-md bg-secondary-container text-white text-[10px] font-code uppercase tracking-widest px-sm py-[2px] rounded-full">Fitness</span>
+                </div>
+                <div class="p-lg flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Vigor Fitness</h3>
+                        <p class="text-on-surface-variant text-body-md mb-md">A dynamic fitness web hub featuring premium program catalogs, trainer spotlights, interactive memberships, and custom workout scheduler dashboards.</p>
+                        
+                        <div class="flex flex-wrap gap-xs mb-lg">
+                            <span class="font-code text-[11px] text-primary bg-primary/10 border border-primary/20 px-sm py-[2px] rounded-md">TailwindCSS</span>
+                            <span class="font-code text-[11px] text-tertiary bg-tertiary/10 border border-tertiary/20 px-sm py-[2px] rounded-md">Vanilla JS</span>
+                            <span class="font-code text-[11px] text-on-surface bg-white/5 border border-white/10 px-sm py-[2px] rounded-md">Scroll Reveal</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-md pt-md border-t border-outline-variant/10">
+                        <a href="portfolio/gym/index.html" target="_blank" class="flex-1 text-center bg-primary text-on-primary py-xs rounded-lg font-bold text-label-md btn-hover hover:shadow-[0_0_20px_rgba(174,198,255,0.25)] flex items-center justify-center gap-xs">
+                            Live Demo <span class="material-symbols-outlined text-body-md">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Restaurant -->
+            <div class="project-card group bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden flex flex-col justify-between transition-all duration-300" data-category="restaurant">
+                <div class="relative overflow-hidden aspect-[4/3] bg-surface-container-low">
+                    <img alt="Saboré Culinary Restaurant" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="portfolio/restaurant/assets/images/hero-bg.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-md left-md bg-primary/20 text-primary border border-primary/30 text-[10px] font-code uppercase tracking-widest px-sm py-[2px] rounded-full">Culinary</span>
+                </div>
+                <div class="p-lg flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Saboré Restaurant</h3>
+                        <p class="text-on-surface-variant text-body-md mb-md">An elegant, luxury culinary landing experience equipped with reservation modals, fully detailed menu pages, and responsive chef profiles.</p>
+                        
+                        <div class="flex flex-wrap gap-xs mb-lg">
+                            <span class="font-code text-[11px] text-primary bg-primary/10 border border-primary/20 px-sm py-[2px] rounded-md">TailwindCSS</span>
+                            <span class="font-code text-[11px] text-tertiary bg-tertiary/10 border border-tertiary/20 px-sm py-[2px] rounded-md">CSS Grid</span>
+                            <span class="font-code text-[11px] text-on-surface bg-white/5 border border-white/10 px-sm py-[2px] rounded-md">Custom CSS</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-md pt-md border-t border-outline-variant/10">
+                        <a href="portfolio/restaurant/index.html" target="_blank" class="flex-1 text-center bg-primary text-on-primary py-xs rounded-lg font-bold text-label-md btn-hover hover:shadow-[0_0_20px_rgba(174,198,255,0.25)] flex items-center justify-center gap-xs">
+                            Live Demo <span class="material-symbols-outlined text-body-md">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5: SaaS -->
+            <div class="project-card group bg-surface-container rounded-2xl border border-outline-variant/10 overflow-hidden flex flex-col justify-between transition-all duration-300" data-category="saas">
+                <div class="relative overflow-hidden aspect-[4/3] bg-surface-container-low">
+                    <img alt="Nexus Cloud SaaS" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="portfolio/saas/assets/landing-page-static.png"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-md left-md bg-tertiary-container text-white text-[10px] font-code uppercase tracking-widest px-sm py-[2px] rounded-full">SaaS Cloud</span>
+                </div>
+                <div class="p-lg flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Nexus SaaS</h3>
+                        <p class="text-on-surface-variant text-body-md mb-md">An advanced cloud SaaS landing and dashboard prototype featuring dark-mode analytics panels, team workspaces, and interactive docs page.</p>
+                        
+                        <div class="flex flex-wrap gap-xs mb-lg">
+                            <span class="font-code text-[11px] text-primary bg-primary/10 border border-primary/20 px-sm py-[2px] rounded-md">TailwindCSS</span>
+                            <span class="font-code text-[11px] text-tertiary bg-tertiary/10 border border-tertiary/20 px-sm py-[2px] rounded-md">Charts</span>
+                            <span class="font-code text-[11px] text-on-surface bg-white/5 border border-white/10 px-sm py-[2px] rounded-md">Docs Engine</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-md pt-md border-t border-outline-variant/10">
+                        <a href="portfolio/saas/index.html" target="_blank" class="flex-1 text-center bg-primary text-on-primary py-xs rounded-lg font-bold text-label-md btn-hover hover:shadow-[0_0_20px_rgba(174,198,255,0.25)] flex items-center justify-center gap-xs">
+                            Live Demo <span class="material-symbols-outlined text-body-md">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full px-lg py-md gap-gutter max-w-container-max mx-auto">
+        <div class="flex flex-col gap-xs items-center md:items-start">
+            <span class="font-display text-headline-md text-primary font-bold">Cliqser</span>
+            <p class="font-body-md text-body-md text-on-surface-variant">© 2026 Cliqser. All rights reserved. Engineering the future.</p>
+        </div>
+        <div class="flex gap-lg">
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="#">Security</a>
+            <a class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors hover:opacity-80" href="contact.html">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Portfolio Filter Micro-interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterButtons = document.querySelectorAll('#portfolio-filters button');
+        const projectCards = document.querySelectorAll('#portfolio-grid .project-card');
+
+        if (filterButtons.length > 0 && projectCards.length > 0) {
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button state
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg', 'shadow-primary/10');
+                        b.classList.add('bg-surface-container', 'text-on-surface-variant');
+                    });
+                    btn.classList.add('bg-primary', 'text-on-primary', 'shadow-lg', 'shadow-primary/10');
+                    btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (filterValue === 'all' || cardCategory === filterValue) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        }
+    });
+</script>
+</body>
+</html>

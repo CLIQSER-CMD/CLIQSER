@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>IRON PEAK FITNESS | Enlist</title>
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a4e6ff",
+                        "primary-container": "#00d1ff",
+                        "secondary": "#ffb4ab",
+                        "secondary-container": "#d30017",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e2e2e2",
+                        "on-surface-variant": "#bbc9cf",
+                        "on-primary-container": "#00566a",
+                        "on-secondary-container": "#ffe2de"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem"
+                    },
+                    spacing: {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "container-max": "1280px"
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Custom Kinetic Noir Styling -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,209,255,0.1)]">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+            <a class="font-display-lg text-[24px] md:text-[32px] font-black text-primary-container tracking-tighter" href="index.html">IRON PEAK</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="index.html">Home</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="programs.html">Programs</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="trainers.html">Trainers</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="membership.html">Membership</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="contact.html">Contact</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1 text-glow" href="dashboard.html">Dashboard</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='membership.html'" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-button text-xs uppercase tracking-widest glow-blue active:scale-95 transition-all btn-pulse hover:brightness-110 hidden sm:block">
+                    JOIN NOW
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden text-on-surface-variant hover:text-primary focus:outline-none">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col p-10 transform translate-x-full transition-transform duration-300 md:hidden border-l border-white/10">
+        <div class="flex justify-between items-center mb-10">
+            <span class="font-display-lg text-[24px] font-black text-primary-container tracking-tighter">IRON PEAK</span>
+            <button id="mobile-close-btn" class="text-on-surface hover:text-primary">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-6 text-xl uppercase tracking-widest font-semibold">
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="index.html">Home</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="programs.html">Programs</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="trainers.html">Trainers</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="membership.html">Membership</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="contact.html">Contact</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5 text-glow" href="dashboard.html">Dashboard</a>
+        </div>
+        <button onclick="window.location.href='membership.html'" class="mt-auto bg-primary-container text-on-primary-container py-4 rounded-full font-button text-button uppercase tracking-widest glow-blue">
+            JOIN NOW
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-32 min-h-screen">
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24">
+            <div class="text-center mb-16">
+                <span class="text-primary-container font-label-caps text-xs uppercase tracking-[0.2em] mb-4 block">Base of Operations</span>
+                <h1 class="text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Establish Contact</h1>
+                <p class="font-body-md text-on-surface-variant max-w-xl mx-auto opacity-80">
+                    Submit your details below to activate your performance application or reach out to our administration teams.
+                </p>
+            </div>
+
+            <!-- Contact Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-24">
+                
+                <!-- Info & Map -->
+                <div class="space-y-8">
+                    <h2 class="text-3xl font-extrabold uppercase tracking-tight">Global HQ</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-6 items-start">
+                            <div class="w-12 h-12 glass-panel rounded-full flex items-center justify-center shrink-0 border border-primary-container/30">
+                                <span class="material-symbols-outlined text-primary-container">location_on</span>
+                            </div>
+                            <div>
+                                <div class="font-bold mb-1">Global Headquarters</div>
+                                <div class="text-xs text-on-surface-variant font-semibold">742 Peak Performance Way, Silicon District<br/>San Francisco, CA 94105</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 items-start">
+                            <div class="w-12 h-12 glass-panel rounded-full flex items-center justify-center shrink-0 border border-primary-container/30">
+                                <span class="material-symbols-outlined text-primary-container">call</span>
+                            </div>
+                            <div>
+                                <div class="font-bold mb-1">Command Line</div>
+                                <div class="text-xs text-on-surface-variant font-semibold">+1 (800) IRON-PEAK</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 items-start">
+                            <div class="w-12 h-12 glass-panel rounded-full flex items-center justify-center shrink-0 border border-primary-container/30">
+                                <span class="material-symbols-outlined text-primary-container">mail</span>
+                            </div>
+                            <div>
+                                <div class="font-bold mb-1">Inquiries</div>
+                                <div class="text-xs text-on-surface-variant font-semibold">contact@ironpeakfitness.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Monochrome Map -->
+                    <div class="h-64 rounded-xl overflow-hidden border border-white/10 relative grayscale hover:grayscale-0 transition-all duration-700 shadow-lg">
+                        <img class="w-full h-full object-cover opacity-50" alt="San Francisco Location" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADfHg-H2GLMP-1tz6Mmz4YX751tRZTfpCBY_q00MImUk4MJA1_0rQnWz2HYSZEIiOzM1bZIh7fznD8pwSdMPjhTeU9yiVi0vrnTtSPrgOpSNLKWGA0j9Qgm9L2KYJU6W9DZjr0UL9NhtjPVEUsFSHssHtmjoFfhDIZCQDrW3rR4_sJ0fu0dIszo4ndyIV85qDJEYubdjDFMV6v8vcu2ma22WSuUhsKJrcV8WVDnXnuQqCu7NhNIEX0iDBe8ca0tGLTdeagz7lkObhz"/>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span class="bg-primary-container/20 backdrop-blur-md border border-primary-container p-3 rounded-full animate-bounce">
+                                <span class="material-symbols-outlined text-primary-container">location_on</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enlistment Form -->
+                <div class="glass-panel p-8 rounded-xl border border-white/10 relative overflow-hidden" id="form-container">
+                    <h3 class="text-2xl font-black uppercase mb-6 tracking-wide">Enlist Now</h3>
+                    <form id="contact-form" class="space-y-6 text-xs" onsubmit="handleFormSubmit(event)">
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-on-surface-variant text-[10px] font-semibold">FULL NAME</label>
+                            <input required id="name-input" class="w-full bg-surface-container-lowest border-0 border-b-2 border-white/10 focus:border-primary-container focus:ring-0 text-on-surface py-3 transition-colors placeholder:text-white/5" placeholder="John Doe" type="text"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-on-surface-variant text-[10px] font-semibold">EMAIL ADDRESS</label>
+                            <input required id="email-input" class="w-full bg-surface-container-lowest border-0 border-b-2 border-white/10 focus:border-primary-container focus:ring-0 text-on-surface py-3 transition-colors placeholder:text-white/5" placeholder="john@performance.com" type="email"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-on-surface-variant text-[10px] font-semibold">PROGRAM OF INTEREST</label>
+                            <select id="program-select" class="w-full bg-surface-container-lowest border-0 border-b-2 border-white/10 focus:border-primary-container focus:ring-0 text-on-surface py-3 transition-colors">
+                                <option>Strength &amp; Hypertrophy</option>
+                                <option>Metabolic Conditioning</option>
+                                <option>Body Recomposition</option>
+                                <option>Elite Personal Coaching</option>
+                                <option>High-Intensity CrossFit</option>
+                                <option>Yoga &amp; Mobility</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-label-caps text-on-surface-variant text-[10px] font-semibold">MESSAGE / OBJECTIVE</label>
+                            <textarea required id="message-input" class="w-full bg-surface-container-lowest border-0 border-b-2 border-white/10 focus:border-primary-container focus:ring-0 text-on-surface py-3 transition-colors placeholder:text-white/5" placeholder="What are your primary performance objectives?" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-button text-xs uppercase tracking-widest font-semibold glow-blue active:scale-95 transition-all">
+                            Submit Application
+                        </button>
+                    </form>
+
+                    <!-- Success Screen -->
+                    <div id="form-success" class="hidden flex flex-col items-center justify-center text-center py-12 space-y-6">
+                        <span class="material-symbols-outlined text-primary-container text-6xl animate-pulse">send</span>
+                        <div>
+                            <h4 class="text-2xl font-black uppercase text-glow mb-2">Application Received</h4>
+                            <p class="text-on-surface-variant leading-relaxed font-medium">A performance consultant will analyze your objective and contact you within 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Interactive FAQs Accordion -->
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-black uppercase tracking-tight text-center mb-10">Frequently Answered Protocols</h2>
+                <div class="space-y-4">
+                    
+                    <!-- FAQ 1 -->
+                    <div class="faq-item glass-panel border border-white/5 rounded-lg overflow-hidden">
+                        <button class="w-full p-6 text-left font-bold text-sm uppercase tracking-wide flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span>What are the command hours of operations?</span>
+                            <span class="material-symbols-outlined transform transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-xs text-on-surface-variant leading-relaxed border-t border-white/5 pt-4 opacity-0 h-0 hidden transition-all duration-300">
+                            Our primary facilities operate 24 hours a day, 7 days a week for Apex-tier configurations. Core and Elite memberships allow facility access between 05:00 AM and 11:00 PM daily. Support administration is online Mon-Fri, 08:00 AM to 06:00 PM PST.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item glass-panel border border-white/5 rounded-lg overflow-hidden">
+                        <button class="w-full p-6 text-left font-bold text-sm uppercase tracking-wide flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span>Do you provide short term guest clearances?</span>
+                            <span class="material-symbols-outlined transform transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-xs text-on-surface-variant leading-relaxed border-t border-white/5 pt-4 opacity-0 h-0 hidden transition-all duration-300">
+                            Yes. We offer single-session technical trial clears (₹2,500) and three-day consecutive guest clearances (₹6,000). Clearances can be purchased directly at the global headquarters concierge or reserved through our contact forms.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item glass-panel border border-white/5 rounded-lg overflow-hidden">
+                        <button class="w-full p-6 text-left font-bold text-sm uppercase tracking-wide flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span>How does wearable biometric syncing function?</span>
+                            <span class="material-symbols-outlined transform transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-xs text-on-surface-variant leading-relaxed border-t border-white/5 pt-4 opacity-0 h-0 hidden transition-all duration-300">
+                            With our Biometric Port Syncing, you can connect Apple Watch, WHOOP, Garmin, or Oura bands. The data syncs directly with your Client Dashboard, visualizing daily energy levels, cardiovascular thresholds, and hydration metrics in real time.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item glass-panel border border-white/5 rounded-lg overflow-hidden">
+                        <button class="w-full p-6 text-left font-bold text-sm uppercase tracking-wide flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span>Can I pause my contract during absences?</span>
+                            <span class="material-symbols-outlined transform transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-xs text-on-surface-variant leading-relaxed border-t border-white/5 pt-4 opacity-0 h-0 hidden transition-all duration-300">
+                            Contracts configured for 6 months or 12 months can be frozen for up to 30 days per contract year at no cost. Freezes can be initialized through your Client Dashboard or by contacting customer support.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-white/5 w-full py-16 mt-24">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="col-span-1 md:col-span-1">
+                <div class="font-display-lg text-2xl font-black text-primary-container mb-6">IRON PEAK</div>
+                <p class="font-body-md text-on-surface-variant opacity-80 mb-6">Engineering the next generation of physical potential through technical mastery and elite environments.</p>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="terminal">terminal</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="precision_manufacturing">precision_manufacturing</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="psychology">psychology</span>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Navigation</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="index.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="programs.html">Programs</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="trainers.html">Trainers</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Legal</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Updates</h4>
+                <p class="font-body-md text-on-surface-variant mb-4">Receive tactical performance updates.</p>
+                <div class="flex bg-surface-container-low rounded-lg overflow-hidden border border-white/10">
+                    <input class="bg-transparent border-0 focus:ring-0 px-4 py-2 w-full text-on-surface placeholder:text-white/20" placeholder="Email" type="email"/>
+                    <button class="bg-primary-container text-on-primary-container px-4 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/5 text-center px-margin-mobile">
+            <p class="font-body-md text-on-surface-variant text-xs opacity-60">© 2026 IRON PEAK FITNESS. ENGINEERED FOR PEAK PERFORMANCE.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // FAQ Accordion Toggle
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('.material-symbols-outlined');
+            
+            if(answer.classList.contains('hidden')) {
+                // Open
+                answer.classList.remove('hidden');
+                setTimeout(() => {
+                    answer.style.height = 'auto';
+                    answer.style.opacity = '1';
+                    icon.style.transform = 'rotate(180deg)';
+                }, 50);
+            } else {
+                // Close
+                answer.style.height = '0';
+                answer.style.opacity = '0';
+                icon.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    answer.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Form Submit Simulation
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const success = document.getElementById('form-success');
+            
+            form.classList.add('hidden');
+            success.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

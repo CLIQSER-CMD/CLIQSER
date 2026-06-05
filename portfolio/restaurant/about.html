@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VELORA LUXE | Our Philosophy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#775a19",
+              "primary-container": "#c5a059",
+              "on-primary-container": "#4e3700",
+              secondary: "#705a4c",
+              tertiary: "#5f5e5e",
+              background: "#fcf9f3",
+              "on-background": "#1c1c18",
+              surface: "#fcf9f3",
+              "on-surface": "#1c1c18",
+              "on-surface-variant": "#4e4639",
+              outline: "#7f7667",
+              "outline-variant": "#d1c5b4",
+              "inverse-surface": "#31312d",
+              "surface-container-low": "#f6f3ed",
+              "surface-container-high": "#ebe8e2",
+              "surface-container-highest": "#e5e2dc"
+            },
+            spacing: {
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "16px",
+              "margin-desktop": "80px",
+              "margin-mobile": "24px",
+              gutter: "24px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container pt-28">
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 z-[60] bg-primary text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-90" id="backToTop">
+        <span class="material-symbols-outlined">north</span>
+    </button>
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-primary/10 py-3 shadow-lg" id="mainNav">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+                <img alt="VELORA" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="assets/images/logo.png"/>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="index.html">Home</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="menu.html">Menu</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-primary hover:text-primary transition-colors duration-400" href="about.html">Philosophy</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="reservation.html">Reservations</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+            
+            <!-- Desktop Action -->
+            <div class="hidden md:block">
+                <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 inline-block rounded-sm">
+                    Book A Table
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-on-surface hover:text-primary transition-colors duration-300 z-50" id="mobileMenuToggle">
+                <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="fixed inset-0 bg-background/98 z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden" id="mobileMenu">
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest text-primary hover:text-primary transition-colors" href="about.html">Philosophy</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="reservation.html">Reservations</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="contact.html">Contact</a>
+            <a href="reservation.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 mt-4 rounded-sm">
+                Book A Table
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="py-stack-md bg-surface text-center">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-2">Our Story</span>
+            <h1 class="font-display-lg text-4xl md:text-6xl text-on-surface font-serif mb-4">Gastronomy Redefined</h1>
+            <p class="font-body-lg text-lg text-on-surface-variant max-w-3xl mx-auto font-light font-sans">
+                Velora Luxe blends ethical sourcing, cinematic design, and sensory synchronicity to create an unforgettable fine dining journey.
+            </p>
+        </div>
+    </header>
+
+    <!-- Culinary Vision Narrative -->
+    <section class="py-stack-lg bg-surface-container-low">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+            
+            <div class="space-y-6 reveal">
+                <span class="font-label-md text-xs text-primary uppercase tracking-widest font-semibold block">Sensory Dining System</span>
+                <h2 class="font-headline-xl text-3xl md:text-5xl font-serif text-on-surface">The Harmonies of Scent and Sound</h2>
+                <div class="w-20 h-0.5 bg-primary"></div>
+                <p class="font-body-md text-base text-on-surface-variant leading-relaxed">
+                    At Velora Luxe, we believe taste does not exist in isolation. Our signature culinary design matches gourmet dishes with auditory soundscapes and ambient aromas. We work alongside sonic engineers to pair frequencies that enhance sweetness, amplify savory umami, or clean the palate. As each dish arrives, a subtle dry-ice vapor of matching botanical essences envelops the table, elevating the sensory journey.
+                </p>
+                <div class="p-6 border-l-2 border-primary bg-background/50 rounded-sm">
+                    <h4 class="font-headline-sm text-lg text-primary font-serif mb-2">Zero-Waste &amp; Ethical Sourcing</h4>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">
+                        We collaborate exclusively with local organic farms and biodynamic vintners who share our ecological commitment. Our kitchen operates on a zero-waste loop, turning culinary offcuts into rich glazes, botanical syrups, and textured powder decorations.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 reveal">
+                <div class="space-y-4">
+                    <img class="w-full h-[250px] object-cover rounded-sm border border-outline-variant/20 shadow-md" src="assets/images/signature-dish.png" alt="Signature Plating"/>
+                    <img class="w-full h-[180px] object-cover rounded-sm border border-outline-variant/20 shadow-md" src="assets/images/starter.png" alt="Plated Appetizer"/>
+                </div>
+                <div class="space-y-4 pt-8">
+                    <img class="w-full h-[180px] object-cover rounded-sm border border-outline-variant/20 shadow-md" src="assets/images/hero-bg.png" alt="Main Dining Room"/>
+                    <img class="w-full h-[250px] object-cover rounded-sm border border-outline-variant/20 shadow-md" src="assets/images/drinks.png" alt="Handcrafted Cocktail"/>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Chef Julian Vane Vision -->
+    <section class="py-stack-lg bg-inverse-surface text-white">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+            <div class="order-2 md:order-1 relative group reveal">
+                <div class="absolute -inset-4 border border-primary/20 scale-95 group-hover:scale-100 transition-transform duration-1000 pointer-events-none"></div>
+                <img alt="Chef Julian Vane" class="rounded-sm shadow-2xl transition-transform duration-[2s] group-hover:scale-[1.02] w-full max-h-[500px] object-cover border border-primary/30" src="assets/images/chef.png"/>
+            </div>
+            <div class="order-1 md:order-2 space-y-6 reveal">
+                <span class="font-label-md text-xs text-primary-container uppercase tracking-widest">The Artisan Behind the Lens</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-serif">Julian Vane</h2>
+                <div class="w-20 h-0.5 bg-primary-container"></div>
+                <p class="font-body-lg text-lg text-surface-variant font-light leading-relaxed">
+                    Raised in the coastal valleys of southern France and educated in Paris's legendary Michelin-starred temples, Chef Julian Vane brings a structured, analytical eye to classic French gastronomy. 
+                </p>
+                <p class="font-body-md text-base text-surface-variant/80 font-light leading-relaxed">
+                    Julian believes that every dish should respect the pure, natural flavor of its core ingredient. "An onion should taste fully of onion, concentrated and sweetened, not masked by excess spices. Technique should serve to unveil the soul of the harvest, not shadow it." His culinary philosophy balances intense, clean flavors with a modern aesthetic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timelines System -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal">
+                <span class="font-label-md text-xs text-primary uppercase tracking-widest block mb-2">Milestones</span>
+                <h2 class="font-headline-lg text-3xl md:text-5xl font-serif text-on-surface">The Evolution of Velora</h2>
+                <div class="w-20 h-0.5 bg-primary mx-auto mt-4"></div>
+            </div>
+
+            <!-- Timeline Line -->
+            <div class="relative border-l-2 border-primary-container/40 max-w-4xl mx-auto space-y-12 pl-8">
+                
+                <!-- 2020 -->
+                <div class="relative reveal">
+                    <!-- Dot -->
+                    <div class="absolute -left-[41px] top-1.5 w-6 h-6 rounded-full border-4 border-surface bg-primary shadow-lg flex items-center justify-center"></div>
+                    <div class="glass-card p-8 rounded-lg hover:shadow-xl transition-all duration-300">
+                        <span class="font-serif text-2xl text-primary font-bold">2020</span>
+                        <h3 class="font-headline-sm text-xl mb-2 font-serif">The Foundation in Paris</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">
+                            Chef Julian Vane launches Velora Dining in a historic Parisian alleyway, seating only 14 guests. The initial concept fuses traditional French slow-cooking with custom aroma sprays.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2022 -->
+                <div class="relative reveal" style="transition-delay: 100ms;">
+                    <!-- Dot -->
+                    <div class="absolute -left-[41px] top-1.5 w-6 h-6 rounded-full border-4 border-surface bg-primary shadow-lg flex items-center justify-center"></div>
+                    <div class="glass-card p-8 rounded-lg hover:shadow-xl transition-all duration-300">
+                        <span class="font-serif text-2xl text-primary font-bold">2022</span>
+                        <h3 class="font-headline-sm text-xl mb-2 font-serif">The First Michelin Star</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">
+                            Michelin guides award Velora its first star, praising Julian Vane's 'Honest Complexity' model and innovative zero-waste practices that use 95% of all organic farm deliveries.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="relative reveal" style="transition-delay: 200ms;">
+                    <!-- Dot -->
+                    <div class="absolute -left-[41px] top-1.5 w-6 h-6 rounded-full border-4 border-surface bg-primary shadow-lg flex items-center justify-center"></div>
+                    <div class="glass-card p-8 rounded-lg hover:shadow-xl transition-all duration-300">
+                        <span class="font-serif text-2xl text-primary font-bold">2024</span>
+                        <h3 class="font-headline-sm text-xl mb-2 font-serif">Introduction of Seating Zones</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">
+                            Velora moves to a larger, premium space featuring an outdoor Glass Greenhouse room and private dining vaults. We debut the interactive seating reservation desk, letting diners choose their spatial acoustics.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2026 -->
+                <div class="relative reveal" style="transition-delay: 300ms;">
+                    <!-- Dot -->
+                    <div class="absolute -left-[41px] top-1.5 w-6 h-6 rounded-full border-4 border-surface bg-primary shadow-lg flex items-center justify-center"></div>
+                    <div class="glass-card p-8 rounded-lg hover:shadow-xl transition-all duration-300">
+                        <span class="font-serif text-2xl text-primary font-bold">2026</span>
+                        <h3 class="font-headline-sm text-xl mb-2 font-serif">Scent &amp; Sound Pairing Launch</h3>
+                        <p class="text-sm text-on-surface-variant leading-relaxed">
+                            Partnering with audio acoustics laboratories, Velora introduces frequency-tuned soundscapes and dry-ice botanical vapor pairing, completing the five-sensory fine dining ecosystem.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Tour Gallery -->
+    <section class="py-stack-lg bg-surface-container-low" id="gallery">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-stack-lg reveal">
+                <span class="font-label-md text-xs text-primary uppercase tracking-widest block mb-2">Virtual Tour</span>
+                <h2 class="font-headline-lg text-3xl md:text-5xl font-serif text-on-surface">The Spaces of Velora</h2>
+                <div class="w-20 h-0.5 bg-primary mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <!-- Greenhouse -->
+                <div class="group overflow-hidden rounded-sm border border-outline-variant/30 bg-surface shadow-md reveal" style="transition-delay: 100ms;">
+                    <div class="h-[300px] overflow-hidden relative">
+                        <img class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" src="assets/images/hero-bg.png" alt="The Greenhouse Room"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <span class="text-white font-serif text-xl">The Glass Greenhouse</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <p class="text-sm text-on-surface-variant font-light">
+                            A luminous glass greenhouse filled with edible orchids, vines, and citrus trees. Dining under the night sky with natural acoustics.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Main Hall -->
+                <div class="group overflow-hidden rounded-sm border border-outline-variant/30 bg-surface shadow-md reveal" style="transition-delay: 200ms;">
+                    <div class="h-[300px] overflow-hidden relative">
+                        <img class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" src="assets/images/chef.png" alt="Kitchen Prep Area"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <span class="text-white font-serif text-xl">The Open Kitchen</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <p class="text-sm text-on-surface-variant font-light">
+                            Witness the intense focus of the culinary team. A sleek stainless-steel kitchen counter setting where tables face the plating area directly.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Private Lounge -->
+                <div class="group overflow-hidden rounded-sm border border-outline-variant/30 bg-surface shadow-md reveal" style="transition-delay: 300ms;">
+                    <div class="h-[300px] overflow-hidden relative">
+                        <img class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" src="assets/images/signature-dish.png" alt="Signature Dining"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <span class="text-white font-serif text-xl">The Private Vault</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-2">
+                        <p class="text-sm text-on-surface-variant font-light">
+                            Exclusive underground vaults carved from 18th-century stone. Offers a secluded atmosphere with customized scent diffusers and dim lighting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-surface-variant/80 py-stack-lg border-t border-outline-variant/20">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="md:col-span-1">
+                    <span class="font-headline-md text-3xl text-primary block mb-4 font-serif">VELORA</span>
+                    <p class="font-body-md text-base font-light">Refining the art of culinary excellence through sensory innovation and artisan heritage.</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Explore</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="menu.html">Menu</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="about.html">Our Philosophy</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="reservation.html">Reservations</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="contact.html">Contact Us</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Connect</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Instagram</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Facebook</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Newsletter</span>
+                    <div class="relative group">
+                        <input class="w-full bg-white/5 border-0 border-b border-white/20 focus:ring-0 focus:border-primary py-2 text-white transition-all duration-500 group-focus-within:border-primary" placeholder="Email Address" type="email"/>
+                        <button class="absolute right-0 bottom-2 text-primary transition-transform duration-500 hover:translate-x-1">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-stack-md border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body-md text-sm uppercase tracking-widest">© 2026 VELORA DINING. ARTISAN GASTRONOMY.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">public</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">restaurant</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">wine_bar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Mobile drawer menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // Back to Top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

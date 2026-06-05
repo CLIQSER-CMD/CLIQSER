@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AUREN WEAR | Redefine Your Style</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-header.scrolled {
+            background-color: rgba(252, 249, 248, 0.85);
+            backdrop-filter: blur(12px);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .product-card:hover .quick-add {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .quick-add {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .parallax-container {
+            overflow: hidden;
+        }
+        .parallax-image {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        .hero-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroFadeUp 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+        }
+        .hero-animate-delay {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroFadeUp 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+            animation-delay: 0.3s;
+        }
+        @keyframes heroFadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcf9f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e2e1;
+        }
+        .mini-cart-overlay {
+            background-color: rgba(0,0,0,0.4);
+            transition: opacity 0.3s ease;
+        }
+        .mini-cart-panel {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mini-cart-panel.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f2",
+                        "surface": "#fcf9f8",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#474747",
+                        "on-surface-variant": "#4c4546",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary-container": "#848484",
+                        "primary": "#000000",
+                        "background": "#fcf9f8",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-fixed-variant": "#454744",
+                        "on-surface": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#1a1c19",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dfe0e0",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "inverse-primary": "#c6c6c6",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#838480",
+                        "secondary": "#5d5f5f",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-secondary-container": "#616363",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#313030",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cfc4c5",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5e5e5e",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "tertiary-fixed": "#e3e3de",
+                        "on-secondary-fixed-variant": "#454747",
+                        "surface-container": "#f0eded",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#e2e2e2",
+                        "outline": "#7e7576",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "on-background": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "stack-lg": "120px",
+                        "stack-md": "64px",
+                        "stack-sm": "32px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 glass-header border-b border-outline-variant/0 transition-all duration-300" id="top-nav">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto transition-all duration-300" id="nav-container">
+            <div class="flex items-center gap-8">
+                <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-primary border-b border-primary pb-1" href="index.html">Home</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-300" href="shop.html">Shop</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-300" href="shop.html">Collections</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-300" href="#">About</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-300" href="#">Contact</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="text-primary hover:opacity-70 transition-opacity duration-300" onclick="toggleSearchModal()"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+                <button class="text-primary hover:opacity-70 transition-opacity duration-300 relative" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                    <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center cart-badge">0</span>
+                </button>
+                <button class="md:hidden text-primary" onclick="toggleMobileMenu()"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <img class="absolute inset-0 w-full h-full object-cover" alt="Hero Image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6y86iWAXJHXCucP-XaKWaUzr5uvttYp7XycvZRU4fkrDgzM9qrKEpah72IhmneTd7lSL5I6LlIKdA-sE378JKR7Zhik44lKyIq63WCzvUiTqNjoz1hB09PfG58AbYobmYCsCbW95H996oMSZvuLiE2KLH0mPo5PBus9Io1W4g9LC7tMK9zyuRVg-4NHLJ30I0fLQycQUxRRsx3_r80n9cuTdAxlDYIoNSlox6d8Ag_DKJE6f98PX3lvr7HReKnfkrhICttj3TCGA"/>
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="relative z-10 text-center px-margin-mobile">
+            <h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-6 max-w-4xl mx-auto hero-animate">Redefine Your Style</h1>
+            <p class="font-body-lg text-body-md md:text-body-lg text-primary/80 mb-10 max-w-2xl mx-auto hero-animate-delay">Discover modern fashion designed for confidence, comfort, and individuality.</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center hero-animate-delay">
+                <a href="shop.html" class="bg-primary text-on-primary px-10 py-4 font-label-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 text-center">Shop Now</a>
+                <a href="shop.html" class="border border-primary text-primary px-10 py-4 font-label-sm uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300 text-center">Explore Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Grid -->
+    <section class="py-stack-lg max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="flex justify-between items-end mb-stack-sm reveal-on-scroll">
+            <div>
+                <span class="font-label-sm text-label-sm uppercase text-secondary tracking-widest mb-2 block">Curation</span>
+                <h2 class="font-headline-lg text-headline-lg text-primary">Featured Products</h2>
+            </div>
+            <a class="font-label-sm text-label-sm uppercase text-primary border-b border-primary pb-1 hidden md:block hover:opacity-70 transition-opacity duration-300" href="shop.html">View All</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+            <!-- Product Card 1 -->
+            <div class="product-card group cursor-pointer reveal-on-scroll">
+                <div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-4">
+                    <a href="product.html?id=essential-heavy-hoodie">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105" alt="Essential Heavy Hoodie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf7vnyFnabBlMKhoGrzcA-DGlYG4X3OrIKTt5qGPygx5VX3DWeRDWC9pHe_zaNB4ed3D5F122l3h-qIVOwwLZWHGRjQH-H4eXMfbRtJe0UWVpxzk2B-mSYB4pqvBxixUBbC8sWg5qfmYVn0ucWVT-hfR08Do5zYzUjtigIEW4brYExTNbBdMpL1EdQtUi3atEJO2UZeVMFXM4Iac9nUhdAWjg_ETFsiasxsXPxczI8-DRSr-fLCq69_5OKXBQ4fpdXHUYO5oPeDtw"/>
+                    </a>
+                    <button class="absolute top-4 right-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    </button>
+                    <div class="quick-add absolute bottom-0 left-0 w-full p-4">
+                        <button class="w-full bg-primary text-on-primary py-3 font-label-sm uppercase text-[10px] tracking-widest hover:bg-primary/90 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'essential-heavy-hoodie', name: 'Essential Heavy Hoodie', price: 120.00, size: 'M', color: 'Charcoal', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCf7vnyFnabBlMKhoGrzcA-DGlYG4X3OrIKTt5qGPygx5VX3DWeRDWC9pHe_zaNB4ed3D5F122l3h-qIVOwwLZWHGRjQH-H4eXMfbRtJe0UWVpxzk2B-mSYB4pqvBxixUBbC8sWg5qfmYVn0ucWVT-hfR08Do5zYzUjtigIEW4brYExTNbBdMpL1EdQtUi3atEJO2UZeVMFXM4Iac9nUhdAWjg_ETFsiasxsXPxczI8-DRSr-fLCq69_5OKXBQ4fpdXHUYO5oPeDtw', quantity: 1})">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <a href="product.html?id=essential-heavy-hoodie" class="hover:underline"><h3 class="font-body-md text-body-md text-primary">Essential Heavy Hoodie</h3></a>
+                        <p class="font-body-md text-secondary">$120.00</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card 2 -->
+            <div class="product-card group cursor-pointer reveal-on-scroll" style="transition-delay: 0.1s;">
+                <div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-4">
+                    <a href="product.html?id=classic-minimal-tee">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105" alt="Classic Minimal Tee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGGKOcoVuQGN1RLl5SVsYfk8ddq9ovxA2dJ6TiFkiCsaPIoRxGin4H9FgrWqJTF0I_Wt5k-jMNiBzafkzr_WBYaFBBtevviHfMhn5eKN-2DiWXabkrRcGG6IKPteLicgRrQ8VfqL01OJq9-uPNpvA1p9GmHyZLSihHPh0y3cu53MDKzk05hF69LmxRou7GZpEPuJPYHyEqwELgBaxn-clF0QladNl2urxC6HeO3toDzLozOFeBZECH1wz6lVRXAKWNfI2oPfjYpas"/>
+                    </a>
+                    <button class="absolute top-4 right-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    </button>
+                    <div class="quick-add absolute bottom-0 left-0 w-full p-4">
+                        <button class="w-full bg-primary text-on-primary py-3 font-label-sm uppercase text-[10px] tracking-widest hover:bg-primary/90 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'classic-minimal-tee', name: 'Classic Minimal Tee', price: 45.00, size: 'M', color: 'White', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBGGKOcoVuQGN1RLl5SVsYfk8ddq9ovxA2dJ6TiFkiCsaPIoRxGin4H9FgrWqJTF0I_Wt5k-jMNiBzafkzr_WBYaFBBtevviHfMhn5eKN-2DiWXabkrRcGG6IKPteLicgRrQ8VfqL01OJq9-uPNpvA1p9GmHyZLSihHPh0y3cu53MDKzk05hF69LmxRou7GZpEPuJPYHyEqwELgBaxn-clF0QladNl2urxC6HeO3toDzLozOFeBZECH1wz6lVRXAKWNfI2oPfjYpas', quantity: 1})">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <a href="product.html?id=classic-minimal-tee" class="hover:underline"><h3 class="font-body-md text-body-md text-primary">Classic Minimal Tee</h3></a>
+                        <p class="font-body-md text-secondary">$45.00</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card 3 -->
+            <div class="product-card group cursor-pointer reveal-on-scroll" style="transition-delay: 0.2s;">
+                <div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-4">
+                    <a href="product.html?id=urban-tech-sneaker">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105" alt="Urban Tech Sneaker" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbNVbZLYnXG7FJClbyaocGx7q9EmXy6uipzsjYYzH3XpFehXuuEfmW1eE-WRum13uxcf6tna4pD2z1zDPmVMSOPBjlPIVsNtRH7pawrR-9lJQKaDbUvFHv814LjJGjhfXI_aMtNJ2uza1Tq0Cvkq5H2gnUQJeNt3obP2bUoo1qpKc23Tz6wEz8hv0E9xyp8Hi7RALa7cqTN3S9FPJ55JGRfYUoPK3JZqfWUYMmBWhjVorWiIRQCFnralAXhiN8uHII6uKOEFMDn_s"/>
+                    </a>
+                    <button class="absolute top-4 right-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    </button>
+                    <div class="quick-add absolute bottom-0 left-0 w-full p-4">
+                        <button class="w-full bg-primary text-on-primary py-3 font-label-sm uppercase text-[10px] tracking-widest hover:bg-primary/90 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'urban-tech-sneaker', name: 'Urban Tech Sneaker', price: 185.00, size: '42', color: 'Monochrome Grey', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbNVbZLYnXG7FJClbyaocGx7q9EmXy6uipzsjYYzH3XpFehXuuEfmW1eE-WRum13uxcf6tna4pD2z1zDPmVMSOPBjlPIVsNtRH7pawrR-9lJQKaDbUvFHv814LjJGjhfXI_aMtNJ2uza1Tq0Cvkq5H2gnUQJeNt3obP2bUoo1qpKc23Tz6wEz8hv0E9xyp8Hi7RALa7cqTN3S9FPJ55JGRfYUoPK3JZqfWUYMmBWhjVorWiIRQCFnralAXhiN8uHII6uKOEFMDn_s', quantity: 1})">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <a href="product.html?id=urban-tech-sneaker" class="hover:underline"><h3 class="font-body-md text-body-md text-primary">Urban Tech Sneaker</h3></a>
+                        <p class="font-body-md text-secondary">$185.00</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Product Card 4 -->
+            <div class="product-card group cursor-pointer reveal-on-scroll" style="transition-delay: 0.3s;">
+                <div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-4">
+                    <a href="product.html?id=sculptural-overcoat">
+                        <img class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-105" alt="Sculptural Overcoat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQNnr0w82ymDq1FpDQfy6Hwkc5hxu3nn85YuGs9PIl_FbopM95xgeJujcIaXti6Mnfh-UjvOs_d2hN2UU_z1DRtRgOIUbKGdp3P7vN6DNlmN6EMIofoH3QLDTqXSy27Ez0fIbsNbuSMcEF-4eu6TsVD3M_aRcbhnUMGySOHZhB_dZ6X-WUmvjrrBgiI_r2ZzAmdbiWUTix7jiocmsqUgNFkg3xFxsSayMcLyfL1JOXkLMNVfgdHsR1vWTVp0B5BJbWWSmWTOY04uk"/>
+                    </a>
+                    <button class="absolute top-4 right-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    </button>
+                    <div class="quick-add absolute bottom-0 left-0 w-full p-4">
+                        <button class="w-full bg-primary text-on-primary py-3 font-label-sm uppercase text-[10px] tracking-widest hover:bg-primary/90 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'sculptural-overcoat', name: 'Sculptural Overcoat', price: 320.00, size: 'M', color: 'Camel', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCQNnr0w82ymDq1FpDQfy6Hwkc5hxu3nn85YuGs9PIl_FbopM95xgeJujcIaXti6Mnfh-UjvOs_d2hN2UU_z1DRtRgOIUbKGdp3P7vN6DNlmN6EMIofoH3QLDTqXSy27Ez0fIbsNbuSMcEF-4eu6TsVD3M_aRcbhnUMGySOHZhB_dZ6X-WUmvjrrBgiI_r2ZzAmdbiWUTix7jiocmsqUgNFkg3xFxsSayMcLyfL1JOXkLMNVfgdHsR1vWTVp0B5BJbWWSmWTOY04uk', quantity: 1})">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <a href="product.html?id=sculptural-overcoat" class="hover:underline"><h3 class="font-body-md text-body-md text-primary">Sculptural Overcoat</h3></a>
+                        <p class="font-body-md text-secondary">$320.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section (Asymmetric Grid) -->
+    <section class="py-stack-lg bg-surface-container-low overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm text-center reveal-on-scroll">The Collections</h2>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <!-- Large Featured Card -->
+                <div class="md:col-span-8 group relative overflow-hidden aspect-video md:aspect-auto h-[600px] cursor-pointer parallax-container reveal-on-scroll">
+                    <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 parallax-image" alt="Collection 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhBfaLcZCJC0JqsO7BBjQ2V_wu0YIkFk0FQRjdZYNQjWJEYnIqfROskRw8qg8ef8iXjTu7p1dB7ofTVZ0VTZEoHmXPFddWEK3j3phWxuGW56AorcZtDeBeN8HnQ4TkotUiXLfY4CkeBg601XomxzRnXhX8GnRb7ohUtx9sUhX13YTlUAPltqFyB5qWQCYzzRIdAhriUYjPfH7VDii4WQGOwAU-tIF_D2ZLIBf-SCToYMbhs0R3P_sSiMgaSnrjy8PzN1BWeomrMHg"/>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
+                    <div class="absolute bottom-10 left-10 text-white">
+                        <p class="font-label-sm text-label-sm uppercase tracking-[0.2em] mb-2">Defining the Era</p>
+                        <h3 class="font-display-lg text-headline-lg-mobile md:text-headline-lg mb-6">Streetwear '24</h3>
+                        <a href="shop.html" class="border-b border-white pb-1 font-label-sm text-label-sm uppercase tracking-widest hover:opacity-70 transition-all duration-300">Shop Collection</a>
+                    </div>
+                </div>
+                <!-- Stacked Side Cards -->
+                <div class="md:col-span-4 flex flex-col gap-gutter">
+                    <div class="relative group overflow-hidden h-[288px] cursor-pointer parallax-container reveal-on-scroll" style="transition-delay: 0.2s;">
+                        <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 parallax-image" alt="Collection 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0CGNcPdiUVp7D0iGxkSvKvfJitgW-i2fZ5T27Uuwah7VTDQl_xGPzlLRmr7RZsLedg43D6O4doBs_CLUwDOr5gPgd0rGCNHd0ITW-V0lKEJccdOFBwzOpx0l03AAqPYSApxjXJaNmVeS_1TNx57Dqk7PWNp7nHEyfUyvifojWg6jamaTUfKnvUpZ3FAicrLVU4qyDpX2elg63wiGa0hmWgqZbR12UycZPKtLptUNetVfe2UzLDKJsQhyQsNCC59El8oNdc3jbv8k"/>
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        <div class="absolute bottom-8 left-8 text-white">
+                            <h3 class="font-headline-md text-headline-md mb-2">Minimalist</h3>
+                            <a href="shop.html" class="text-[10px] font-label-sm uppercase tracking-widest border-b border-white pb-1 hover:opacity-70 transition-all duration-300">Explore</a>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden h-[288px] cursor-pointer parallax-container reveal-on-scroll" style="transition-delay: 0.4s;">
+                        <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 parallax-image" alt="Collection 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlntAD_ZWw1wfhNGUajQ8x7Hfzv8rBI7SdDG17dElaDGalnmbQuNcrFxg_UoJp-7XSlYEKBstbue57fedVSDQR9BUnMUTQNvfbhpnJQYVSkdFwTHf4OBz008TeJM_VUZ5ZDcq5oeWQ_QTB4UWRwznA3r_vzZjgmhDQ2ebKOws4P53Kw9WSn1PqPIriiHc4J7rlRrxRDRjxPZP4fzfmIVOKSNb6h7YxWgCRBR0kaTdFTk9QQRPi74V1moC2Pe6ZU9EmO_Fe-VN098s"/>
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
+                        <div class="absolute bottom-8 left-8 text-white">
+                            <h3 class="font-headline-md text-headline-md mb-2">Essentials</h3>
+                            <a href="shop.html" class="text-[10px] font-label-sm uppercase tracking-widest border-b border-white pb-1 hover:opacity-70 transition-all duration-300">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-stack-lg max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-gutter">
+            <div class="text-center p-8 border border-outline-variant/30 hover:border-primary transition-all duration-300 reveal-on-scroll">
+                <span class="material-symbols-outlined text-4xl mb-4 text-primary" data-icon="diamond">diamond</span>
+                <h4 class="font-headline-md text-headline-md mb-3">Premium Quality</h4>
+                <p class="font-body-md text-secondary">Crafted with the finest materials for longevity and luxury feel.</p>
+            </div>
+            <div class="text-center p-8 border border-outline-variant/30 hover:border-primary transition-all duration-300 reveal-on-scroll" style="transition-delay: 0.2s;">
+                <span class="material-symbols-outlined text-4xl mb-4 text-primary" data-icon="local_shipping">local_shipping</span>
+                <h4 class="font-headline-md text-headline-md mb-3">Fast Delivery</h4>
+                <p class="font-body-md text-secondary">Swift and tracked shipping to ensure your pieces arrive safely.</p>
+            </div>
+            <div class="text-center p-8 border border-outline-variant/30 hover:border-primary transition-all duration-300 reveal-on-scroll" style="transition-delay: 0.4s;">
+                <span class="material-symbols-outlined text-4xl mb-4 text-primary" data-icon="verified_user">verified_user</span>
+                <h4 class="font-headline-md text-headline-md mb-3">Secure Payments</h4>
+                <p class="font-body-md text-secondary">Protected checkout process for a worry-free shopping experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-stack-lg bg-surface-container-highest/30 overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center reveal-on-scroll">
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm italic">"The quality surpassed all expectations. AUREN is truly the pinnacle of modern minimalism."</h2>
+            <div class="flex flex-col items-center">
+                <p class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Alexander Vance</p>
+                <p class="font-body-md text-secondary">Creative Director</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Gallery (Bento Style) -->
+    <section class="py-stack-lg max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="text-center mb-stack-sm reveal-on-scroll">
+            <span class="font-label-sm text-label-sm uppercase text-secondary tracking-widest mb-2 block">Connect With Us</span>
+            <h2 class="font-headline-lg text-headline-lg text-primary">@AURENWEAR</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="aspect-square overflow-hidden bg-surface-variant relative group reveal-on-scroll">
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Insta 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfGlLsQ_-eN5xgrAdnPKvACR7-Bk7kBVtyd8lYfOQ76sEEzWkN-npKOcETaKhevtdS6lxXdsvD0laPoEUMo1lVWBD_0T5wjNg7OIxO1U58aPMIGp8VcE9Ln-zRKH7en9JCJVdRC0jFEU3coAIBDIo_JY6nriYVHPmdf67Ww_b7y5vGmYrOqcc1dTa_QM4robZ6vCfJ_tqdydbv-ZDRh1uYwDqK5bOJxHDta3_Sg2SEeiaKACo7JJqP6fuG7TVVm2JMvQBECVUn7ic"/>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+                </div>
+            </div>
+            <div class="aspect-square overflow-hidden bg-surface-variant relative group reveal-on-scroll" style="transition-delay: 0.1s;">
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Insta 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEPmbulFZZNk5JS4X0AEZ-KnxAvhx0J4lDd0mAN6_p8wHEys7wMCEJMzjLXvmXwpiw08vCHJOLFbAgO567Q2hs6vND1fjxwx7sMSR2rLODJKkOlP8VdfWIRap0u4dZUZJRMtB_Kf7YMtFSb51_HkiBQMh2dW8OxT4kz6cIFcjbX8JaqZYv3j6G4Q364T_knubzzdfAZkPjPMtiCBRVjZXbuWwF5tyoNPWvDbJFqdDsuVg3NfN3NKQTubZ6SNFcXCuh3u0uU-3tIKc"/>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+                </div>
+            </div>
+            <div class="aspect-square overflow-hidden bg-surface-variant relative group reveal-on-scroll" style="transition-delay: 0.2s;">
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Insta 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4qZ9bZGoj-Nr3VQxZ0s1bdbMR0e0i8guuFjYT6t0vndSfpX9s6e7RPrNwnA063tJ-Wm2kSALBK4n0sI6rQ_uYXyy64X9YWimdUiiTl9A8US1Vz5gFvvEnxo2zZrXMNUqPWzUIJaCRy37gCgIB5GW-rmV0_DfC9jP9IWZMqEao4qOut_6thv1URJU7SrA3L3m4D7PdKbvf_-GMFxnV-2w_yXUJyAv0pcSvnn0csVBiLdDAefAnLZmQm6TyjNaoblAG-E7nf7S2OhA"/>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+                </div>
+            </div>
+            <div class="aspect-square overflow-hidden bg-surface-variant relative group reveal-on-scroll" style="transition-delay: 0.3s;">
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Insta 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfA5xkKX277K6I4r2g53fBBZiGVeAttrun1c4NPmgFJbipwbGwvYx1h4iMYDolu5fFPBQbOye9aUnikkJd4EAW8CYELsqCx_L0nBHxSXavYQxkUrFX-PqxKf334_SK0CIcg1T9w8JUoiDX7Vuwj6pj3LusLBqtawh7_LmA_TnDuUMWeMa7qglupEm9-C0SM7zcayOs40BMNf0QHwtUK1zmvToKliSFfMI2Oi-vFWl58e_BeuGKuFPIkLNlGfHponF0E08dYdl6azA"/>
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full py-stack-md bg-surface-container-lowest border-t border-outline-variant/50">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="flex flex-col gap-6">
+                <a class="font-display-lg text-headline-md text-primary" href="index.html">AUREN</a>
+                <p class="font-body-md text-on-surface-variant">Elevating the everyday through precision craftsmanship and timeless design.</p>
+                <div class="flex gap-4">
+                    <a class="text-primary hover:opacity-70 transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+                    <a class="text-primary hover:opacity-70 transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+                    <a class="text-primary hover:opacity-70 transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Quick Links</h5>
+                <ul class="flex flex-col gap-2">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="shop.html">New Arrivals</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="shop.html">Best Sellers</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Gift Cards</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Store Locator</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Customer Support</h5>
+                <ul class="flex flex-col gap-2">
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Contact Us</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Shipping Policy</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Returns &amp; Exchanges</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300 hover:underline underline-offset-4 decoration-1" href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h5 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Newsletter</h5>
+                <p class="font-body-md text-on-surface-variant">Join our list for exclusive releases and editorial updates.</p>
+                <form class="flex flex-col gap-4 mt-2" onsubmit="event.preventDefault(); alert('Thank you for subscribing to AUREN WEAR updates!'); this.reset();">
+                    <div class="relative">
+                        <input class="w-full bg-transparent border-b border-outline py-2 focus:border-primary focus:ring-0 outline-none font-body-md placeholder:text-outline" placeholder="Email Address" type="email" required/>
+                        <button class="absolute right-0 bottom-2 text-primary hover:translate-x-1 transition-transform duration-300" type="submit">
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-stack-md pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="font-body-md text-body-md text-on-surface-variant">© 2024 AUREN WEAR. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-6">
+                <a class="text-[12px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Privacy Policy</a>
+                <a class="text-[12px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal Overlay -->
+    <div id="searchModal" class="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm hidden flex items-start justify-center pt-24 px-4" onclick="toggleSearchModal()">
+        <div class="bg-white w-full max-w-2xl p-8 border-b border-outline shadow-2xl relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-primary pb-2">
+                <input type="text" class="w-full bg-transparent border-none text-2xl font-body-md focus:ring-0 outline-none placeholder:text-outline p-0" placeholder="Search AUREN WEAR..."/>
+                <button onclick="toggleSearchModal()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+            </div>
+            <div class="mt-8 space-y-4">
+                <p class="font-label-sm text-secondary uppercase tracking-widest text-[10px]">Popular Searches</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="product.html?id=sculpted-wool-overcoat" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Wool Overcoat</a>
+                    <a href="product.html?id=essential-heavy-hoodie" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Heavy Hoodie</a>
+                    <a href="product.html?id=classic-minimal-tee" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Minimal Tee</a>
+                    <a href="product.html?id=urban-tech-sneaker" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Tech Sneaker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenuDrawer" class="fixed inset-0 z-[100] bg-white hidden flex flex-col p-8 transition-all duration-300">
+        <div class="flex justify-between items-center mb-12">
+            <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+            <button onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+        </div>
+        <nav class="flex flex-col gap-6 text-2xl font-label-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Home</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Shop</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Collections</a>
+            <a href="#" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4" onclick="toggleMobileMenu()">About</a>
+            <a href="#" class="hover:text-primary transition-colors pb-4" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+        <div class="mt-auto space-y-6">
+            <button onclick="toggleMobileMenu(); toggleSearchModal();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left pb-4 border-b border-outline-variant/10">
+                <span class="material-symbols-outlined">search</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">Search Catalog</span>
+            </button>
+            <button onclick="toggleMobileMenu(); toggleMiniCart();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">View Bag (<span class="cart-badge">0</span>)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mini-Cart Drawer (Slide-out panel) -->
+    <div class="fixed inset-0 z-[100] mini-cart-overlay hidden" id="miniCartOverlay" onclick="toggleMiniCart()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-[450px] bg-white shadow-2xl flex flex-col mini-cart-panel" id="miniCartPanel" onclick="event.stopPropagation()">
+            <div class="p-8 flex justify-between items-center border-b border-outline-variant/30">
+                <h2 class="font-headline-md uppercase tracking-tight" id="miniCartTitle">Your Cart (0)</h2>
+                <button class="hover:opacity-50 transition-opacity" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <!-- Cart Items (Rendered by cart.js) -->
+            <div class="flex-grow overflow-y-auto p-8 space-y-8" id="miniCartItems">
+                <!-- Dynamic Items -->
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="p-8 border-t border-outline-variant/30 bg-surface-container-low">
+                <div class="flex justify-between font-headline-md mb-6 uppercase tracking-tight">
+                    <span>Subtotal</span>
+                    <span id="miniCartSubtotal">$0.00</span>
+                </div>
+                <a href="checkout.html" class="block w-full bg-primary text-on-primary py-5 font-label-sm uppercase tracking-widest text-center hover:opacity-90 mb-4 transition-all duration-300">
+                    Checkout Now
+                </a>
+                <p class="text-center text-xs text-on-surface-variant uppercase tracking-tighter">
+                    Taxes and shipping calculated at checkout
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // Intersection Observer for Reveal animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Gentle Parallax Effect for Collections
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.parallax-container').forEach(container => {
+                const img = container.querySelector('.parallax-image');
+                if (!img) return;
+                const speed = 0.05;
+                const rect = container.getBoundingClientRect();
+                const visible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (visible) {
+                    const relativeScroll = (window.innerHeight - rect.top);
+                    const yPos = -(relativeScroll * speed);
+                    img.style.transform = `translateY(${yPos}px) scale(1.1)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

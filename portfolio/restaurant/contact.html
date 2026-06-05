@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VELORA LUXE | Contact &amp; FAQs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#775a19",
+              "primary-container": "#c5a059",
+              "on-primary-container": "#4e3700",
+              secondary: "#705a4c",
+              tertiary: "#5f5e5e",
+              background: "#fcf9f3",
+              "on-background": "#1c1c18",
+              surface: "#fcf9f3",
+              "on-surface": "#1c1c18",
+              "on-surface-variant": "#4e4639",
+              outline: "#7f7667",
+              "outline-variant": "#d1c5b4",
+              "inverse-surface": "#31312d",
+              "surface-container-low": "#f6f3ed",
+              "surface-container-high": "#ebe8e2",
+              "surface-container-highest": "#e5e2dc"
+            },
+            spacing: {
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "16px",
+              "margin-desktop": "80px",
+              "margin-mobile": "24px",
+              gutter: "24px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container pt-28">
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 z-[60] bg-primary text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-90" id="backToTop">
+        <span class="material-symbols-outlined">north</span>
+    </button>
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-primary/10 py-3 shadow-lg" id="mainNav">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+                <img alt="VELORA" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="assets/images/logo.png"/>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="index.html">Home</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="menu.html">Menu</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="about.html">Philosophy</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="reservation.html">Reservations</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-primary hover:text-primary transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+            
+            <!-- Desktop Action -->
+            <div class="hidden md:block">
+                <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 inline-block rounded-sm">
+                    Book A Table
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-on-surface hover:text-primary transition-colors duration-300 z-50" id="mobileMenuToggle">
+                <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="fixed inset-0 bg-background/98 z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden" id="mobileMenu">
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="about.html">Philosophy</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="reservation.html">Reservations</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest text-primary hover:text-primary transition-colors" href="contact.html">Contact</a>
+            <a href="reservation.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 mt-4 rounded-sm">
+                Book A Table
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="py-stack-md bg-surface text-center">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-2">Concierge Desk</span>
+            <h1 class="font-display-lg text-4xl md:text-6xl text-on-surface font-serif mb-4">Connect with Velora</h1>
+            <p class="font-body-lg text-lg text-on-surface-variant max-w-2xl mx-auto font-light font-sans">
+                Submit an inquiry below, inspect operating hours, or read our answers regarding dress code and private events.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contact & Map Form Grid -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
+            
+            <!-- Contact Inquiry Form -->
+            <div class="glass-card p-8 md:p-12 space-y-8 reveal">
+                <div>
+                    <h2 class="text-2xl font-serif text-on-surface mb-2">Inquiry Form</h2>
+                    <p class="text-sm text-on-surface-variant">We respond to concierge inquiries within 12 business hours.</p>
+                </div>
+                
+                <form id="inquiryForm" onsubmit="submitInquiry(event)" class="space-y-6">
+                    <div class="luxury-input-group">
+                        <input class="luxury-input" id="contactName" type="text" placeholder=" " required/>
+                        <label class="luxury-label" for="contactName">Your Name</label>
+                    </div>
+                    <div class="luxury-input-group">
+                        <input class="luxury-input" id="contactEmail" type="email" placeholder=" " required/>
+                        <label class="luxury-label" for="contactEmail">Email Address</label>
+                    </div>
+                    <div class="luxury-input-group">
+                        <select class="luxury-input" id="contactSubject" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="General Concierge">General Concierge Inquiry</option>
+                            <option value="Private Dining">Private Dining &amp; Corporate Events</option>
+                            <option value="Press Inquiry">Press &amp; Media Requests</option>
+                            <option value="Career Options">Careers &amp; Internships</option>
+                        </select>
+                        <label class="luxury-label" for="contactSubject">Inquiry Subject</label>
+                    </div>
+                    <div class="luxury-input-group">
+                        <textarea class="luxury-input min-h-[100px] resize-none" id="contactMessage" placeholder=" " required></textarea>
+                        <label class="luxury-label" for="contactMessage">How can we assist you?</label>
+                    </div>
+
+                    <button type="submit" class="shimmer-btn w-full bg-primary text-white py-4 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all">
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Information Card & Map -->
+            <div class="space-y-stack-md flex flex-col justify-between reveal">
+                <!-- Info cards grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-sm hover:translate-y-[-2px] transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-2">location_on</span>
+                        <h4 class="font-serif font-bold text-on-surface">Address</h4>
+                        <p class="text-sm text-on-surface-variant font-light mt-1">
+                            42 Artisan Avenue<br/>Gastronomy District<br/>Paris, France 75001
+                        </p>
+                    </div>
+                    <div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-sm hover:translate-y-[-2px] transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-2">call</span>
+                        <h4 class="font-serif font-bold text-on-surface">Phone Desk</h4>
+                        <p class="text-sm text-on-surface-variant font-light mt-1">
+                            General: +33 (0) 1 23 45 67 89<br/>
+                            Concierge: +33 (0) 1 23 45 67 00
+                        </p>
+                    </div>
+                    <div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-sm hover:translate-y-[-2px] transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-2">mail</span>
+                        <h4 class="font-serif font-bold text-on-surface">Email Desk</h4>
+                        <p class="text-sm text-on-surface-variant font-light mt-1">
+                            concierge@veloradining.com<br/>
+                            events@veloradining.com
+                        </p>
+                    </div>
+                    <div class="p-6 bg-surface-container-low border border-outline-variant/30 rounded-sm hover:translate-y-[-2px] transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary text-3xl mb-2">schedule</span>
+                        <h4 class="font-serif font-bold text-on-surface">Operating Hours</h4>
+                        <p class="text-sm text-on-surface-variant font-light mt-1">
+                            Tuesday – Sunday<br/>
+                            Dinner: 18:00 – 23:30<br/>
+                            Closed Mondays
+                        </p>
+                    </div>
+                </div>
+
+                <!-- District Map -->
+                <div class="h-[280px] border border-outline-variant/30 rounded-sm overflow-hidden bg-surface-container-low relative group">
+                    <div class="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000">
+                        <img class="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUbSY-XetVvw3p6JdwjDFhU3QWZgIPdZcPQLSWDj-0ydrYFM-c7zHanDCA7bQRM2YG9j5T0p29KJCbObZa3xMbHDBo12rYW7_y0aEhIB1_OtDhEzW11xLiLv94rP8m7OsECX6Cu7lGykcfqKeG6zE6YVug6rAJrm-1QY3OndZ3-BhFaeQUEhNQbyMlj__NK2XTk3tRUGNikxyjr-fdwnwRWMg6viDNl4BQOatu5r3WSxnda6ORAHqT30wZM0pJiqpK1XVjh3tn__w" alt="Map District"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Luxury FAQ Section (Interactive Accordion) -->
+    <section class="py-stack-lg bg-surface-container-low">
+        <div class="max-w-[800px] mx-auto px-margin-mobile">
+            <div class="text-center mb-stack-lg reveal">
+                <span class="font-label-md text-xs text-primary uppercase tracking-widest block mb-2">Common Inquiries</span>
+                <h2 class="font-headline-lg text-3xl md:text-4xl font-serif text-on-surface">Frequently Asked Questions</h2>
+                <div class="w-20 h-0.5 bg-primary mx-auto mt-4"></div>
+            </div>
+
+            <!-- Accordion Group -->
+            <div class="space-y-4 reveal">
+                
+                <!-- FAQ 1 -->
+                <div class="accordion-item border border-outline-variant/30 bg-surface rounded-sm">
+                    <div class="accordion-header p-6 flex justify-between items-center font-serif text-lg font-semibold text-on-surface" onclick="toggleAccordion(this)">
+                        <span>Is there a dress code at Velora Luxe?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </div>
+                    <div class="accordion-content px-6 bg-surface-container-low transition-all">
+                        <div class="py-4 text-sm text-on-surface-variant font-light leading-relaxed">
+                            Yes, to maintain our exclusive fine dining environment, we enforce a <strong>Smart Elegant</strong> dress code. We respectfully request that guests refrain from wearing athletic apparel, sand-shoes, torn denim, or casual shorts. Jackets are recommended for gentlemen dining in the Main Hall and Private Vaults.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item border border-outline-variant/30 bg-surface rounded-sm">
+                    <div class="accordion-header p-6 flex justify-between items-center font-serif text-lg font-semibold text-on-surface" onclick="toggleAccordion(this)">
+                        <span>Can you accommodate severe dietary restrictions?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </div>
+                    <div class="accordion-content px-6 bg-surface-container-low transition-all">
+                        <div class="py-4 text-sm text-on-surface-variant font-light leading-relaxed">
+                            Absolutely. Our kitchen can adjust courses for gluten-free, dairy-free, vegetarian, or vegan requirements. Please specify your restrictions in detail when filling out the reservation form, or notify our concierge at least 24 hours prior to your seating.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item border border-outline-variant/30 bg-surface rounded-sm">
+                    <div class="accordion-header p-6 flex justify-between items-center font-serif text-lg font-semibold text-on-surface" onclick="toggleAccordion(this)">
+                        <span>Is valet parking available?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </div>
+                    <div class="accordion-content px-6 bg-surface-container-low transition-all">
+                        <div class="py-4 text-sm text-on-surface-variant font-light leading-relaxed">
+                            Yes, Velora Luxe offers complimentary valet parking services at the main entrance. Security-monitored garage storage is used for all vehicles. Simply pull up to our front portico upon arrival.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item border border-outline-variant/30 bg-surface rounded-sm">
+                    <div class="accordion-header p-6 flex justify-between items-center font-serif text-lg font-semibold text-on-surface" onclick="toggleAccordion(this)">
+                        <span>Do you host corporate summits or private events?</span>
+                        <span class="material-symbols-outlined accordion-icon">expand_more</span>
+                    </div>
+                    <div class="accordion-content px-6 bg-surface-container-low transition-all">
+                        <div class="py-4 text-sm text-on-surface-variant font-light leading-relaxed">
+                            Yes. The Private Stone Vaults (up to 20 guests) and the Glass Greenhouse (up to 40 guests) can be reserved for exclusive private dining, corporate retreats, or celebratory banquets. Please contact our event coordination desk at <a href="mailto:events@veloradining.com" class="text-primary hover:underline">events@veloradining.com</a> for customization menus and pricing.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal Overlay -->
+    <div id="successModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-md w-full p-8 text-center space-y-6 rounded-lg border border-primary shadow-2xl">
+            <span class="material-symbols-outlined text-primary text-6xl">check_circle</span>
+            <div class="space-y-2">
+                <h3 class="font-serif text-2xl text-on-surface">Inquiry Sent</h3>
+                <p class="text-sm text-on-surface-variant">Your message has been delivered to the Velora concierge team. A representative will contact you shortly.</p>
+            </div>
+            <button class="shimmer-btn bg-primary text-white w-full py-3 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all rounded-sm" onclick="closeSuccessModal()">
+                Return to Concierge
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-surface-variant/80 py-stack-lg border-t border-outline-variant/20">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="md:col-span-1">
+                    <span class="font-headline-md text-3xl text-primary block mb-4 font-serif">VELORA</span>
+                    <p class="font-body-md text-base font-light">Refining the art of culinary excellence through sensory innovation and artisan heritage.</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Explore</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="menu.html">Menu</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="about.html">Our Philosophy</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="reservation.html">Reservations</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="contact.html">Contact Us</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Connect</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Instagram</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Facebook</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Newsletter</span>
+                    <div class="relative group">
+                        <input class="w-full bg-white/5 border-0 border-b border-white/20 focus:ring-0 focus:border-primary py-2 text-white transition-all duration-500 group-focus-within:border-primary" placeholder="Email Address" type="email"/>
+                        <button class="absolute right-0 bottom-2 text-primary transition-transform duration-500 hover:translate-x-1">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-stack-md border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body-md text-sm uppercase tracking-widest">© 2026 VELORA DINING. ARTISAN GASTRONOMY.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">public</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">restaurant</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">wine_bar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isOpen = item.classList.contains('active');
+            
+            // Close all items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(i => i.classList.remove('active'));
+
+            // If it wasn't open, open it
+            if (!isOpen) {
+                item.classList.add('active');
+            }
+        }
+
+        // Form Submit
+        function submitInquiry(e) {
+            e.preventDefault();
+            
+            // Clear inputs
+            document.getElementById('inquiryForm').reset();
+
+            // Open Success Modal
+            const success = document.getElementById('successModal');
+            success.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeSuccessModal() {
+            const success = document.getElementById('successModal');
+            success.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Mobile Drawer menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // Back to Top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

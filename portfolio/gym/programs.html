@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>IRON PEAK FITNESS | Elite Training Protocols</title>
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a4e6ff",
+                        "primary-container": "#00d1ff",
+                        "secondary": "#ffb4ab",
+                        "secondary-container": "#d30017",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e2e2e2",
+                        "on-surface-variant": "#bbc9cf",
+                        "on-primary-container": "#00566a",
+                        "on-secondary-container": "#ffe2de"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem"
+                    },
+                    spacing: {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "container-max": "1280px"
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Custom Kinetic Noir Styling -->
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,209,255,0.1)]">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+            <a class="font-display-lg text-[24px] md:text-[32px] font-black text-primary-container tracking-tighter" href="index.html">IRON PEAK</a>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="index.html">Home</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="programs.html">Programs</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="trainers.html">Trainers</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="membership.html">Membership</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1" href="contact.html">Contact</a>
+                <a class="nav-link font-button text-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors pb-1 text-glow" href="dashboard.html">Dashboard</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='membership.html'" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-button text-xs uppercase tracking-widest glow-blue active:scale-95 transition-all btn-pulse hover:brightness-110 hidden sm:block">
+                    JOIN NOW
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden text-on-surface-variant hover:text-primary focus:outline-none">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-background/95 backdrop-blur-2xl flex flex-col p-10 transform translate-x-full transition-transform duration-300 md:hidden border-l border-white/10">
+        <div class="flex justify-between items-center mb-10">
+            <span class="font-display-lg text-[24px] font-black text-primary-container tracking-tighter">IRON PEAK</span>
+            <button id="mobile-close-btn" class="text-on-surface hover:text-primary">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-6 text-xl uppercase tracking-widest font-semibold">
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="index.html">Home</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="programs.html">Programs</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="trainers.html">Trainers</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="membership.html">Membership</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5" href="contact.html">Contact</a>
+            <a class="nav-link text-on-surface-variant hover:text-primary transition-colors py-2 border-b border-white/5 text-glow" href="dashboard.html">Dashboard</a>
+        </div>
+        <button onclick="window.location.href='membership.html'" class="mt-auto bg-primary-container text-on-primary-container py-4 rounded-full font-button text-button uppercase tracking-widest glow-blue">
+            JOIN NOW
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-32 min-h-screen">
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-16">
+            <div class="text-center mb-12">
+                <span class="text-primary-container font-label-caps text-xs uppercase tracking-[0.2em] mb-4 block">Scientific Optimization</span>
+                <h1 class="text-4xl md:text-6xl font-black uppercase mb-6 leading-none">Training Protocols</h1>
+                <p class="font-body-md text-on-surface-variant max-w-xl mx-auto opacity-80">
+                    Engineered to meet specific physiological adaptations. Filter by target goals and intensities to find your optimal path to evolution.
+                </p>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="glass-panel p-6 rounded-xl border border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+                <!-- Goal Filters -->
+                <div class="w-full md:w-auto">
+                    <span class="text-xs uppercase tracking-wider text-on-surface-variant font-semibold block mb-3">Filter by Goal</span>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="filter-btn active-filter px-5 py-2 rounded-full border text-xs uppercase tracking-wider font-semibold" data-type="goal" data-value="all">All Goals</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="goal" data-value="Power">Power</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="goal" data-value="Endurance">Endurance</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="goal" data-value="Mobility">Mobility</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="goal" data-value="Composition">Composition</button>
+                    </div>
+                </div>
+                <!-- Intensity Filters -->
+                <div class="w-full md:w-auto">
+                    <span class="text-xs uppercase tracking-wider text-on-surface-variant font-semibold block mb-3">Filter by Intensity</span>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="filter-btn active-filter px-5 py-2 rounded-full border text-xs uppercase tracking-wider font-semibold" data-type="intensity" data-value="all">All Intensities</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="intensity" data-value="Moderate">Moderate</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="intensity" data-value="High">High</button>
+                        <button class="filter-btn px-5 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider font-semibold hover:border-primary-container/50 hover:bg-white/5 transition-all" data-type="intensity" data-value="Elite">Elite</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid of Programs -->
+            <div id="programs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Strength Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Power" data-intensity="Elite">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">fitness_center</span>
+                            <span class="text-[10px] bg-secondary-container/20 text-secondary border border-secondary/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Elite Intensity</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">Strength &amp; Hypertrophy</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            Focuses on progressive muscle overload, motor unit recruitment, and biomechanical hypertrophy protocols. Targeted resistance routines.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">450 kcal/hr</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Zone 2-3 (60-80%)</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">60 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html?coach=Marcus%20Vance" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cardio Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Endurance" data-intensity="High">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">monitor_heart</span>
+                            <span class="text-[10px] bg-primary/20 text-primary border border-primary/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">High Intensity</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">Metabolic Conditioning</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            Designed to maximize VO2 Max, elevate cardiovascular capacity, and optimize oxygen utilization efficiency using state-of-the-art equipment.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">750 kcal/hr</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Zone 4 (75-90%)</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">45 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html?coach=Elena%20Rossi" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Weight Loss Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Composition" data-intensity="High">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">scale</span>
+                            <span class="text-[10px] bg-primary/20 text-primary border border-primary/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">High Intensity</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">Body Recomposition</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            Combines targeted resistance with continuous aerobic zones to induce lipid oxidation while preserving and defining skeletal muscle tissue.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">600 kcal/hr</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Zone 3 (65-75%)</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">50 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html?coach=Elena%20Rossi" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Personal Training Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Power,Mobility" data-intensity="Elite">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">person</span>
+                            <span class="text-[10px] bg-secondary-container/20 text-secondary border border-secondary/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Elite Intensity</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">Elite Personal Coaching</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            One-on-one mechanical and biomechanical guidance. Custom-designed fitness pathways tailored to structural analysis and performance metrics.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">Customized</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Adaptive / Personalized</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">60 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CrossFit Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Power,Endurance" data-intensity="Elite">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">sports_gymnastics</span>
+                            <span class="text-[10px] bg-secondary-container/20 text-secondary border border-secondary/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Elite Intensity</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">High-Intensity CrossFit</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            Olympic weightlifting, metabolic conditioning, and bodyweight elements blended in a competitive environment. High muscular demands.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">800 kcal/hr</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Zone 5 (85-95%)</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">60 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html?coach=Jaxson%20Reed" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Yoga Card -->
+                <div class="program-card glass-panel rounded-xl flex flex-col hover:border-primary-container/50 transition-all border border-white/5 overflow-hidden" data-goals="Mobility" data-intensity="Moderate">
+                    <div class="p-8 flex-grow">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="material-symbols-outlined text-primary-container text-4xl">self_improvement</span>
+                            <span class="text-[10px] bg-green-500/20 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Moderate</span>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4">Vinyasa &amp; Mobility Restructure</h3>
+                        <p class="font-body-md text-on-surface-variant mb-6 leading-relaxed">
+                            Restructures fascia channels, optimizes dynamic flexibility, and utilizes specialized deep breathwork to regulate cortisol and mental fatigue.
+                        </p>
+                        <!-- Biometrics Widget -->
+                        <div class="bg-surface-container-low/50 rounded-lg p-4 space-y-3 mb-6">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Est. Caloric Burn</span>
+                                <span class="font-semibold text-primary-container">250 kcal/hr</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Heart Rate Zone</span>
+                                <span class="font-semibold text-primary-container">Zone 1 (50-60%)</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-on-surface-variant font-medium">Session Duration</span>
+                                <span class="font-semibold text-primary-container">75 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="trainers.html?coach=Sarah%20Chen" class="w-full text-center bg-primary-container text-on-primary-container py-3 rounded-lg font-button text-xs uppercase tracking-widest font-semibold block glow-blue hover:brightness-110 active:scale-95 transition-all">
+                            Enlist Protocol
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-white/5 w-full py-16 mt-24">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="col-span-1 md:col-span-1">
+                <div class="font-display-lg text-2xl font-black text-primary-container mb-6">IRON PEAK</div>
+                <p class="font-body-md text-on-surface-variant opacity-80 mb-6">Engineering the next generation of physical potential through technical mastery and elite environments.</p>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="terminal">terminal</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="precision_manufacturing">precision_manufacturing</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="psychology">psychology</span>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Navigation</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="index.html">Home</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="programs.html">Programs</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="trainers.html">Trainers</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Legal</h4>
+                <ul class="space-y-4 font-body-md text-on-surface-variant">
+                    <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                    <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-button text-primary-container text-sm uppercase mb-6 tracking-widest font-semibold">Updates</h4>
+                <p class="font-body-md text-on-surface-variant mb-4">Receive tactical performance updates.</p>
+                <div class="flex bg-surface-container-low rounded-lg overflow-hidden border border-white/10">
+                    <input class="bg-transparent border-0 focus:ring-0 px-4 py-2 w-full text-on-surface placeholder:text-white/20" placeholder="Email" type="email"/>
+                    <button class="bg-primary-container text-on-primary-container px-4 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/5 text-center px-margin-mobile">
+            <p class="font-body-md text-on-surface-variant text-xs opacity-60">© 2026 IRON PEAK FITNESS. ENGINEERED FOR PEAK PERFORMANCE.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Interactive Filtering Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.program-card');
+            
+            // Initial read from URL query parameters (e.g. programs.html?focus=Strength)
+            const urlParams = new URLSearchParams(window.location.search);
+            const focusGoal = urlParams.get('focus');
+            
+            let activeFilters = {
+                goal: 'all',
+                intensity: 'all'
+            };
+
+            if (focusGoal) {
+                activeFilters.goal = focusGoal;
+                // Set the correct active button state
+                filterBtns.forEach(btn => {
+                    if (btn.getAttribute('data-type') === 'goal') {
+                        if (btn.getAttribute('data-value') === focusGoal) {
+                            btn.classList.add('active-filter');
+                            btn.classList.remove('border-white/10', 'hover:bg-white/5');
+                        } else {
+                            btn.classList.remove('active-filter');
+                            btn.classList.add('border-white/10', 'hover:bg-white/5');
+                        }
+                    }
+                });
+            }
+
+            const applyFilters = () => {
+                cards.forEach(card => {
+                    const cardGoals = card.getAttribute('data-goals').split(',');
+                    const cardIntensity = card.getAttribute('data-intensity');
+
+                    const goalMatch = activeFilters.goal === 'all' || cardGoals.includes(activeFilters.goal);
+                    const intensityMatch = activeFilters.intensity === 'all' || cardIntensity === activeFilters.intensity;
+
+                    if (goalMatch && intensityMatch) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            };
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const type = btn.getAttribute('data-type');
+                    const value = btn.getAttribute('data-value');
+
+                    activeFilters[type] = value;
+
+                    // Update UI active styling
+                    const siblings = document.querySelectorAll(`.filter-btn[data-type="${type}"]`);
+                    siblings.forEach(sib => {
+                        sib.classList.remove('active-filter');
+                        sib.classList.add('border-white/10', 'hover:bg-white/5');
+                        sib.style.borderColor = '';
+                        sib.style.boxShadow = '';
+                        sib.style.textShadow = '';
+                    });
+
+                    btn.classList.add('active-filter');
+                    btn.classList.remove('border-white/10', 'hover:bg-white/5');
+
+                    applyFilters();
+                });
+            });
+
+            // Run on load
+            applyFilters();
+        });
+    </script>
+    <style>
+        /* Special active filter style */
+        .active-filter {
+            background-color: var(--color-primary, #00d1ff);
+            color: #003543 !important;
+            border-color: var(--color-primary, #00d1ff) !important;
+            box-shadow: 0 0 15px rgba(0, 209, 255, 0.4);
+            text-shadow: none !important;
+        }
+    </style>
+</body>
+</html>

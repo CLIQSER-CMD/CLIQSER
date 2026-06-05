@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>AUREN | SECURE CHECKOUT</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        input:focus {
+            outline: none !important;
+            border-bottom-color: #000000 !important;
+            box-shadow: none !important;
+        }
+        .mini-cart-overlay {
+            background-color: rgba(0,0,0,0.4);
+            transition: opacity 0.3s ease;
+        }
+        .mini-cart-panel {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mini-cart-panel.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary">
+    <!-- Top Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-surface/80 glass-header border-b border-outline-variant/30" id="top-nav">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto" id="nav-container">
+            <div class="flex items-center gap-12">
+                <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+                <nav class="hidden md:flex gap-8">
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="shop.html">Shop</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="shop.html">Collections</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">About</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="hover:opacity-70 transition-opacity" onclick="toggleSearchModal()"><span class="material-symbols-outlined">search</span></button>
+                <button class="relative hover:opacity-70 transition-opacity" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full cart-badge">0</span>
+                </button>
+                <button class="md:hidden hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined">menu</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Checkout Content -->
+    <main class="pt-[120px] pb-stack-lg max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="mb-12">
+            <h1 class="font-display-lg text-headline-lg uppercase tracking-tight mb-2">Checkout</h1>
+            <p class="text-secondary font-body-md">Complete your order with secure payment processing.</p>
+        </div>
+
+        <form id="checkoutForm" onsubmit="completeOrder(event)">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                <!-- Left Column: Forms -->
+                <div class="lg:col-span-7 space-y-12">
+                    <!-- Contact & Shipping -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="w-8 h-8 rounded-full border border-primary flex items-center justify-center font-label-sm">1</span>
+                            <h2 class="font-headline-md uppercase tracking-tight">Shipping Details</h2>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-gutter gap-y-8">
+                            <div class="col-span-2 relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">Email Address</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="email@example.com" type="email" required/>
+                            </div>
+                            <div class="relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">First Name</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="Jane" type="text" required/>
+                            </div>
+                            <div class="relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">Last Name</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="Doe" type="text" required/>
+                            </div>
+                            <div class="col-span-2 relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">Shipping Address</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="123 Luxury Lane" type="text" required/>
+                            </div>
+                            <div class="relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">City</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="New York" type="text" required/>
+                            </div>
+                            <div class="relative">
+                                <label class="block font-label-sm text-on-surface-variant mb-1">Postal Code</label>
+                                <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0" placeholder="10001" type="text" required/>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Payment Section -->
+                    <section>
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="w-8 h-8 rounded-full border border-primary flex items-center justify-center font-label-sm">2</span>
+                            <h2 class="font-headline-md uppercase tracking-tight">Secure Payment</h2>
+                            <span class="ml-auto flex items-center gap-2 text-label-sm text-on-surface-variant">
+                                <span class="material-symbols-outlined text-[16px]">lock</span>
+                                SECURE SSL ENCRYPTED
+                            </span>
+                        </div>
+                        <!-- Payment Methods -->
+                        <div class="space-y-4">
+                            <label class="flex items-center justify-between p-6 border border-primary cursor-pointer transition-all">
+                                <div class="flex items-center gap-4">
+                                    <input checked="" class="text-primary focus:ring-0 border-outline" name="payment" type="radio" id="payCard" onchange="togglePaymentInputs(true)"/>
+                                    <span class="font-label-sm uppercase tracking-wider">Credit / Debit Card</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <img alt="Visa" class="h-4 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuyF0WcxhjvZ_kYouvQwaPFUuEL0A-jRARgPSiTdrX8bLEmjtzqSfNEXoAIM1-WLXkcWISnlkxSoDKrp07RtP71tqg0saLSLKjoFamu8RljHx8G_Qqixv5Uht267upz-2coEIPaavTrHKQ-gA4lChQvzXooB-Y5Ja4WP5DiS1TmAneF_UdeWxXjFyATMm-_40syUt-hSTu2y3VFNVFaV5hMo0XlVfvIR3EwrMNjZ6ThjRgsrQeoPMPancopF8qYS7mFUVodJ83iL0"/>
+                                    <img alt="Mastercard" class="h-4 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXu-5Wh3OulSVwv8qMz3i0D403gEARLxYVFkbOVKIoNgfSTAVbVNs36y9jBvHwYjzDBNoWaJZ2VH0Tq-Ex5FhKfOHvQgQZe1B9kCpw0lnc6aPsw4XHPd3H1vBXEkuA_p1fzpNSiYa7npkapbh16HsAo4b_ptlA6ifDJpm5CYk1WToK_s9bqiNfhjEJo6rNygFZxDLDrfHNqrJeUNTegLtusyCMUiCU9NK59FHAq2UynDL0lbTUODOI7I0jcd_muSugJqbwCMS6uy9zc"/>
+                                </div>
+                            </label>
+                            <div class="p-6 bg-surface-container-low space-y-6" id="creditCardForm">
+                                <div class="relative">
+                                    <label class="block font-label-sm text-on-surface-variant mb-1">Card Number</label>
+                                    <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0 card-input" placeholder="0000 0000 0000 0000" type="text" required pattern="\d{16}" title="Please enter a valid 16-digit card number"/>
+                                </div>
+                                <div class="grid grid-cols-2 gap-x-gutter">
+                                    <div class="relative">
+                                        <label class="block font-label-sm text-on-surface-variant mb-1">Expiry Date</label>
+                                        <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0 card-input" placeholder="MM / YY" type="text" required pattern="(0[1-9]|1[0-2])\/\d{2}" title="Use MM/YY format"/>
+                                    </div>
+                                    <div class="relative">
+                                        <label class="block font-label-sm text-on-surface-variant mb-1">Security Code</label>
+                                        <input class="w-full border-t-0 border-x-0 border-b border-outline-variant bg-transparent py-2 px-0 focus:ring-0 card-input" placeholder="CVV" type="text" required pattern="\d{3,4}" title="3 or 4 digits"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="flex items-center justify-between p-6 border border-outline-variant/30 cursor-pointer hover:border-primary/50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <input class="text-primary focus:ring-0 border-outline" name="payment" type="radio" id="payApple" onchange="togglePaymentInputs(false)"/>
+                                    <span class="font-label-sm uppercase tracking-wider">Apple Pay</span>
+                                </div>
+                                <span class="material-symbols-outlined">contactless</span>
+                            </label>
+                            <label class="flex items-center justify-between p-6 border border-outline-variant/30 cursor-pointer hover:border-primary/50 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <input class="text-primary focus:ring-0 border-outline" name="payment" type="radio" id="payPal" onchange="togglePaymentInputs(false)"/>
+                                    <span class="font-label-sm uppercase tracking-wider">PayPal</span>
+                                </div>
+                                <span class="material-symbols-outlined">payments</span>
+                            </label>
+                        </div>
+                    </section>
+                </div>
+                
+                <!-- Right Column: Summary -->
+                <aside class="lg:col-span-5 sticky top-[140px]">
+                    <div class="border border-outline-variant/30 p-8 bg-surface-container-low">
+                        <h2 class="font-headline-md uppercase tracking-tight mb-8">Order Summary</h2>
+                        
+                        <!-- Dynamically Rendered by cart.js -->
+                        <div class="space-y-6 mb-8" id="checkoutSummaryItems">
+                            <!-- Items -->
+                        </div>
+                        
+                        <div class="space-y-4 pt-8 border-t border-outline-variant/30">
+                            <div class="flex justify-between font-body-md">
+                                <span class="text-secondary">Subtotal</span>
+                                <span id="checkoutSubtotal">$0.00</span>
+                            </div>
+                            <div class="flex justify-between font-body-md">
+                                <span class="text-secondary">Shipping</span>
+                                <span>Complimentary</span>
+                            </div>
+                            <div class="flex justify-between font-headline-md pt-4 border-t border-outline-variant/30">
+                                <span class="uppercase tracking-tight">Total</span>
+                                <span id="checkoutTotal">$0.00</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-on-primary py-6 mt-8 font-label-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+                            Complete Purchase
+                        </button>
+                        <p class="mt-6 text-center text-xs text-on-surface-variant flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                            100% Secure Checkout Guaranteed
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </form>
+    </main>
+
+    <!-- Success Modal Overlay -->
+    <div id="successModal" class="fixed inset-0 z-[200] bg-black/55 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full p-8 border border-outline text-center shadow-2xl relative">
+            <span class="material-symbols-outlined text-6xl text-primary mb-6" style="font-variation-settings: 'FILL' 0, 'wght' 200;">verified</span>
+            <h2 class="font-display-lg text-headline-lg uppercase mb-2 tracking-tight">Order Confirmed</h2>
+            <p class="font-label-sm text-secondary uppercase tracking-widest text-[11px] mb-6" id="successOrderNum">Order #AUREN-00000</p>
+            <p class="text-on-surface-variant font-body-md mb-8 leading-relaxed">
+                Thank you for your purchase. Your order has been placed successfully. An email confirmation containing your shipping details has been sent.
+            </p>
+            <button onclick="dismissSuccess()" class="w-full bg-primary text-on-primary py-4 font-label-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Modal Overlay -->
+    <div id="searchModal" class="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm hidden flex items-start justify-center pt-24 px-4" onclick="toggleSearchModal()">
+        <div class="bg-white w-full max-w-2xl p-8 border-b border-outline shadow-2xl relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-primary pb-2">
+                <input type="text" class="w-full bg-transparent border-none text-2xl font-body-md focus:ring-0 outline-none placeholder:text-outline p-0" placeholder="Search AUREN WEAR..."/>
+                <button onclick="toggleSearchModal()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+            </div>
+            <div class="mt-8 space-y-4">
+                <p class="font-label-sm text-secondary uppercase tracking-widest text-[10px]">Popular Searches</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="product.html?id=sculpted-wool-overcoat" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Wool Overcoat</a>
+                    <a href="product.html?id=essential-heavy-hoodie" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Heavy Hoodie</a>
+                    <a href="product.html?id=classic-minimal-tee" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Minimal Tee</a>
+                    <a href="product.html?id=urban-tech-sneaker" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Tech Sneaker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenuDrawer" class="fixed inset-0 z-[100] bg-white hidden flex flex-col p-8 transition-all duration-300">
+        <div class="flex justify-between items-center mb-12">
+            <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+            <button onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+        </div>
+        <nav class="flex flex-col gap-6 text-2xl font-label-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Home</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Shop</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Collections</a>
+            <a href="#" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4" onclick="toggleMobileMenu()">About</a>
+            <a href="#" class="hover:text-primary transition-colors pb-4" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+        <div class="mt-auto space-y-6">
+            <button onclick="toggleMobileMenu(); toggleSearchModal();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left pb-4 border-b border-outline-variant/10">
+                <span class="material-symbols-outlined">search</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">Search Catalog</span>
+            </button>
+            <button onclick="toggleMobileMenu(); toggleMiniCart();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">View Bag (<span class="cart-badge">0</span>)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mini-Cart Drawer (Slide-out panel) -->
+    <div class="fixed inset-0 z-[100] mini-cart-overlay hidden" id="miniCartOverlay" onclick="toggleMiniCart()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-[450px] bg-white shadow-2xl flex flex-col mini-cart-panel" id="miniCartPanel" onclick="event.stopPropagation()">
+            <div class="p-8 flex justify-between items-center border-b border-outline-variant/30">
+                <h2 class="font-headline-md uppercase tracking-tight" id="miniCartTitle">Your Cart (0)</h2>
+                <button class="hover:opacity-50 transition-opacity" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <!-- Cart Items (Rendered by cart.js) -->
+            <div class="flex-grow overflow-y-auto p-8 space-y-8" id="miniCartItems">
+                <!-- Dynamic Items -->
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="p-8 border-t border-outline-variant/30 bg-surface-container-low">
+                <div class="flex justify-between font-headline-md mb-6 uppercase tracking-tight">
+                    <span>Subtotal</span>
+                    <span id="miniCartSubtotal">$0.00</span>
+                </div>
+                <button class="w-full bg-primary text-on-primary py-5 font-label-sm uppercase tracking-widest text-center hover:opacity-90 mb-4 transition-all duration-300" onclick="toggleMiniCart()">
+                    Close and Continue
+                </button>
+                <p class="text-center text-xs text-on-surface-variant uppercase tracking-tighter">
+                    Taxes and shipping calculated at checkout
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // Toggle credit card input requirement based on selected payment method
+        function togglePaymentInputs(showCard) {
+            const cardForm = document.getElementById('creditCardForm');
+            const inputs = cardForm.querySelectorAll('.card-input');
+            
+            if (showCard) {
+                cardForm.classList.remove('hidden');
+                inputs.forEach(input => input.setAttribute('required', ''));
+            } else {
+                cardForm.classList.add('hidden');
+                inputs.forEach(input => input.removeAttribute('required'));
+            }
+        }
+
+        // Form submission complete order handler
+        function completeOrder(event) {
+            event.preventDefault();
+            
+            // Check if cart is empty before completing purchase
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to your cart before checking out.");
+                return;
+            }
+
+            // Generate mock order number
+            const orderNum = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('successOrderNum').textContent = `Order #AUREN-${orderNum}`;
+            
+            // Open success modal
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('hidden');
+        }
+
+        // Success dismissal handler
+        function dismissSuccess() {
+            // Clear cart
+            clearCart();
+            
+            // Hide modal
+            const modal = document.getElementById('successModal');
+            modal.classList.add('hidden');
+            
+            // Redirect to home page
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

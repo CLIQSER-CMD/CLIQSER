@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VELORA LUXE | Reservations</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#775a19",
+              "primary-container": "#c5a059",
+              "on-primary-container": "#4e3700",
+              secondary: "#705a4c",
+              tertiary: "#5f5e5e",
+              background: "#fcf9f3",
+              "on-background": "#1c1c18",
+              surface: "#fcf9f3",
+              "on-surface": "#1c1c18",
+              "on-surface-variant": "#4e4639",
+              outline: "#7f7667",
+              "outline-variant": "#d1c5b4",
+              "inverse-surface": "#31312d",
+              "surface-container-low": "#f6f3ed",
+              "surface-container-high": "#ebe8e2",
+              "surface-container-highest": "#e5e2dc"
+            },
+            spacing: {
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "16px",
+              "margin-desktop": "80px",
+              "margin-mobile": "24px",
+              gutter: "24px"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .step-panel {
+            display: none;
+        }
+        .step-panel.active {
+            display: block;
+        }
+        /* Printable ticket styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #ticketModal, #ticketModal * {
+                visibility: visible;
+            }
+            #ticketModal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container pt-28">
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 z-[60] bg-primary text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-90" id="backToTop">
+        <span class="material-symbols-outlined">north</span>
+    </button>
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-primary/10 py-3 shadow-lg" id="mainNav">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+                <img alt="VELORA" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="assets/images/logo.png"/>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="index.html">Home</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="menu.html">Menu</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="about.html">Philosophy</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-primary hover:text-primary transition-colors duration-400" href="reservation.html">Reservations</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+            
+            <!-- Desktop Action -->
+            <div class="hidden md:block">
+                <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 inline-block rounded-sm">
+                    Book A Table
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-on-surface hover:text-primary transition-colors duration-300 z-50" id="mobileMenuToggle">
+                <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="fixed inset-0 bg-background/98 z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden" id="mobileMenu">
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="about.html">Philosophy</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest text-primary hover:text-primary transition-colors" href="reservation.html">Reservations</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="contact.html">Contact</a>
+            <a href="reservation.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 mt-4 rounded-sm">
+                Book A Table
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="py-stack-md bg-surface text-center">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-2">Dining Desk</span>
+            <h1 class="font-display-lg text-4xl md:text-6xl text-on-surface font-serif mb-4">Table Reservations</h1>
+            <p class="font-body-lg text-lg text-on-surface-variant max-w-2xl mx-auto font-light font-sans">
+                Reserve your seat below. Choose your date, select a room, and click your table directly on our interactive map.
+            </p>
+        </div>
+    </header>
+
+    <!-- Reservation Wizard -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            
+            <!-- Step Indicators -->
+            <div class="max-w-xl mx-auto flex items-center justify-between mb-12">
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold" id="indicator1">1</div>
+                    <span class="text-xs uppercase tracking-wider text-primary font-semibold">Details</span>
+                </div>
+                <div class="h-0.5 bg-outline-variant flex-grow mx-4" id="line1"></div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold" id="indicator2">2</div>
+                    <span class="text-xs uppercase tracking-wider text-on-surface-variant" id="label2">Seating</span>
+                </div>
+                <div class="h-0.5 bg-outline-variant flex-grow mx-4" id="line2"></div>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold" id="indicator3">3</div>
+                    <span class="text-xs uppercase tracking-wider text-on-surface-variant" id="label3">Contact</span>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="glass-card max-w-4xl mx-auto p-8 md:p-12">
+                <form id="reservationForm" onsubmit="submitReservation(event)">
+                    
+                    <!-- STEP 1: Details -->
+                    <div class="step-panel active" id="step1">
+                        <h2 class="text-2xl font-serif mb-6 text-center text-on-surface">Step 1: Dining Details</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="luxury-input-group">
+                                <input class="luxury-input" id="dateInput" type="date" required min="2026-06-05"/>
+                                <label class="luxury-label" for="dateInput">Reservation Date</label>
+                            </div>
+                            <div class="luxury-input-group">
+                                <select class="luxury-input" id="timeInput" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="18:00">18:00 (Sunset Seating)</option>
+                                    <option value="19:00">19:00 (Prime Seating)</option>
+                                    <option value="20:00">20:00 (Sensory Seating)</option>
+                                    <option value="21:00">21:00 (Late Gastronomy)</option>
+                                </select>
+                                <label class="luxury-label" for="timeInput">Preferred Time</label>
+                            </div>
+                            <div class="luxury-input-group">
+                                <select class="luxury-input" id="guestsInput" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="4">4 Guests</option>
+                                    <option value="6">6 Guests</option>
+                                    <option value="8">8 Guests (Private Vault Only)</option>
+                                </select>
+                                <label class="luxury-label" for="guestsInput">Party Size</label>
+                            </div>
+                        </div>
+                        <div class="text-center mt-8">
+                            <button type="button" class="shimmer-btn bg-primary text-white px-8 py-3 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all" onclick="nextStep(2)">
+                                Select Seating
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Seating Chart -->
+                    <div class="step-panel" id="step2">
+                        <h2 class="text-2xl font-serif mb-2 text-center text-on-surface">Step 2: Dining Room Layout</h2>
+                        <p class="text-sm text-center text-on-surface-variant mb-8">Click on an available table (gold outline) to assign your seat.</p>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- SVG Map (Injected) -->
+                            <div class="lg:col-span-2 border border-outline-variant/30 rounded-sm bg-surface-container-low p-4 flex items-center justify-center">
+                                <svg width="100%" height="320" viewBox="0 0 600 350" id="seatingMap" class="max-w-full">
+                                    <!-- Legend -->
+                                    <g transform="translate(10, 10)">
+                                        <rect width="15" height="15" fill="#dec1af" rx="2" class="stroke-[#705a4c] stroke-1"/>
+                                        <text x="25" y="12" fill="#1c1c18" font-size="10" font-family="sans-serif">Available</text>
+                                        
+                                        <rect x="90" width="15" height="15" fill="#775a19" rx="2"/>
+                                        <text x="115" y="12" fill="#1c1c18" font-size="10" font-family="sans-serif">Selected</text>
+
+                                        <rect x="180" width="15" height="15" fill="#c8c6c5" rx="2"/>
+                                        <text x="205" y="12" fill="#1c1c18" font-size="10" font-family="sans-serif">Occupied</text>
+                                    </g>
+
+                                    <!-- MAIN DINING ROOM ZONE -->
+                                    <g id="zoneMain">
+                                        <!-- Floor outline -->
+                                        <rect x="30" y="50" width="230" height="270" fill="none" stroke="#d1c5b4" stroke-width="2" stroke-dasharray="4" rx="6"/>
+                                        <text x="40" y="75" fill="#705a4c" font-size="12" font-family="serif" font-weight="bold">Main Dining Room</text>
+                                        
+                                        <!-- Tables -->
+                                        <circle id="t1" cx="80" cy="130" r="22" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(1, 't1', 'Main Dining Hall')"/>
+                                        <text x="80" y="134" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T1 (2p)</text>
+                                        
+                                        <circle id="t2" cx="190" cy="130" r="22" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(2, 't2', 'Main Dining Hall')"/>
+                                        <text x="190" y="134" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T2 (2p)</text>
+
+                                        <rect id="t3" x="55" y="210" width="50" height="50" rx="4" class="seating-table occupied fill-[#c8c6c5]"/>
+                                        <text x="80" y="238" text-anchor="middle" fill="#7f7667" font-size="10" pointer-events="none">T3 (4p)</text>
+
+                                        <rect id="t4" x="165" y="210" width="50" height="50" rx="4" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(4, 't4', 'Main Dining Hall')"/>
+                                        <text x="190" y="238" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T4 (4p)</text>
+                                    </g>
+
+                                    <!-- GLASS GREENHOUSE ZONE -->
+                                    <g id="zoneGreenhouse">
+                                        <rect x="290" y="50" width="280" height="130" fill="none" stroke="#d1c5b4" stroke-width="2" stroke-dasharray="4" rx="6"/>
+                                        <text x="300" y="75" fill="#705a4c" font-size="12" font-family="serif" font-weight="bold">Glass Greenhouse</text>
+
+                                        <circle id="t5" cx="350" cy="125" r="22" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(5, 't5', 'Glass Greenhouse')"/>
+                                        <text x="350" y="129" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T5 (2p)</text>
+                                        
+                                        <circle id="t6" cx="440" cy="125" r="22" class="seating-table occupied fill-[#c8c6c5]"/>
+                                        <text x="440" y="129" text-anchor="middle" fill="#7f7667" font-size="10" pointer-events="none">T6 (2p)</text>
+
+                                        <circle id="t7" cx="520" cy="125" r="22" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(7, 't7', 'Glass Greenhouse')"/>
+                                        <text x="520" y="129" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T7 (2p)</text>
+                                    </g>
+
+                                    <!-- PRIVATE VAULT ZONE -->
+                                    <g id="zoneVault">
+                                        <rect x="290" y="200" width="280" height="120" fill="none" stroke="#d1c5b4" stroke-width="2" stroke-dasharray="4" rx="6"/>
+                                        <text x="300" y="225" fill="#705a4c" font-size="12" font-family="serif" font-weight="bold">Private Stone Vaults</text>
+
+                                        <rect id="t8" x="330" y="250" width="60" height="50" rx="4" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(8, 't8', 'Private Vault')"/>
+                                        <text x="360" y="278" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T8 (6p)</text>
+
+                                        <rect id="t9" x="460" y="250" width="70" height="50" rx="4" class="seating-table available fill-[#dec1af] stroke-[#705a4c]" onclick="selectSeating(9, 't9', 'Private Vault')"/>
+                                        <text x="495" y="278" text-anchor="middle" fill="#1c1c18" font-size="10" pointer-events="none">T9 (8p)</text>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- Selection Summary Panel -->
+                            <div class="flex flex-col justify-between p-6 bg-surface-container rounded-sm border border-outline-variant/30">
+                                <div class="space-y-4">
+                                    <h3 class="font-headline-sm text-xl font-serif text-on-surface">Selected Seat</h3>
+                                    <div class="p-4 bg-background rounded-sm border border-outline-variant/20 space-y-2">
+                                        <p class="text-xs text-on-surface-variant uppercase">Zone</p>
+                                        <p class="font-semibold text-primary" id="summaryZone">No Zone Selected</p>
+                                        <p class="text-xs text-on-surface-variant uppercase pt-2">Table Assigned</p>
+                                        <p class="font-semibold text-on-surface" id="summaryTable">Please click on a table</p>
+                                        <p class="text-xs text-on-surface-variant uppercase pt-2">Sensory Acoustics</p>
+                                        <p class="text-xs text-on-surface-variant italic" id="summaryAcoustics">Acoustic layers adapt to room selection.</p>
+                                    </div>
+                                    <!-- Hidden Inputs -->
+                                    <input type="hidden" id="selectedTableId" required/>
+                                    <input type="hidden" id="selectedTableZone" required/>
+                                </div>
+                                <div class="flex gap-4 pt-6">
+                                    <button type="button" class="w-1/2 border border-primary text-primary py-3 uppercase tracking-widest font-label-md hover:bg-surface-container-low transition-all" onclick="nextStep(1)">
+                                        Back
+                                    </button>
+                                    <button type="button" class="w-1/2 bg-primary text-white py-3 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all" onclick="nextStep(3)">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Contact Details -->
+                    <div class="step-panel" id="step3">
+                        <h2 class="text-2xl font-serif mb-6 text-center text-on-surface">Step 3: Contact &amp; Preferences</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="luxury-input-group">
+                                <input class="luxury-input" id="nameInput" type="text" placeholder=" " required/>
+                                <label class="luxury-label" for="nameInput">Full Name</label>
+                            </div>
+                            <div class="luxury-input-group">
+                                <input class="luxury-input" id="emailInput" type="email" placeholder=" " required/>
+                                <label class="luxury-label" for="emailInput">Email Address</label>
+                            </div>
+                            <div class="luxury-input-group">
+                                <input class="luxury-input" id="phoneInput" type="tel" placeholder=" " required/>
+                                <label class="luxury-label" for="phoneInput">Contact Number</label>
+                            </div>
+                            <div class="luxury-input-group">
+                                <input class="luxury-input" id="dietInput" type="text" placeholder=" "/>
+                                <label class="luxury-label" for="dietInput">Dietary Requirements / Allergies</label>
+                            </div>
+                            <div class="md:col-span-2 flex items-center gap-2 py-2">
+                                <input class="rounded border-outline-variant text-primary focus:ring-primary h-5 w-5" id="occasionInput" type="checkbox"/>
+                                <label class="text-sm text-on-surface-variant" for="occasionInput">Celebrating a special occasion? (Anniversary, Birthday)</label>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-8 max-w-md mx-auto">
+                            <button type="button" class="w-1/2 border border-primary text-primary py-3 uppercase tracking-widest font-label-md hover:bg-surface-container-low transition-all" onclick="nextStep(2)">
+                                Back
+                            </button>
+                            <button type="submit" class="w-1/2 shimmer-btn bg-primary text-white py-3 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all">
+                                Confirm Table
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Exquisite Reservation Ticket Modal -->
+    <div id="ticketModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-xl w-full p-8 md:p-10 text-on-surface relative rounded-lg border-2 border-primary max-h-[95vh] overflow-y-auto transform translate-y-8 transition-transform duration-300 shadow-2xl">
+            
+            <div class="text-center space-y-2 mb-6">
+                <span class="font-label-md text-xs uppercase tracking-widest text-primary font-bold">Booking Receipt</span>
+                <h2 class="text-3xl font-serif text-primary" style="font-family: 'Playfair Display', serif;">Velora Luxe</h2>
+                <p class="text-xs text-on-surface-variant uppercase tracking-widest">Gastronomy District, Paris</p>
+            </div>
+
+            <!-- The Ticket Box -->
+            <div class="border-2 border-dashed border-primary/30 p-6 rounded-md bg-surface-container space-y-4 font-sans relative overflow-hidden">
+                <!-- Watermark Logo -->
+                <div class="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none">
+                    <img src="assets/images/logo.png" class="w-48 h-auto"/>
+                </div>
+
+                <div class="flex justify-between items-center text-xs text-on-surface-variant font-bold border-b border-outline-variant/30 pb-2">
+                    <span>RESERVATION ID: <span id="ticketId" class="text-primary font-mono">VL-00000</span></span>
+                    <span id="ticketOccasion" class="bg-primary/10 text-primary px-2 py-0.5 rounded-sm">REGULAR</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Guest Name</p>
+                        <p class="font-semibold text-on-surface" id="ticketName">John Doe</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Party Size</p>
+                        <p class="font-semibold text-on-surface" id="ticketGuests">2 Guests</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Date</p>
+                        <p class="font-semibold text-on-surface" id="ticketDate">June 5, 2026</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Time</p>
+                        <p class="font-semibold text-on-surface" id="ticketTime">20:00</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Seating Zone</p>
+                        <p class="font-semibold text-primary" id="ticketZone">Glass Greenhouse</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-on-surface-variant uppercase">Table Assigned</p>
+                        <p class="font-semibold text-on-surface" id="ticketTable">Table 5</p>
+                    </div>
+                </div>
+
+                <div class="border-t border-outline-variant/30 pt-4 space-y-2 text-xs">
+                    <p class="text-on-surface-variant"><strong class="text-primary">Sensory Frequency:</strong> <span id="ticketAcoustics">630Hz Binaural</span></p>
+                    <p class="text-on-surface-variant"><strong class="text-primary">Dietary Notes:</strong> <span id="ticketDiet">None</span></p>
+                    <p class="text-on-surface-variant"><strong class="text-primary">Dress Code:</strong> Smart Elegant (Jacket recommended)</p>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex gap-4 mt-6 no-print">
+                <button class="w-1/2 border border-primary text-primary py-3 uppercase tracking-widest font-label-md hover:bg-surface-container-low transition-all" onclick="printTicket()">
+                    Print / Save
+                </button>
+                <button class="w-1/2 bg-primary text-white py-3 uppercase tracking-widest font-label-md hover:bg-primary-container hover:text-on-primary-container transition-all" onclick="closeTicketModal()">
+                    Close Desk
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-surface-variant/80 py-stack-lg border-t border-outline-variant/20 no-print">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="md:col-span-1">
+                    <span class="font-headline-md text-3xl text-primary block mb-4 font-serif">VELORA</span>
+                    <p class="font-body-md text-base font-light">Refining the art of culinary excellence through sensory innovation and artisan heritage.</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Explore</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="menu.html">Menu</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="about.html">Our Philosophy</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="reservation.html">Reservations</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="contact.html">Contact Us</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Connect</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Instagram</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Facebook</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Newsletter</span>
+                    <div class="relative group">
+                        <input class="w-full bg-white/5 border-0 border-b border-white/20 focus:ring-0 focus:border-primary py-2 text-white transition-all duration-500 group-focus-within:border-primary" placeholder="Email Address" type="email"/>
+                        <button class="absolute right-0 bottom-2 text-primary transition-transform duration-500 hover:translate-x-1">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-stack-md border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body-md text-sm uppercase tracking-widest">© 2026 VELORA DINING. ARTISAN GASTRONOMY.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">public</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">restaurant</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">wine_bar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum reservation date to today
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('dateInput').setAttribute('min', todayStr);
+        document.getElementById('dateInput').value = todayStr;
+
+        let activeStep = 1;
+
+        // Navigation for wizard steps
+        function nextStep(step) {
+            // Validation
+            if (step === 2 && activeStep === 1) {
+                const date = document.getElementById('dateInput').value;
+                const time = document.getElementById('timeInput').value;
+                const guests = document.getElementById('guestsInput').value;
+                if (!date || !time || !guests) {
+                    alert('Please complete all dining details before proceeding.');
+                    return;
+                }
+            }
+            if (step === 3 && activeStep === 2) {
+                const tableId = document.getElementById('selectedTableId').value;
+                if (!tableId) {
+                    alert('Please select a table on the map.');
+                    return;
+                }
+            }
+
+            // Transition Steps
+            document.getElementById(`step${activeStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+
+            // Update Indicators
+            updateIndicators(step);
+            activeStep = step;
+        }
+
+        function updateIndicators(step) {
+            for (let i = 1; i <= 3; i++) {
+                const ind = document.getElementById(`indicator${i}`);
+                const label = document.getElementById(`label${i}`);
+                if (i < step) {
+                    ind.className = 'w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold';
+                    if (label) label.className = 'text-xs uppercase tracking-wider text-primary font-semibold';
+                    if (i < 3) document.getElementById(`line${i}`).className = 'h-0.5 bg-primary flex-grow mx-4';
+                } else if (i === step) {
+                    ind.className = 'w-10 h-10 rounded-full border-2 border-primary bg-primary text-white flex items-center justify-center font-bold shadow-lg';
+                    if (label) label.className = 'text-xs uppercase tracking-wider text-primary font-bold';
+                    if (i < 3) document.getElementById(`line${i}`).className = 'h-0.5 bg-outline-variant flex-grow mx-4';
+                } else {
+                    ind.className = 'w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold';
+                    if (label) label.className = 'text-xs uppercase tracking-wider text-on-surface-variant';
+                    if (i < 3) document.getElementById(`line${i}`).className = 'h-0.5 bg-outline-variant flex-grow mx-4';
+                }
+            }
+        }
+
+        // Table map interaction
+        function selectSeating(tableNum, tableId, zone) {
+            // Remove selection class from all other tables
+            const tables = document.querySelectorAll('.seating-table');
+            tables.forEach(t => {
+                if (t.classList.contains('selected')) {
+                    t.classList.remove('selected');
+                    t.classList.add('available');
+                    t.setAttribute('fill', '#dec1af');
+                }
+            });
+
+            // Set selection on clicked table
+            const clicked = document.getElementById(tableId);
+            clicked.classList.remove('available');
+            clicked.classList.add('selected');
+            clicked.setAttribute('fill', '#775a19');
+
+            // Update Summary
+            document.getElementById('summaryZone').textContent = zone;
+            document.getElementById('summaryTable').textContent = `Table ${tableNum}`;
+            document.getElementById('selectedTableId').value = `Table ${tableNum}`;
+            document.getElementById('selectedTableZone').value = zone;
+
+            let acoustics = "630Hz Binaural Layer";
+            if (zone === "Glass Greenhouse") acoustics = "850Hz Ambient Forest Waves";
+            if (zone === "Private Vault") acoustics = "528Hz Solfeggio Stone Resonance";
+            document.getElementById('summaryAcoustics').textContent = acoustics;
+        }
+
+        // Form Submission & Ticket Generation
+        function submitReservation(e) {
+            e.preventDefault();
+            
+            // Collect Form Values
+            const name = document.getElementById('nameInput').value;
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('timeInput').value;
+            const guests = document.getElementById('guestsInput').value;
+            const table = document.getElementById('selectedTableId').value;
+            const zone = document.getElementById('selectedTableZone').value;
+            const diet = document.getElementById('dietInput').value || 'None specified';
+            const occasion = document.getElementById('occasionInput').checked;
+
+            // Generate Random Booking ID
+            const bookingId = 'VL-' + Math.floor(10000 + Math.random() * 90000);
+
+            // Set Ticket Info
+            document.getElementById('ticketId').textContent = bookingId;
+            document.getElementById('ticketName').textContent = name;
+            document.getElementById('ticketGuests').textContent = `${guests} Guests`;
+            document.getElementById('ticketDate').textContent = date;
+            document.getElementById('ticketTime').textContent = time;
+            document.getElementById('ticketZone').textContent = zone;
+            document.getElementById('ticketTable').textContent = table;
+            document.getElementById('ticketDiet').textContent = diet;
+            document.getElementById('ticketOccasion').textContent = occasion ? 'CELEBRATION' : 'REGULAR';
+
+            let acoustics = "630Hz Binaural Layer";
+            if (zone === "Glass Greenhouse") acoustics = "850Hz Ambient Forest Waves";
+            if (zone === "Private Vault") acoustics = "528Hz Solfeggio Stone Resonance";
+            document.getElementById('ticketAcoustics').textContent = acoustics;
+
+            // Open Modal
+            const modal = document.getElementById('ticketModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card').classList.remove('translate-y-8');
+        }
+
+        function printTicket() {
+            window.print();
+        }
+
+        function closeTicketModal() {
+            const modal = document.getElementById('ticketModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card').classList.add('translate-y-8');
+            
+            // Reset wizard to Step 1
+            document.getElementById('reservationForm').reset();
+            nextStep(1);
+            
+            // Reset map styles
+            const tables = document.querySelectorAll('.seating-table');
+            tables.forEach(t => {
+                if (t.classList.contains('selected')) {
+                    t.classList.remove('selected');
+                    t.classList.add('available');
+                    t.setAttribute('fill', '#dec1af');
+                }
+            });
+            document.getElementById('summaryZone').textContent = 'No Zone Selected';
+            document.getElementById('summaryTable').textContent = 'Please click on a table';
+            document.getElementById('summaryAcoustics').textContent = 'Acoustic layers adapt to room selection.';
+            document.getElementById('selectedTableId').value = '';
+            document.getElementById('selectedTableZone').value = '';
+        }
+
+        // Mobile drawer menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // Back to Top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>NEURAVOX AI | The Intelligent Vanguard</title>
+    <!-- Tailwind CSS with Forms and Container Queries plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --color-primary: #d3bbff;
+            --color-secondary: #4cd7f6;
+            --glass-bg: rgba(10, 15, 30, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #050505 0%, #150a26 40%, #0a0d1a 70%, #050505 100%);
+            background-size: 400% 400%;
+            animation: meshGradient 20s ease infinite;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+
+        @keyframes meshGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(76, 215, 246, 0.3);
+            box-shadow: 0 0 30px rgba(76, 215, 246, 0.12);
+            transform: translateY(-6px);
+        }
+
+        .glow-button-primary {
+            background: linear-gradient(135deg, #6d28d9 0%, #a78bfa 100%);
+            box-shadow: 0 0 15px rgba(109, 40, 217, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glow-button-primary:hover {
+            box-shadow: 0 0 25px rgba(109, 40, 217, 0.65);
+            transform: translateY(-2px);
+        }
+
+        .hero-glow-effect {
+            background: radial-gradient(circle 600px at var(--mouse-x) var(--mouse-y), rgba(109, 40, 217, 0.12), transparent 80%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: float 7s ease-in-out infinite;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Shimmer Effect for Pro Plan */
+        .pro-glow {
+            position: relative;
+            border: 1px solid #4cd7f6;
+            box-shadow: 0 0 30px rgba(76, 215, 246, 0.2);
+            overflow: hidden;
+        }
+
+        .pro-glow::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(76, 215, 246, 0.15), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) rotate(45deg); }
+            100% { transform: translateX(150%) rotate(45deg); }
+        }
+
+        .navbar-scrolled {
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            background-color: rgba(10, 10, 15, 0.75) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+            height: 4.5rem !important;
+        }
+
+        /* Pricing toggle transitions */
+        .price-val {
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .price-changed {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        /* Accordion transition */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .faq-active .faq-answer {
+            opacity: 1;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed": "#250059",
+                        "on-error": "#690005",
+                        "outline-variant": "#4a4455",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "primary": "#d3bbff",
+                        "primary-fixed-dim": "#d3bbff",
+                        "on-tertiary-fixed-variant": "#414658",
+                        "surface": "#131313",
+                        "on-primary-fixed-variant": "#5b00c5",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed": "#161b2b",
+                        "surface-bright": "#3a3939",
+                        "inverse-primary": "#7331df",
+                        "primary-fixed": "#ebddff",
+                        "on-primary": "#3f008d",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#acedff",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-fixed-dim": "#c2c6db",
+                        "tertiary-container": "#53586a",
+                        "surface-container": "#201f1f",
+                        "on-surface-variant": "#ccc3d7",
+                        "on-tertiary-container": "#cbcee4",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "secondary-container": "#03b5d3",
+                        "on-primary-container": "#dac5ff",
+                        "secondary": "#4cd7f6",
+                        "tertiary-fixed": "#dee1f7",
+                        "on-secondary-fixed": "#001f26",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary": "#2b3040",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#003640",
+                        "tertiary": "#c2c6db",
+                        "surface-tint": "#d3bbff",
+                        "on-secondary-container": "#00424e",
+                        "primary-container": "#6d28d9",
+                        "surface-variant": "#353534",
+                        "background": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#958da1"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sm": "16px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "lg": "40px",
+                        "xl": "64px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "code": ["JetBrains Mono", "monospace"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "headline-xl": ["Inter", "sans-serif"]
+                    },
+                    fontSize: {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "code": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-xl": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary selection:text-on-primary">
+
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full z-50 bg-surface/10 backdrop-blur-md border-b border-white/10 transition-all duration-500 ease-in-out" id="main-header">
+        <div class="flex justify-between items-center max-w-container-max mx-auto px-gutter h-20 transition-all duration-500">
+            <div class="flex items-center gap-xs cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <!-- SVG Logo -->
+                <svg class="h-10 w-10 animate-[pulse_4s_ease-in-out_infinite]" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="#4cd7f6" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="#6d28d9" fill-opacity="0.8"/>
+                    <circle cx="20" cy="20" r="3" fill="#FFFFFF"/>
+                </svg>
+                <span class="font-headline-lg text-headline-lg font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-primary">NEURAVOX AI</span>
+            </div>
+            <nav class="hidden md:flex gap-lg">
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#features">Features</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#command-center">Dashboard</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#pricing">Pricing</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#faq">FAQ</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="./docs.html">Developer API</a>
+            </nav>
+            <div class="flex gap-sm items-center">
+                <a href="./dashboard.html" class="hidden sm:block text-secondary font-label-md text-label-md hover:text-primary transition-colors">Login</a>
+                <a href="./dashboard.html" class="glow-button-primary px-sm py-xs rounded-lg text-on-primary font-label-md text-label-md font-bold text-center">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative pt-40 pb-20 overflow-hidden hero-glow-effect transition-all duration-300" id="hero">
+            <div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-xl items-center relative z-10">
+                <div class="reveal active">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-sm">
+                        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                        <span class="text-xs font-bold text-primary uppercase tracking-widest">New: Neural Engine v4.2 Pro</span>
+                    </div>
+                    <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-md bg-gradient-to-br from-white via-white to-primary bg-clip-text text-transparent">
+                        AI-Powered Automation For The Modern World
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-xl">
+                        Streamline workflows, automate complex engineering pipelines, and supercharge team productivity with next-generation autonomous AI agents.
+                    </p>
+                    <div class="flex flex-wrap gap-md">
+                        <a href="./dashboard.html" class="glow-button-primary px-xl py-md rounded-xl font-bold text-on-primary-fixed block text-center">Start Free Trial</a>
+                        <button onclick="openVideoDemo()" class="glass-card px-xl py-md rounded-xl font-bold flex items-center gap-xs hover:border-secondary transition-all">
+                            <span class="material-symbols-outlined text-secondary">play_circle</span>
+                            Watch Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="reveal active relative">
+                    <div class="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 blur-[100px] rounded-full"></div>
+                    <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/8 blur-[100px] rounded-full"></div>
+                    <img alt="AI Dashboard Mockup" class="animate-float relative z-10 w-full rounded-2xl shadow-[0_0_50px_rgba(109,40,217,0.2)] border border-white/10" src="assets/dashboard-mockup.png"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-xl bg-surface-container-low/30 border-y border-outline-variant/10">
+            <div class="max-w-container-max mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-lg">
+                <div class="text-center reveal active">
+                    <div class="font-headline-xl text-headline-xl text-secondary font-black mb-1">50k+</div>
+                    <div class="text-sm font-label-md text-on-surface-variant uppercase tracking-widest">Active Users</div>
+                </div>
+                <div class="text-center reveal active">
+                    <div class="font-headline-xl text-headline-xl text-primary font-black mb-1">10M+</div>
+                    <div class="text-sm font-label-md text-on-surface-variant uppercase tracking-widest">Automations</div>
+                </div>
+                <div class="text-center reveal active">
+                    <div class="font-headline-xl text-headline-xl text-secondary font-black mb-1">500+</div>
+                    <div class="text-sm font-label-md text-on-surface-variant uppercase tracking-widest">Enterprise Teams</div>
+                </div>
+                <div class="text-center reveal active">
+                    <div class="font-headline-xl text-headline-xl text-primary font-black mb-1">40%</div>
+                    <div class="text-sm font-label-md text-on-surface-variant uppercase tracking-widest">Productivity Lift</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section (Bento Grid Style) -->
+        <section class="py-xl" id="features">
+            <div class="max-w-container-max mx-auto px-gutter">
+                <div class="text-center mb-xl reveal">
+                    <h2 class="font-headline-xl text-headline-xl mb-sm bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">Engineered for Precision</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto">Explore the powerful features that make NEURAVOX the chosen platform for technical decision-makers worldwide.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                    <div class="glass-card p-xl rounded-2xl reveal">
+                        <span class="material-symbols-outlined text-secondary text-4xl mb-md">auto_awesome</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">AI Autonomous Agents</h3>
+                        <p class="text-on-surface-variant">Deploy custom neural agents that execute complex, multi-step logic across your cloud database and engineering stacks.</p>
+                    </div>
+                    <div class="glass-card p-xl rounded-2xl md:col-span-2 reveal">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-md">monitoring</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">Predictive Analytics Engine</h3>
+                        <p class="text-on-surface-variant">Real-time telemetry and resource usage tracking that feeds raw log data into boardroom insights within seconds.</p>
+                    </div>
+                    <div class="glass-card p-xl rounded-2xl md:col-span-2 reveal">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-md">account_tree</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">Visual Node Workflow Builder</h3>
+                        <p class="text-on-surface-variant">Intuitively stitch together endpoints, custom models, and triggers into a visual flow representing massive team pipelines.</p>
+                    </div>
+                    <div class="glass-card p-xl rounded-2xl reveal">
+                        <span class="material-symbols-outlined text-secondary text-4xl mb-md">forum</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">Internal Knowledge Base Chat</h3>
+                        <p class="text-on-surface-variant">SOP and codebase indexing, providing lightning-fast answers based entirely on secure, localized database integrations.</p>
+                    </div>
+                    <div class="glass-card p-xl rounded-2xl reveal">
+                        <span class="material-symbols-outlined text-secondary text-4xl mb-md">groups</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">Enterprise Workspace</h3>
+                        <p class="text-on-surface-variant">Organize your technical organization with granular role permissions, shared keys, and comprehensive audit logs.</p>
+                    </div>
+                    <div class="glass-card p-xl rounded-2xl reveal">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-md">speed</span>
+                        <h3 class="font-headline-lg text-headline-lg mb-sm">Zero Latency Insights</h3>
+                        <p class="text-on-surface-variant">Streaming event architecture guarantees instantly updated metrics, letting teams respond before anomalies occur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Preview Section -->
+        <section class="py-xl relative" id="command-center">
+            <div class="max-w-container-max mx-auto px-gutter text-center">
+                <div class="reveal mb-xl">
+                    <h2 class="font-headline-xl text-headline-xl mb-sm bg-gradient-to-r from-white via-white to-secondary bg-clip-text text-transparent">The Command Center</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto">Intuitive, powerful, and beautiful. Everything you need to scale operational intelligence in one unified view.</p>
+                </div>
+                <div class="relative max-w-5xl mx-auto reveal">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-20 pointer-events-none"></div>
+                    <img alt="Productivity Dashboard" class="w-full rounded-2xl shadow-[0_0_100px_rgba(109,40,217,0.15)] border border-outline-variant/30" src="assets/dashboard-mockup.png"/>
+                    
+                    <!-- Interactive Go to Dashboard button overlay -->
+                    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30">
+                        <a href="./dashboard.html" class="glow-button-primary px-xl py-sm rounded-xl font-bold flex items-center gap-xs">
+                            Enter Dashboard Console
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integrations Marquee -->
+        <section class="py-xl overflow-hidden bg-surface-container-lowest/30 border-y border-outline-variant/10">
+            <div class="text-center mb-md reveal">
+                <p class="text-xs font-bold text-on-surface-variant uppercase tracking-[0.3em]">Seamlessly Integrated With</p>
+            </div>
+            <div class="marquee-track flex py-sm">
+                <div class="flex items-center gap-xl px-xl grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
+                    <span class="text-headline-lg font-black tracking-tighter">Slack</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-primary">Notion</span>
+                    <span class="text-headline-lg font-black tracking-tighter">Discord</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-secondary">Google Drive</span>
+                    <span class="text-headline-lg font-black tracking-tighter">GitHub</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-primary">Zapier</span>
+                    <span class="text-headline-lg font-black tracking-tighter">Linear</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-secondary">Asana</span>
+                </div>
+                <div class="flex items-center gap-xl px-xl grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
+                    <span class="text-headline-lg font-black tracking-tighter">Slack</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-primary">Notion</span>
+                    <span class="text-headline-lg font-black tracking-tighter">Discord</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-secondary">Google Drive</span>
+                    <span class="text-headline-lg font-black tracking-tighter">GitHub</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-primary">Zapier</span>
+                    <span class="text-headline-lg font-black tracking-tighter">Linear</span>
+                    <span class="text-headline-lg font-black tracking-tighter text-secondary">Asana</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="py-xl" id="pricing">
+            <div class="max-w-container-max mx-auto px-gutter">
+                <div class="text-center mb-xl reveal">
+                    <h2 class="font-headline-xl text-headline-xl mb-sm bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">Scalable Pricing</h2>
+                    <p class="text-on-surface-variant max-w-xl mx-auto mb-md">Choose the tier that aligns with your operational velocity.</p>
+                    
+                    <!-- Pricing Toggle Switch -->
+                    <div class="inline-flex items-center gap-sm bg-surface-container-low/50 border border-white/10 p-1.5 rounded-full relative z-10">
+                        <button id="btn-monthly" onclick="togglePricing(false)" class="px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 bg-primary text-on-primary-fixed">Monthly</button>
+                        <button id="btn-yearly" onclick="togglePricing(true)" class="px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 text-on-surface-variant hover:text-white flex items-center gap-1">
+                            Yearly
+                            <span class="bg-secondary/25 text-secondary text-[10px] font-black px-2 py-0.5 rounded-full">Save 20%</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-lg max-w-5xl mx-auto items-stretch">
+                    <!-- Starter Plan -->
+                    <div class="glass-card p-xl rounded-2xl flex flex-col justify-between reveal">
+                        <div>
+                            <div class="mb-md">
+                                <h3 class="text-lg font-bold mb-xs">Starter</h3>
+                                <div class="flex items-baseline">
+                                    <span class="text-4xl font-black text-white" id="price-starter">$49</span>
+                                    <span class="text-on-surface-variant ml-1 text-sm" id="period-starter">/mo</span>
+                                </div>
+                                <span class="text-xs text-secondary mt-1 block h-4" id="yearly-note-starter"></span>
+                            </div>
+                            <ul class="space-y-sm mb-xl text-on-surface-variant text-sm">
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 5 Automations</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 10k Operations / mo</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Community Support</li>
+                                <li class="flex items-center gap-xs opacity-40"><span class="material-symbols-outlined text-sm">cancel</span> Custom Integration Hub</li>
+                            </ul>
+                        </div>
+                        <a href="./dashboard.html" class="w-full py-sm rounded-lg border border-outline text-white font-bold hover:bg-white/5 block text-center transition-all">Get Started</a>
+                    </div>
+                    
+                    <!-- Pro Plan (Shimmer Glow) -->
+                    <div class="glass-card p-xl rounded-2xl flex flex-col justify-between pro-glow relative reveal scale-105 z-10">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-on-secondary px-sm py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Most Popular</div>
+                        <div>
+                            <div class="mb-md">
+                                <h3 class="text-lg font-bold mb-xs">Pro</h3>
+                                <div class="flex items-baseline">
+                                    <span class="text-4xl font-black text-white" id="price-pro">$199</span>
+                                    <span class="text-on-surface-variant ml-1 text-sm" id="period-pro">/mo</span>
+                                </div>
+                                <span class="text-xs text-secondary mt-1 block h-4" id="yearly-note-pro"></span>
+                            </div>
+                            <ul class="space-y-sm mb-xl text-on-surface-variant text-sm">
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Unlimited Automations</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> 250k Operations / mo</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Priority API Access</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Advanced Real-time Analytics</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> v4.2 Neural Engine Access</li>
+                            </ul>
+                        </div>
+                        <a href="./dashboard.html" class="w-full py-sm rounded-lg glow-button-primary text-on-primary-fixed font-bold block text-center transition-all">Try Pro Free</a>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="glass-card p-xl rounded-2xl flex flex-col justify-between reveal">
+                        <div>
+                            <div class="mb-md">
+                                <h3 class="text-lg font-bold mb-xs">Enterprise</h3>
+                                <div class="flex items-baseline">
+                                    <span class="text-4xl font-black text-white">Custom</span>
+                                </div>
+                                <span class="text-xs text-secondary mt-1 block h-4">Billed dynamically</span>
+                            </div>
+                            <ul class="space-y-sm mb-xl text-on-surface-variant text-sm">
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Dedicated Isolated Clusters</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 24/7 White-glove Support</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom Security Audit & SSO</li>
+                                <li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> SLA Agreement Guarantee</li>
+                            </ul>
+                        </div>
+                        <a href="./dashboard.html" class="w-full py-sm rounded-lg border border-outline text-white font-bold hover:bg-white/5 block text-center transition-all">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-xl bg-surface-container-low/20" id="faq">
+            <div class="max-w-3xl mx-auto px-gutter">
+                <div class="text-center mb-xl reveal">
+                    <h2 class="font-headline-xl text-headline-xl mb-sm bg-gradient-to-r from-white to-secondary bg-clip-text text-transparent">Frequently Asked Questions</h2>
+                    <p class="text-on-surface-variant">Find instant answers regarding security, engine specs, and billing.</p>
+                </div>
+                
+                <div class="space-y-sm">
+                    <!-- FAQ 1 -->
+                    <div class="glass-card rounded-xl p-md cursor-pointer reveal border-white/10 faq-item" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-semibold text-white">How does the Neural Engine v4.2 Pro work?</h4>
+                            <span class="material-symbols-outlined text-secondary transform transition-transform duration-350 select-none">expand_more</span>
+                        </div>
+                        <div class="faq-answer text-sm text-on-surface-variant mt-sm">
+                            The Neural Engine indexes your active workspace nodes, generating optimized workflow pipelines. Our LLM-powered context mapping lets agents connect to external databases, executing APIs autonomously with guardrails and strict security compliance.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="glass-card rounded-xl p-md cursor-pointer reveal border-white/10 faq-item" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-semibold text-white">Can I integrate Neuravox with local offline source codes?</h4>
+                            <span class="material-symbols-outlined text-secondary transform transition-transform duration-350 select-none">expand_more</span>
+                        </div>
+                        <div class="faq-answer text-sm text-on-surface-variant mt-sm">
+                            Yes. Using our secure API bridge, you can deploy localized agents that scan directories and query indices locally. No proprietary codebase is stored on Neuravox servers—they only access temporary vector context.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="glass-card rounded-xl p-md cursor-pointer reveal border-white/10 faq-item" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-semibold text-white">What happens if we exceed operations limits on our plan?</h4>
+                            <span class="material-symbols-outlined text-secondary transform transition-transform duration-350 select-none">expand_more</span>
+                        </div>
+                        <div class="faq-answer text-sm text-on-surface-variant mt-sm">
+                            If operations limits are exceeded, agents continue to run, but they throttle speed slightly. You'll receive emails at 80% and 100% capacity with one-click options to expand credits or scale to Pro/Enterprise instantly.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="glass-card rounded-xl p-md cursor-pointer reveal border-white/10 faq-item" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-semibold text-white">Is enterprise data secure and SOC2 compliant?</h4>
+                            <span class="material-symbols-outlined text-secondary transform transition-transform duration-350 select-none">expand_more</span>
+                        </div>
+                        <div class="faq-answer text-sm text-on-surface-variant mt-sm">
+                            Absolutely. Neuravox utilizes end-to-end AES-256 encryption for data at rest and TLS 1.3 for in-transit communication. We maintain active SOC2 Type II certifications and comply with GDPR guidelines.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-xl bg-surface-container">
+            <div class="max-w-container-max mx-auto px-gutter">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                    <div class="glass-card p-lg rounded-2xl reveal">
+                        <div class="flex gap-1 text-secondary mb-sm">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface mb-lg italic">"NEURAVOX has completely redefined how our engineering team handles orchestration. The AI agents are incredibly reliable."</p>
+                        <div class="flex items-center gap-sm">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-xs text-on-primary-fixed">AS</div>
+                            <div>
+                                <div class="text-sm font-bold">Alex Sterling</div>
+                                <div class="text-[10px] text-on-surface-variant uppercase tracking-widest">CTO @ NexaFlow</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-lg rounded-2xl reveal">
+                        <div class="flex gap-1 text-secondary mb-sm">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface mb-lg italic">"The real-time insights saved us from a major deployment bottleneck last week. This is more than a tool; it's a teammate."</p>
+                        <div class="flex items-center gap-sm">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-secondary to-primary flex items-center justify-center font-bold text-xs text-on-secondary-container">SC</div>
+                            <div>
+                                <div class="text-sm font-bold">Sarah Chen</div>
+                                <div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Founder @ OrbitAI</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-lg rounded-2xl reveal">
+                        <div class="flex gap-1 text-secondary mb-sm">
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="font-body-md text-on-surface mb-lg italic">"Zero latency, high fidelity, and an aesthetic that finally matches our technical ambition. NEURAVOX is the future."</p>
+                        <div class="flex items-center gap-sm">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary-container to-secondary flex items-center justify-center font-bold text-xs text-white">JV</div>
+                            <div>
+                                <div class="text-sm font-bold">Jameson Vance</div>
+                                <div class="text-[10px] text-on-surface-variant uppercase tracking-widest">DevOps Lead @ Quantum</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section / Newsletter -->
+        <section class="py-xl">
+            <div class="max-w-container-max mx-auto px-gutter reveal">
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-container to-[#050505] p-xl text-center border border-white/10">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-secondary/10 blur-[120px] -translate-y-1/2"></div>
+                    <h2 class="font-headline-xl text-headline-xl mb-md">Ready To Automate Your Workflow?</h2>
+                    <p class="text-on-primary-container/80 max-w-xl mx-auto mb-lg text-lg">Join 500+ teams who are building the future of autonomous industry. Start your 14-day free trial today.</p>
+                    
+                    <div class="flex flex-wrap justify-center gap-md mb-xl">
+                        <a href="./dashboard.html" class="bg-white text-primary-container px-xl py-md rounded-xl font-bold hover:scale-105 transition-transform block">Get Started Now</a>
+                        <button onclick="openVideoDemo()" class="bg-primary-container/30 backdrop-blur-md border border-white/20 text-white px-xl py-md rounded-xl font-bold hover:bg-primary-container/40 transition-colors">Book a Live Demo</button>
+                    </div>
+
+                    <!-- Newsletter Form -->
+                    <div class="max-w-md mx-auto bg-surface-container-lowest/60 border border-white/10 p-md rounded-2xl backdrop-blur-md">
+                        <h4 class="text-white font-semibold mb-xs text-sm">Subscribe to the Vanguard Tech Report</h4>
+                        <p class="text-xs text-on-surface-variant mb-md">Receive weekly research on AI orchestration and neural architectures.</p>
+                        <form id="newsletter-form" onsubmit="handleNewsletter(event)" class="flex gap-xs">
+                            <input type="email" id="news-email" required placeholder="name@company.com" class="bg-black/50 border border-white/15 text-white text-sm rounded-xl px-sm py-xs flex-grow focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"/>
+                            <button type="submit" class="bg-primary hover:bg-primary-fixed text-on-primary-fixed text-sm font-bold px-md py-xs rounded-xl transition-colors">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-xl bg-surface-container-lowest border-t border-outline-variant/20 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-lg max-w-container-max mx-auto px-gutter">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-xs mb-md">
+                    <svg class="h-8 w-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="#4cd7f6" stroke-width="2.5" stroke-linejoin="round"/>
+                        <path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="#6d28d9" fill-opacity="0.8"/>
+                        <circle cx="20" cy="20" r="3" fill="#FFFFFF"/>
+                    </svg>
+                    <span class="font-bold text-lg text-primary tracking-tighter">NEURAVOX AI</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant opacity-80 text-xs">Engineered for the Intelligent Vanguard. Leading the era of autonomous operational intelligence.</p>
+            </div>
+            <div class="col-span-1">
+                <h4 class="font-bold text-white mb-md text-sm">Platform</h4>
+                <ul class="space-y-xs font-body-md text-on-surface-variant text-xs">
+                    <li><a class="hover:text-secondary transition-opacity" href="#features">Features</a></li>
+                    <li><a class="hover:text-secondary transition-opacity" href="./dashboard.html">Dashboard Console</a></li>
+                    <li><a class="hover:text-secondary transition-opacity" href="#pricing">Pricing</a></li>
+                    <li><a class="hover:text-secondary transition-opacity" href="./docs.html">Developer API docs</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h4 class="font-bold text-white mb-md text-sm">Company</h4>
+                <ul class="space-y-xs font-body-md text-on-surface-variant text-xs">
+                    <li><a class="hover:text-secondary transition-opacity" href="#">About Us</a></li>
+                    <li><a class="hover:text-secondary transition-opacity" href="#">Privacy Policy</a></li>
+                    <li><a class="hover:text-secondary transition-opacity" href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <h4 class="font-bold text-white mb-md text-sm">Join Our Community</h4>
+                <div class="flex gap-sm mb-md">
+                    <a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+                    <a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">hub</span></a>
+                    <a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-secondary transition-colors" href="#"><span class="material-symbols-outlined text-sm">rocket_launch</span></a>
+                </div>
+                <p class="text-[10px] text-on-surface-variant uppercase tracking-widest">© 2026 NEURAVOX AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Demo Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 flex items-center justify-center p-md bg-black/80 hidden opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-3xl glass-card rounded-2xl overflow-hidden border border-secondary/35">
+            <button onclick="closeVideoDemo()" class="absolute top-4 right-4 text-white hover:text-secondary z-10 bg-black/60 rounded-full w-8 h-8 flex items-center justify-center">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="aspect-video bg-black flex flex-col items-center justify-center p-xl text-center">
+                <span class="material-symbols-outlined text-secondary text-6xl mb-md animate-pulse">rocket_launch</span>
+                <h3 class="text-2xl font-bold text-white mb-xs">Neural Engine v4.2 Demo</h3>
+                <p class="text-on-surface-variant text-sm max-w-md mb-md">Streaming connection established. This simulation shows Neuravox compiling agent chains in real-time.</p>
+                <div class="w-full max-w-sm bg-white/5 border border-white/10 rounded-xl p-sm font-code text-xs text-left mb-md">
+                    <span class="text-secondary">&gt; neuravox run --agent data-analyst</span><br/>
+                    <span class="text-on-surface-variant">[11:00:25] Connecting clusters... Done (12ms)</span><br/>
+                    <span class="text-on-surface-variant">[11:00:26] Compiling neural graph... Active</span><br/>
+                    <span class="text-primary">[11:00:27] Output piped: Stream resolved. (Success 99.8%)</span>
+                </div>
+                <button onclick="closeVideoDemo()" class="glow-button-primary px-lg py-xs rounded-xl font-bold text-sm text-on-primary-fixed">Close Player</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Success Notification -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 glass-card border-secondary/40 px-lg py-md rounded-xl shadow-2xl flex items-center gap-sm translate-y-12 opacity-0 transition-all duration-400 pointer-events-none">
+        <span class="material-symbols-outlined text-secondary animate-bounce">check_circle</span>
+        <div>
+            <div class="font-bold text-sm text-white" id="toast-title">Subscribed!</div>
+            <div class="text-xs text-on-surface-variant" id="toast-desc">Welcome to the Intelligent Vanguard.</div>
+        </div>
+    </div>
+
+    <!-- Floating AI Chat Assistant -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Floating bubble button -->
+        <button onclick="toggleChat()" class="glow-button-primary w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-105 transition-transform relative">
+            <span class="material-symbols-outlined text-white text-2xl select-none" id="chat-icon">forum</span>
+            <span class="absolute top-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-black animate-ping"></span>
+            <span class="absolute top-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-black"></span>
+        </button>
+
+        <!-- Chat Panel -->
+        <div id="chat-panel" class="absolute bottom-16 right-0 w-[360px] max-w-[calc(100vw-2rem)] h-[480px] glass-card border-white/10 rounded-2xl flex flex-col shadow-2xl overflow-hidden translate-y-12 opacity-0 pointer-events-none transition-all duration-400">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-primary-container/80 to-[#100b21] p-md border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-xs">
+                    <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" stroke="#4cd7f6" stroke-width="2.5"/>
+                        <circle cx="20" cy="20" r="3" fill="#FFFFFF"/>
+                    </svg>
+                    <div>
+                        <div class="text-sm font-bold text-white">Vanguard AI Bot</div>
+                        <div class="text-[9px] text-secondary flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                            Online & thinking
+                        </div>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-on-surface-variant hover:text-white"><span class="material-symbols-outlined text-sm">close</span></button>
+            </div>
+
+            <!-- Messages area -->
+            <div class="flex-grow p-md overflow-y-auto space-y-md" id="chat-messages">
+                <!-- System message -->
+                <div class="bg-white/5 border border-white/5 p-sm rounded-xl text-xs text-on-surface-variant">
+                    Greeting, technical leader. I am Vanguard Bot. Ask me anything about NEURAVOX AI features, pricing, or developer setup.
+                </div>
+            </div>
+
+            <!-- Suggested chips -->
+            <div class="p-xs bg-black/20 border-t border-white/5 flex gap-xs overflow-x-auto whitespace-nowrap scrollbar-none" id="chat-chips">
+                <button onclick="sendChipQuestion('What is Neuravox?')" class="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-white px-sm py-1 rounded-full">What is Neuravox?</button>
+                <button onclick="sendChipQuestion('Show pricing tiers')" class="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-white px-sm py-1 rounded-full">Show pricing tiers</button>
+                <button onclick="sendChipQuestion('How secure is it?')" class="bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-white px-sm py-1 rounded-full">How secure is it?</button>
+            </div>
+
+            <!-- Input bar -->
+            <form onsubmit="handleChatSubmit(event)" class="p-sm bg-black/40 border-t border-white/10 flex gap-xs">
+                <input type="text" id="chat-input" placeholder="Type a question..." class="bg-black/50 border border-white/15 text-xs text-white rounded-xl px-sm py-xs flex-grow focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"/>
+                <button type="submit" class="bg-secondary text-on-secondary-container w-8 h-8 rounded-xl flex items-center justify-center font-bold hover:scale-105 transition-transform"><span class="material-symbols-outlined text-sm">send</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Reveal on scroll using IntersectionObserver
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -40px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+        // Header scroll transition
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            const headerContent = header.querySelector('div');
+            if (window.scrollY > 40) {
+                header.classList.add('navbar-scrolled');
+                headerContent.classList.remove('h-20');
+                headerContent.classList.add('h-16');
+            } else {
+                header.classList.remove('navbar-scrolled');
+                headerContent.classList.remove('h-16');
+                headerContent.classList.add('h-20');
+            }
+        });
+
+        // Hero mouse move glow tracker
+        const hero = document.getElementById('hero');
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            hero.style.setProperty('--mouse-x', `${x}px`);
+            hero.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Smooth scroll for nav anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Video Modal demo trigger
+        function openVideoDemo() {
+            const modal = document.getElementById('video-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+            }, 50);
+        }
+
+        function closeVideoDemo() {
+            const modal = document.getElementById('video-modal');
+            modal.classList.remove('opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Pricing Monthly/Yearly Toggle Logic
+        let isYearlyBilling = false;
+        function togglePricing(yearly) {
+            if (isYearlyBilling === yearly) return;
+            isYearlyBilling = yearly;
+
+            const btnMonthly = document.getElementById('btn-monthly');
+            const btnYearly = document.getElementById('btn-yearly');
+            const priceStarter = document.getElementById('price-starter');
+            const pricePro = document.getElementById('price-pro');
+            const periodStarter = document.getElementById('period-starter');
+            const periodPro = document.getElementById('period-pro');
+            const noteStarter = document.getElementById('yearly-note-starter');
+            const notePro = document.getElementById('yearly-note-pro');
+
+            // Apply fade out class
+            priceStarter.classList.add('price-changed');
+            pricePro.classList.add('price-changed');
+
+            setTimeout(() => {
+                if (isYearlyBilling) {
+                    btnMonthly.className = "px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 text-on-surface-variant hover:text-white";
+                    btnYearly.className = "px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 bg-primary text-on-primary-fixed flex items-center gap-1";
+                    
+                    priceStarter.innerText = "$39";
+                    pricePro.innerText = "$159";
+                    periodStarter.innerText = "/mo";
+                    periodPro.innerText = "/mo";
+                    
+                    noteStarter.innerText = "Billed annually ($468/yr)";
+                    notePro.innerText = "Billed annually ($1,908/yr)";
+                } else {
+                    btnMonthly.className = "px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 bg-primary text-on-primary-fixed";
+                    btnYearly.className = "px-sm py-1.5 rounded-full text-sm font-semibold transition-all duration-350 text-on-surface-variant hover:text-white flex items-center gap-1";
+                    
+                    priceStarter.innerText = "$49";
+                    pricePro.innerText = "$199";
+                    periodStarter.innerText = "/mo";
+                    periodPro.innerText = "/mo";
+                    
+                    noteStarter.innerText = "";
+                    notePro.innerText = "";
+                }
+                // Fade back in
+                priceStarter.classList.remove('price-changed');
+                pricePro.classList.remove('price-changed');
+            }, 200);
+        }
+
+        // FAQ Accordion logic
+        function toggleFaq(card) {
+            const isActive = card.classList.contains('faq-active');
+            const icon = card.querySelector('.material-symbols-outlined');
+            const answer = card.querySelector('.faq-answer');
+
+            // Reset all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('faq-active');
+                item.querySelector('.material-symbols-outlined').style.transform = "rotate(0deg)";
+                item.querySelector('.faq-answer').style.maxHeight = "0";
+            });
+
+            if (!isActive) {
+                card.classList.add('faq-active');
+                icon.style.transform = "rotate(180deg)";
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        }
+
+        // Newsletter validation & toast notification
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('news-email');
+            const email = emailInput.value.trim();
+
+            if (email && validateEmail(email)) {
+                showToast("Subscription Complete!", `Welcome ${email} to our weekly briefing.`);
+                emailInput.value = "";
+            } else {
+                showToast("Invalid Email", "Please enter a valid developer address.", true);
+            }
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showToast(title, desc, isError = false) {
+            const toast = document.getElementById('toast');
+            const tTitle = document.getElementById('toast-title');
+            const tDesc = document.getElementById('toast-desc');
+            const icon = toast.querySelector('.material-symbols-outlined');
+
+            tTitle.innerText = title;
+            tDesc.innerText = desc;
+
+            if (isError) {
+                toast.style.borderColor = "#ffb4ab";
+                icon.innerText = "error";
+                icon.className = "material-symbols-outlined text-error animate-bounce";
+            } else {
+                toast.style.borderColor = "#4cd7f6";
+                icon.innerText = "check_circle";
+                icon.className = "material-symbols-outlined text-secondary animate-bounce";
+            }
+
+            toast.classList.remove('translate-y-12', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-12', 'opacity-0');
+            }, 4000);
+        }
+
+        // Chat Widget Toggle Logic
+        let isChatOpen = false;
+        function toggleChat() {
+            isChatOpen = !isChatOpen;
+            const panel = document.getElementById('chat-panel');
+            const icon = document.getElementById('chat-icon');
+
+            if (isChatOpen) {
+                icon.innerText = "close";
+                panel.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+                panel.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                icon.innerText = "forum";
+                panel.classList.remove('translate-y-0', 'opacity-100');
+                panel.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Chat conversation handling
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addChatMessage(text, 'user');
+            input.value = "";
+            botReply(text);
+        }
+
+        function sendChipQuestion(question) {
+            addChatMessage(question, 'user');
+            botReply(question);
+        }
+
+        function addChatMessage(text, sender) {
+            const msgArea = document.getElementById('chat-messages');
+            const outerDiv = document.createElement('div');
+            outerDiv.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+            const innerDiv = document.createElement('div');
+            innerDiv.className = sender === 'user' 
+                ? 'bg-primary text-on-primary-fixed text-xs px-sm py-2 rounded-2xl rounded-tr-sm max-w-[80%]'
+                : 'bg-white/10 text-white text-xs px-sm py-2 rounded-2xl rounded-tl-sm max-w-[80%] border border-white/5';
+            
+            innerDiv.innerText = text;
+            outerDiv.appendChild(innerDiv);
+            msgArea.appendChild(outerDiv);
+            msgArea.scrollTop = msgArea.scrollHeight;
+        }
+
+        function botReply(userText) {
+            // Add thinking indicator
+            const msgArea = document.getElementById('chat-messages');
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'flex justify-start items-center gap-1 text-[10px] text-secondary';
+            thinkingDiv.id = 'thinking-indicator';
+            thinkingDiv.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span> thinking...';
+            msgArea.appendChild(thinkingDiv);
+            msgArea.scrollTop = msgArea.scrollHeight;
+
+            let response = "I'm connecting to the Neuravox cluster... Can you repeat your query or select a quick option?";
+            const query = userText.toLowerCase();
+
+            if (query.includes('what is') || query.includes('neuravox')) {
+                response = "Neuravox AI is an autonomous SaaS orchestrator. It lets enterprise technical teams construct AI agents that connect safely to codebases and execute complex API pipelines.";
+            } else if (query.includes('pricing') || query.includes('cost') || query.includes('tiers')) {
+                response = "Our tiers: Starter is $49/mo (5 agents, 10k runs). Pro is $199/mo (unlimited agents, 250k runs). Yearly plans get 20% off. Enterprise is tailored with dedicated clusters.";
+            } else if (query.includes('secure') || query.includes('soc2') || query.includes('safety')) {
+                response = "Security is SOC2 Type II audited. Data in transit runs over TLS 1.3 and at rest uses AES-256. We operate isolated cloud workspaces so your code never leaves your network.";
+            } else if (query.includes('deploy') || query.includes('get started')) {
+                response = "To get started, click the 'Get Started' button in our header to log into the Dashboard. You can instantiate agents, drag-and-drop workflow pipelines, and generate keys.";
+            }
+
+            setTimeout(() => {
+                // Remove thinking
+                const indicator = document.getElementById('thinking-indicator');
+                if (indicator) indicator.remove();
+
+                // Add message with typewriter effect
+                const outerDiv = document.createElement('div');
+                outerDiv.className = 'flex justify-start';
+
+                const innerDiv = document.createElement('div');
+                innerDiv.className = 'bg-white/10 text-white text-xs px-sm py-2 rounded-2xl rounded-tl-sm max-w-[80%] border border-white/5';
+                outerDiv.appendChild(innerDiv);
+                msgArea.appendChild(outerDiv);
+
+                let i = 0;
+                innerDiv.innerText = "";
+                const interval = setInterval(() => {
+                    innerDiv.innerText += response.charAt(i);
+                    i++;
+                    msgArea.scrollTop = msgArea.scrollHeight;
+                    if (i >= response.length) {
+                        clearInterval(interval);
+                    }
+                }, 15);
+
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

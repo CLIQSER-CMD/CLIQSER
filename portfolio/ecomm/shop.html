@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Shop | AUREN WEAR</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .product-image-container:hover .quick-add {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .product-image-container img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-image-container:hover img {
+            transform: scale(1.05);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcf9f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e2e2;
+        }
+        .mini-cart-overlay {
+            background-color: rgba(0,0,0,0.4);
+            transition: opacity 0.3s ease;
+        }
+        .mini-cart-panel {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mini-cart-panel.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f2",
+                        "surface": "#fcf9f8",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#474747",
+                        "on-surface-variant": "#4c4546",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary-container": "#848484",
+                        "primary": "#000000",
+                        "background": "#fcf9f8",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-tertiary-fixed-variant": "#454744",
+                        "on-surface": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#1a1c19",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dfe0e0",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "inverse-primary": "#c6c6c6",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#838480",
+                        "secondary": "#5d5f5f",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-secondary-container": "#616363",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#313030",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#cfc4c5",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5e5e5e",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-fixed-dim": "#c6c7c2",
+                        "tertiary-fixed": "#e3e3de",
+                        "on-secondary-fixed-variant": "#454747",
+                        "surface-container": "#f0eded",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#e2e2e2",
+                        "outline": "#7e7576",
+                        "on-tertiary-fixed": "#1a1c19",
+                        "on-background": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "stack-lg": "120px",
+                        "stack-md": "64px",
+                        "stack-sm": "32px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <!-- Top Navigation Shell -->
+    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md transition-all duration-300 border-b border-outline-variant/30" id="top-nav">
+        <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto" id="nav-container">
+            <div class="flex items-center gap-12">
+                <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+                <div class="hidden md:flex gap-8">
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-primary border-b border-primary pb-1" href="shop.html">Shop</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="shop.html">Collections</a>
+                    <a class="font-label-sm text-label-sm uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">About</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-primary">
+                <button class="hover:opacity-70 transition-opacity" onclick="toggleSearchModal()"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+                <button class="hover:opacity-70 transition-opacity relative" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                    <span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[8px] px-1 rounded-full cart-badge">0</span>
+                </button>
+                <button class="md:hidden hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-[120px]">
+        <!-- Page Header -->
+        <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-stack-md">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-outline-variant/30 pb-12">
+                <div>
+                    <h1 class="font-display-lg text-headline-lg uppercase mb-2">Shop All</h1>
+                    <p class="text-secondary max-w-md">Our core collection of essentials designed for the modern silhouette. Crafted with premium textiles and intentionality.</p>
+                </div>
+                <div class="flex items-center gap-8 self-end">
+                    <div class="flex items-center gap-2 cursor-pointer group">
+                        <span class="font-label-sm text-label-sm uppercase text-secondary group-hover:text-primary transition-colors">Sort By:</span>
+                        <select id="sortSelect" class="appearance-none bg-transparent border-none font-label-sm text-label-sm uppercase text-primary focus:ring-0 cursor-pointer pr-6 py-0" onchange="sortProducts()">
+                            <option value="newest">Newest</option>
+                            <option value="price-desc">Price: High-Low</option>
+                            <option value="price-asc">Price: Low-High</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listing Content -->
+        <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row gap-gutter pb-stack-lg">
+            <!-- Side Filters -->
+            <aside class="w-full md:w-64 flex-shrink-0 space-y-10 mb-12 md:mb-0">
+                <!-- Categories -->
+                <div>
+                    <h3 class="font-label-sm text-label-sm uppercase mb-6 tracking-widest text-primary">Category</h3>
+                    <ul class="space-y-4" id="categoryFilters">
+                        <li><a class="filter-cat text-primary font-medium hover:opacity-70 transition-opacity" href="#" data-cat="all">All Items</a></li>
+                        <li><a class="filter-cat text-secondary hover:text-primary transition-colors" href="#" data-cat="hoodies">Hoodies</a></li>
+                        <li><a class="filter-cat text-secondary hover:text-primary transition-colors" href="#" data-cat="t-shirts">T-Shirts</a></li>
+                        <li><a class="filter-cat text-secondary hover:text-primary transition-colors" href="#" data-cat="jackets">Jackets & Coats</a></li>
+                        <li><a class="filter-cat text-secondary hover:text-primary transition-colors" href="#" data-cat="knitwear">Knitwear</a></li>
+                    </ul>
+                </div>
+                <!-- Size -->
+                <div>
+                    <h3 class="font-label-sm text-label-sm uppercase mb-6 tracking-widest text-primary">Size</h3>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button class="aspect-square border border-outline hover:border-primary text-label-sm flex items-center justify-center transition-all">XS</button>
+                        <button class="aspect-square border border-primary bg-primary text-on-primary text-label-sm flex items-center justify-center transition-all">S</button>
+                        <button class="aspect-square border border-outline hover:border-primary text-label-sm flex items-center justify-center transition-all">M</button>
+                        <button class="aspect-square border border-outline hover:border-primary text-label-sm flex items-center justify-center transition-all">L</button>
+                        <button class="aspect-square border border-outline hover:border-primary text-label-sm flex items-center justify-center transition-all">XL</button>
+                    </div>
+                </div>
+                <!-- Color -->
+                <div>
+                    <h3 class="font-label-sm text-label-sm uppercase mb-6 tracking-widest text-primary">Color</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="w-6 h-6 rounded-full bg-primary border border-outline ring-offset-2 ring-1 ring-primary"></button>
+                        <button class="w-6 h-6 rounded-full bg-[#E5E4E2] border border-outline-variant hover:ring-1 hover:ring-secondary transition-all ring-offset-2"></button>
+                        <button class="w-6 h-6 rounded-full bg-[#2C3E50] border border-outline-variant hover:ring-1 hover:ring-secondary transition-all ring-offset-2"></button>
+                        <button class="w-6 h-6 rounded-full bg-[#F5F5DC] border border-outline-variant hover:ring-1 hover:ring-secondary transition-all ring-offset-2"></button>
+                    </div>
+                </div>
+                <!-- Price Range -->
+                <div>
+                    <h3 class="font-label-sm text-label-sm uppercase mb-6 tracking-widest text-primary">Price</h3>
+                    <input class="w-full accent-primary bg-outline-variant h-1 rounded-full appearance-none" max="1500" min="0" step="50" type="range" value="1500" id="priceRange" oninput="filterByPrice(this.value)"/>
+                    <div class="flex justify-between mt-4 text-label-sm text-secondary">
+                        <span>$0</span>
+                        <span id="priceDisplay">$1,500</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-gutter" id="productsGrid">
+                <!-- Product 1: Featured Span -->
+                <div class="lg:col-span-2 group product-item" data-category="jackets" data-price="450" data-date="2">
+                    <div class="product-image-container relative aspect-[16/10] overflow-hidden bg-surface-container-low">
+                        <a href="product.html?id=archival-wool-overcoat">
+                            <img class="w-full h-full object-cover" alt="Archival Wool Overcoat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-EdmhJrKg-Tcg86cnUN1BMfoHQlm0rGP6oHBM4xtxAND3qy3M1TDMBrXcjGagYuJ7uXlz_bVpCs6p1HpFh1F9iCbAI8aer3eH5aEXEe1fGLxWRn0lxdqV1-Gtu5WBQdTq4bLZDTioCw3MBZGnRw6nUO8_eo5ZX9CVnG6aoED4gZJEiIlCYDVbxE7VY40JHaOeSTu1h0OjkVXcntE_1ZtwnUW4cSgqI1qGupLZQuW4Ql31zA3quJB1H5YpKm8EW-owi3UPhLTNwPE"/>
+                        </a>
+                        <button class="quick-add absolute bottom-0 left-0 w-full py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest opacity-0 translate-y-2 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'archival-wool-overcoat', name: 'Archival Wool Overcoat', price: 450.00, size: 'M', color: 'Black', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD-EdmhJrKg-Tcg86cnUN1BMfoHQlm0rGP6oHBM4xtxAND3qy3M1TDMBrXcjGagYuJ7uXlz_bVpCs6p1HpFh1F9iCbAI8aer3eH5aEXEe1fGLxWRn0lxdqV1-Gtu5WBQdTq4bLZDTioCw3MBZGnRw6nUO8_eo5ZX9CVnG6aoED4gZJEiIlCYDVbxE7VY40JHaOeSTu1h0OjkVXcntE_1ZtwnUW4cSgqI1qGupLZQuW4Ql31zA3quJB1H5YpKm8EW-owi3UPhLTNwPE', quantity: 1})">Quick Add — $450</button>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <a href="product.html?id=archival-wool-overcoat" class="hover:underline"><h2 class="text-body-md font-medium text-primary">Archival Wool Overcoat</h2></a>
+                            <p class="text-label-sm text-secondary uppercase mt-1">Jackets &amp; Coats</p>
+                        </div>
+                        <span class="text-body-md">$450</span>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="group product-item" data-category="hoodies" data-price="180" data-date="1">
+                    <div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+                        <a href="product.html?id=heavyweight-box-hoodie">
+                            <img class="w-full h-full object-cover" alt="Heavyweight Box Hoodie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqwdvOITpdqniQMdtatz0-0V1CKKzmM4qMONEOtZZOYJOXXwsv6iLI2WU3xeTyMJE6Z46Culdau2Hlw8sV6Q2OliV3LWtTI9L-i7ySgWPRfj5Jl6Y4V5on4QYmHIiSvsiv7lE2sRbF2lbogJqusuMVqHUxcsBidBAszEGkUTp3BhCAug3j4ORNwhFiuQKD4ErIn8AQGs5dqQgS5TqWWXlRTDHAUauiQgnliSR-rIPxsypSNtr2lRG5pQ4nCoXWZOjgg_C-63vGUuo"/>
+                        </a>
+                        <button class="quick-add absolute bottom-0 left-0 w-full py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest opacity-0 translate-y-2 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'heavyweight-box-hoodie', name: 'Heavyweight Box Hoodie', price: 180.00, size: 'M', color: 'Oatmeal', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqwdvOITpdqniQMdtatz0-0V1CKKzmM4qMONEOtZZOYJOXXwsv6iLI2WU3xeTyMJE6Z46Culdau2Hlw8sV6Q2OliV3LWtTI9L-i7ySgWPRfj5Jl6Y4V5on4QYmHIiSvsiv7lE2sRbF2lbogJqusuMVqHUxcsBidBAszEGkUTp3BhCAug3j4ORNwhFiuQKD4ErIn8AQGs5dqQgS5TqWWXlRTDHAUauiQgnliSR-rIPxsypSNtr2lRG5pQ4nCoXWZOjgg_C-63vGUuo', quantity: 1})">Quick Add — $180</button>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <a href="product.html?id=heavyweight-box-hoodie" class="hover:underline"><h2 class="text-body-md font-medium text-primary">Heavyweight Box Hoodie</h2></a>
+                            <p class="text-label-sm text-secondary uppercase mt-1">Hoodies</p>
+                        </div>
+                        <span class="text-body-md">$180</span>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="group product-item" data-category="t-shirts" data-price="85" data-date="3">
+                    <div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+                        <a href="product.html?id=core-supima-tee">
+                            <img class="w-full h-full object-cover" alt="Core Supima Tee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVMJwk1biC5MeI0q7wpovumCelp4bwPvt4siUJWSGuIcs5692JU6smQrB8tqVIWrCAQncTS3-R4VeQoKlTTbSv2TIAU-bswxvmVPvUpvgHJ8c9D4NXiswHi64wSKY69uinlj91tErEhcFFrN5bQiko7Y9Aa99sxdnvBBZ8JZU_-iwVDWGtAAcb6vbqSbGTlG6qoMsAqUSkOEev1R9DvgyiQlLZ9uuNdIJVP2fBe8icNU5CNwSGExG8NBfk6ijX8QjtwXL3lUhGWKA"/>
+                        </a>
+                        <button class="quick-add absolute bottom-0 left-0 w-full py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest opacity-0 translate-y-2 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'core-supima-tee', name: 'Core Supima Tee', price: 85.00, size: 'M', color: 'Off-White', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCVMJwk1biC5MeI0q7wpovumCelp4bwPvt4siUJWSGuIcs5692JU6smQrB8tqVIWrCAQncTS3-R4VeQoKlTTbSv2TIAU-bswxvmVPvUpvgHJ8c9D4NXiswHi64wSKY69uinlj91tErEhcFFrN5bQiko7Y9Aa99sxdnvBBZ8JZU_-iwVDWGtAAcb6vbqSbGTlG6qoMsAqUSkOEev1R9DvgyiQlLZ9uuNdIJVP2fBe8icNU5CNwSGExG8NBfk6ijX8QjtwXL3lUhGWKA', quantity: 1})">Quick Add — $85</button>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <a href="product.html?id=core-supima-tee" class="hover:underline"><h2 class="text-body-md font-medium text-primary">Core Supima Tee</h2></a>
+                            <p class="text-label-sm text-secondary uppercase mt-1">T-Shirts</p>
+                        </div>
+                        <span class="text-body-md">$85</span>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="group product-item" data-category="jackets" data-price="220" data-date="5">
+                    <div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+                        <a href="product.html?id=raw-edge-denim">
+                            <img class="w-full h-full object-cover" alt="Raw Edge Denim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwq3LDPgkc4oJESlUwCvbID4kyUbY6AUOn6fHST51JaQ_Pty_9slsqMhamk63mkqiaNNZUjVrPqy4pFNRrreKLrnvs7OgsDTbRmqux-zjntBqRCMXARQYz_nCU0DKyFjJuXPcLq7oG2jsbwL-6o3myPYGmOLotabtFiCcOZsd13qSmTjoM0bl67ZoYMwWDlAYVLyV3EkIo6TSxccKDYKZhIlnHpbjaZf1KkVtYk-4KrvwVuTNJQV8XDjWyflvkI2Cd6NM9LECfta4"/>
+                        </a>
+                        <button class="quick-add absolute bottom-0 left-0 w-full py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest opacity-0 translate-y-2 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'raw-edge-denim', name: 'Raw Edge Denim', price: 220.00, size: 'M', color: 'Raw Indigo', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDwq3LDPgkc4oJESlUwCvbID4kyUbY6AUOn6fHST51JaQ_Pty_9slsqMhamk63mkqiaNNZUjVrPqy4pFNRrreKLrnvs7OgsDTbRmqux-zjntBqRCMXARQYz_nCU0DKyFjJuXPcLq7oG2jsbwL-6o3myPYGmOLotabtFiCcOZsd13qSmTjoM0bl67ZoYMwWDlAYVLyV3EkIo6TSxccKDYKZhIlnHpbjaZf1KkVtYk-4KrvwVuTNJQV8XDjWyflvkI2Cd6NM9LECfta4', quantity: 1})">Quick Add — $220</button>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <a href="product.html?id=raw-edge-denim" class="hover:underline"><h2 class="text-body-md font-medium text-primary">Raw Edge Denim</h2></a>
+                            <p class="text-label-sm text-secondary uppercase mt-1">Jackets</p>
+                        </div>
+                        <span class="text-body-md">$220</span>
+                    </div>
+                </div>
+                <!-- Product 5 -->
+                <div class="group product-item" data-category="knitwear" data-price="310" data-date="4">
+                    <div class="product-image-container relative aspect-[3/4] overflow-hidden bg-surface-container-low">
+                        <a href="product.html?id=cashmere-crew">
+                            <img class="w-full h-full object-cover" alt="Cashmere Crew" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwfKJcmAVQLymeGUWlkih5myuQIMNK3KDI3uSvIc_RZI2J3NubSyf41sS81AyWvLP823JMZZiMLngxnU57HbaBSZWRPQIEscjpMAQoennrAXQvpfPdjqhPJN5nsuvNLPiBOs9WApldI1plXuOodne-q_5M8XzHWXnwJFNZPrhqVFZjgHfa3s18B_Wwh5y9yZSnN-MYGKZNYHJkZHaUe9a0znFme_M5QL9f5OT_YJPNTM9Nygul330zXDc3BIr5sS-d7PMUI16RClc"/>
+                        </a>
+                        <button class="quick-add absolute bottom-0 left-0 w-full py-4 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest opacity-0 translate-y-2 transition-all duration-300" onclick="event.stopPropagation(); addToCart({id: 'cashmere-crew', name: 'Cashmere Crew', price: 310.00, size: 'M', color: 'Charcoal Grey', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAwfKJcmAVQLymeGUWlkih5myuQIMNK3KDI3uSvIc_RZI2J3NubSyf41sS81AyWvLP823JMZZiMLngxnU57HbaBSZWRPQIEscjpMAQoennrAXQvpfPdjqhPJN5nsuvNLPiBOs9WApldI1plXuOodne-q_5M8XzHWXnwJFNZPrhqVFZjgHfa3s18B_Wwh5y9yZSnN-MYGKZNYHJkZHaUe9a0znFme_M5QL9f5OT_YJPNTM9Nygul330zXDc3BIr5sS-d7PMUI16RClc', quantity: 1})">Quick Add — $310</button>
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <a href="product.html?id=cashmere-crew" class="hover:underline"><h2 class="text-body-md font-medium text-primary">Cashmere Crew</h2></a>
+                            <p class="text-label-sm text-secondary uppercase mt-1">Knitwear</p>
+                        </div>
+                        <span class="text-body-md">$310</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Shell -->
+    <footer class="bg-surface-container-lowest border-t border-outline-variant/50 w-full py-stack-md">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="space-y-6">
+                <h2 class="font-display-lg text-headline-md text-primary">AUREN</h2>
+                <p class="text-on-surface-variant font-body-md max-w-xs">Understated opulence for the discerning individual.</p>
+            </div>
+            <div>
+                <h4 class="font-label-sm text-label-sm uppercase text-primary mb-6">Quick Links</h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="shop.html">New Arrivals</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="shop.html">Best Sellers</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="#">The Archive</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-sm text-label-sm uppercase text-primary mb-6">Support</h4>
+                <ul class="space-y-4 font-body-md">
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="#">Shipping &amp; Returns</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="#">Size Guide</a></li>
+                    <li><a class="text-on-surface-variant hover:text-primary hover:underline underline-offset-4 decoration-1 transition-all" href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-sm text-label-sm uppercase text-primary mb-6">Newsletter</h4>
+                <p class="text-on-surface-variant text-body-md mb-4">Join for exclusive access.</p>
+                <form class="flex border-b border-outline py-2" onsubmit="event.preventDefault(); alert('Subscribed to newsletter.'); this.reset();">
+                    <input class="bg-transparent border-none focus:ring-0 w-full text-body-md p-0" placeholder="Email Address" type="email" required/>
+                    <button class="text-primary hover:opacity-70 transition-opacity" type="submit">
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-20 pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-label-sm text-secondary uppercase tracking-widest">© 2024 AUREN WEAR. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-6">
+                <a class="text-label-sm text-secondary uppercase tracking-widest hover:text-primary" href="#">Privacy</a>
+                <a class="text-label-sm text-secondary uppercase tracking-widest hover:text-primary" href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal Overlay -->
+    <div id="searchModal" class="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm hidden flex items-start justify-center pt-24 px-4" onclick="toggleSearchModal()">
+        <div class="bg-white w-full max-w-2xl p-8 border-b border-outline shadow-2xl relative" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between border-b border-primary pb-2">
+                <input type="text" id="searchInput" class="w-full bg-transparent border-none text-2xl font-body-md focus:ring-0 outline-none placeholder:text-outline p-0" placeholder="Search AUREN WEAR..." oninput="handleSearch(this.value)"/>
+                <button onclick="toggleSearchModal()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+            </div>
+            <div class="mt-8 space-y-4">
+                <p class="font-label-sm text-secondary uppercase tracking-widest text-[10px]">Popular Searches</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="product.html?id=sculpted-wool-overcoat" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Wool Overcoat</a>
+                    <a href="product.html?id=essential-heavy-hoodie" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Heavy Hoodie</a>
+                    <a href="product.html?id=classic-minimal-tee" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Minimal Tee</a>
+                    <a href="product.html?id=urban-tech-sneaker" class="border border-outline-variant hover:border-primary px-4 py-2 text-sm transition-all uppercase font-label-sm tracking-wider text-[11px]">Tech Sneaker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenuDrawer" class="fixed inset-0 z-[100] bg-white hidden flex flex-col p-8 transition-all duration-300">
+        <div class="flex justify-between items-center mb-12">
+            <a class="font-display-lg text-headline-md tracking-tighter text-primary" href="index.html">AUREN</a>
+            <button onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-primary text-2xl">close</span></button>
+        </div>
+        <nav class="flex flex-col gap-6 text-2xl font-label-sm uppercase tracking-widest">
+            <a href="index.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Home</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Shop</a>
+            <a href="shop.html" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4">Collections</a>
+            <a href="#" class="hover:text-primary transition-colors border-b border-outline-variant/10 pb-4" onclick="toggleMobileMenu()">About</a>
+            <a href="#" class="hover:text-primary transition-colors pb-4" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+        <div class="mt-auto space-y-6">
+            <button onclick="toggleMobileMenu(); toggleSearchModal();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left pb-4 border-b border-outline-variant/10">
+                <span class="material-symbols-outlined">search</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">Search Catalog</span>
+            </button>
+            <button onclick="toggleMobileMenu(); toggleMiniCart();" class="flex items-center gap-4 text-secondary hover:text-primary w-full text-left">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="font-label-sm uppercase tracking-widest text-xs">View Bag (<span class="cart-badge">0</span>)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mini-Cart Drawer (Slide-out panel) -->
+    <div class="fixed inset-0 z-[100] mini-cart-overlay hidden" id="miniCartOverlay" onclick="toggleMiniCart()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-[450px] bg-white shadow-2xl flex flex-col mini-cart-panel" id="miniCartPanel" onclick="event.stopPropagation()">
+            <div class="p-8 flex justify-between items-center border-b border-outline-variant/30">
+                <h2 class="font-headline-md uppercase tracking-tight" id="miniCartTitle">Your Cart (0)</h2>
+                <button class="hover:opacity-50 transition-opacity" onclick="toggleMiniCart()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <!-- Cart Items (Rendered by cart.js) -->
+            <div class="flex-grow overflow-y-auto p-8 space-y-8" id="miniCartItems">
+                <!-- Dynamic Items -->
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="p-8 border-t border-outline-variant/30 bg-surface-container-low">
+                <div class="flex justify-between font-headline-md mb-6 uppercase tracking-tight">
+                    <span>Subtotal</span>
+                    <span id="miniCartSubtotal">$0.00</span>
+                </div>
+                <a href="checkout.html" class="block w-full bg-primary text-on-primary py-5 font-label-sm uppercase tracking-widest text-center hover:opacity-90 mb-4 transition-all duration-300">
+                    Checkout Now
+                </a>
+                <p class="text-center text-xs text-on-surface-variant uppercase tracking-tighter">
+                    Taxes and shipping calculated at checkout
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+    <script>
+        let selectedCategory = 'all';
+        let maxPrice = 1500;
+
+        // Initialize Category Filter Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const catFilters = document.querySelectorAll('.filter-cat');
+            catFilters.forEach(filter => {
+                filter.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Reset styling
+                    catFilters.forEach(f => {
+                        f.classList.remove('text-primary', 'font-medium');
+                        f.classList.add('text-secondary');
+                    });
+                    
+                    // Style selected
+                    filter.classList.remove('text-secondary');
+                    filter.classList.add('text-primary', 'font-medium');
+                    
+                    selectedCategory = filter.getAttribute('data-cat');
+                    applyFilters();
+                });
+            });
+        });
+
+        // Price filtering helper
+        function filterByPrice(val) {
+            maxPrice = parseInt(val);
+            document.getElementById('priceDisplay').textContent = `$${maxPrice.toLocaleString()}`;
+            applyFilters();
+        }
+
+        // Apply both category and price filters
+        function applyFilters() {
+            const items = document.querySelectorAll('.product-item');
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const itemPrice = parseInt(item.getAttribute('data-price'));
+                
+                const matchesCat = (selectedCategory === 'all' || itemCat === selectedCategory);
+                const matchesPrice = (itemPrice <= maxPrice);
+                
+                if (matchesCat && matchesPrice) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Sorting functionality
+        function sortProducts() {
+            const grid = document.getElementById('productsGrid');
+            const items = Array.from(grid.querySelectorAll('.product-item'));
+            const sortVal = document.getElementById('sortSelect').value;
+
+            items.sort((a, b) => {
+                const priceA = parseInt(a.getAttribute('data-price'));
+                const priceB = parseInt(b.getAttribute('data-price'));
+                const dateA = parseInt(a.getAttribute('data-date'));
+                const dateB = parseInt(b.getAttribute('data-date'));
+
+                if (sortVal === 'price-asc') {
+                    return priceA - priceB;
+                } else if (sortVal === 'price-desc') {
+                    return priceB - priceA;
+                } else { // newest (based on mockup order)
+                    return dateA - dateB;
+                }
+            });
+
+            // Re-append items in sorted order
+            items.forEach(item => grid.appendChild(item));
+        }
+
+        // Realtime Search filtering
+        function handleSearch(query) {
+            query = query.toLowerCase().trim();
+            const items = document.querySelectorAll('.product-item');
+            items.forEach(item => {
+                const title = item.querySelector('h2').textContent.toLowerCase();
+                const category = item.querySelector('p').textContent.toLowerCase();
+                if (title.includes(query) || category.includes(query)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

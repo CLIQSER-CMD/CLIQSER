@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VELORA LUXE | Seasonal Menu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#775a19",
+              "primary-container": "#c5a059",
+              "on-primary-container": "#4e3700",
+              secondary: "#705a4c",
+              tertiary: "#5f5e5e",
+              background: "#fcf9f3",
+              "on-background": "#1c1c18",
+              surface: "#fcf9f3",
+              "on-surface": "#1c1c18",
+              "on-surface-variant": "#4e4639",
+              outline: "#7f7667",
+              "outline-variant": "#d1c5b4",
+              "inverse-surface": "#31312d",
+              "surface-container-low": "#f6f3ed",
+              "surface-container-high": "#ebe8e2",
+              "surface-container-highest": "#e5e2dc"
+            },
+            spacing: {
+              "stack-lg": "64px",
+              "stack-md": "32px",
+              "stack-sm": "16px",
+              "margin-desktop": "80px",
+              "margin-mobile": "24px",
+              gutter: "24px"
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container pt-28">
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 z-[60] bg-primary text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-90" id="backToTop">
+        <span class="material-symbols-outlined">north</span>
+    </button>
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl border-b border-primary/10 py-3 shadow-lg" id="mainNav">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+                <img alt="VELORA" class="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105" src="assets/images/logo.png"/>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="index.html">Home</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-primary hover:text-primary transition-colors duration-400" href="menu.html">Menu</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="about.html">Philosophy</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="reservation.html">Reservations</a>
+                <a class="nav-link font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-400" href="contact.html">Contact</a>
+            </div>
+            
+            <!-- Desktop Action -->
+            <div class="hidden md:block">
+                <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 inline-block rounded-sm">
+                    Book A Table
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-on-surface hover:text-primary transition-colors duration-300 z-50" id="mobileMenuToggle">
+                <span class="material-symbols-outlined text-3xl" id="menuIcon">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="fixed inset-0 bg-background/98 z-45 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 ease-in-out md:hidden" id="mobileMenu">
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest text-primary hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="about.html">Philosophy</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="reservation.html">Reservations</a>
+            <a class="text-2xl font-headline-sm uppercase tracking-widest hover:text-primary transition-colors" href="contact.html">Contact</a>
+            <a href="reservation.html" class="shimmer-btn bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 mt-4 rounded-sm">
+                Book A Table
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="py-stack-md bg-surface text-center">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <span class="font-label-md text-label-md text-primary uppercase tracking-widest block mb-2">Signature Offerings</span>
+            <h1 class="font-display-lg text-4xl md:text-6xl text-on-surface font-serif mb-4">Our Seasonal Menu</h1>
+            <p class="font-body-lg text-lg text-on-surface-variant max-w-2xl mx-auto font-light font-sans">
+                Each plate is a curated canvas reflecting seasonal micro-harvests and artisan techniques. Select a category below to explore.
+            </p>
+        </div>
+    </header>
+
+    <!-- Interactive Tabs Navigation -->
+    <section class="py-4 border-y border-outline-variant/30 bg-surface-container-low sticky top-[68px] z-40">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop flex justify-center gap-2 md:gap-8 overflow-x-auto whitespace-nowrap">
+            <button class="menu-tab px-6 py-3 font-label-md text-label-md uppercase tracking-widest border-b-2 border-primary text-primary transition-all duration-300" onclick="switchTab('all')">All Menu</button>
+            <button class="menu-tab px-6 py-3 font-label-md text-label-md uppercase tracking-widest border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all duration-300" onclick="switchTab('starters')">Starters</button>
+            <button class="menu-tab px-6 py-3 font-label-md text-label-md uppercase tracking-widest border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all duration-300" onclick="switchTab('mains')">Mains</button>
+            <button class="menu-tab px-6 py-3 font-label-md text-label-md uppercase tracking-widest border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all duration-300" onclick="switchTab('desserts')">Desserts</button>
+            <button class="menu-tab px-6 py-3 font-label-md text-label-md uppercase tracking-widest border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all duration-300" onclick="switchTab('drinks')">Drinks</button>
+        </div>
+    </section>
+
+    <!-- Menu Cards Grid -->
+    <section class="py-stack-lg bg-surface">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            
+            <div id="menuContainer" class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+                <!-- Items will be injected dynamically -->
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Seating Plan Reservation Callout -->
+    <section class="py-stack-lg bg-surface-container-high border-t border-outline-variant/20">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <h2 class="font-display-lg text-3xl md:text-5xl text-on-surface font-serif mb-4">Ready to Experience Velora?</h2>
+            <p class="font-body-md text-base text-on-surface-variant mb-stack-md max-w-xl mx-auto">
+                Reserve your table via our interactive seating map to select your preferred dining room.
+            </p>
+            <a href="reservation.html" class="shimmer-btn inline-block bg-primary text-white px-8 py-4 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 rounded-sm">
+                Reserve Table Seating
+            </a>
+        </div>
+    </section>
+
+    <!-- Detailed Dish Modal (Glassmorphism Overlays) -->
+    <div id="dishModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card-dark max-w-2xl w-full p-8 md:p-12 relative text-white rounded-lg max-h-[90vh] overflow-y-auto transform translate-y-8 transition-transform duration-300">
+            <!-- Close Button -->
+            <button class="absolute top-6 right-6 text-white/70 hover:text-primary-container transition-colors" onclick="closeModal()">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <span id="modalCategory" class="text-primary-container font-label-md text-xs uppercase tracking-widest">Category</span>
+                    <h3 id="modalName" class="text-3xl md:text-4xl font-serif text-white">Dish Title</h3>
+                    <div class="text-2xl font-serif text-primary-container" id="modalPrice">€00</div>
+                </div>
+
+                <hr class="border-white/10"/>
+
+                <div class="space-y-4">
+                    <h4 class="font-label-md uppercase tracking-widest text-primary-container">Culinary Story</h4>
+                    <p id="modalDesc" class="text-white/80 font-light leading-relaxed">Dish description story goes here.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                    <div>
+                        <h4 class="font-label-md uppercase tracking-widest text-primary-container mb-2">Ingredients</h4>
+                        <ul id="modalIngredients" class="list-disc list-inside text-sm text-white/80 space-y-1 font-light">
+                            <!-- Injected -->
+                        </ul>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-label-md uppercase tracking-widest text-primary-container mb-1">Wine Pairing</h4>
+                            <p id="modalPairing" class="text-sm text-white/80 italic font-serif">Pairing suggestion.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-label-md uppercase tracking-widest text-primary-container mb-1">Dietary Tags</h4>
+                            <div id="modalAllergens" class="flex flex-wrap gap-2 pt-1">
+                                <!-- Injected -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-white/10"/>
+
+                <div class="flex flex-col sm:flex-row gap-4 items-center justify-between pt-2">
+                    <p class="text-xs text-white/50 italic">Chef's Signature Recommendation</p>
+                    <a href="reservation.html" class="shimmer-btn bg-primary text-white px-6 py-3 font-label-md text-label-md uppercase tracking-widest hover:bg-primary-container hover:text-on-primary-container transition-all duration-400 text-center rounded-sm">
+                        Book To Taste
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-surface-variant/80 py-stack-lg border-t border-outline-variant/20">
+        <div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg">
+                <div class="md:col-span-1">
+                    <span class="font-headline-md text-3xl text-primary block mb-4 font-serif">VELORA</span>
+                    <p class="font-body-md text-base font-light">Refining the art of culinary excellence through sensory innovation and artisan heritage.</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Explore</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="menu.html">Menu</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="about.html">Our Philosophy</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="reservation.html">Reservations</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="contact.html">Contact Us</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Connect</span>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Instagram</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Facebook</a>
+                    <a class="hover:text-primary transition-colors duration-300" href="#">Twitter</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-2">Newsletter</span>
+                    <div class="relative group">
+                        <input class="w-full bg-white/5 border-0 border-b border-white/20 focus:ring-0 focus:border-primary py-2 text-white transition-all duration-500 group-focus-within:border-primary" placeholder="Email Address" type="email"/>
+                        <button class="absolute right-0 bottom-2 text-primary transition-transform duration-500 hover:translate-x-1">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-stack-md border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-body-md text-sm uppercase tracking-widest">© 2026 VELORA DINING. ARTISAN GASTRONOMY.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">public</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">restaurant</span>
+                    <span class="material-symbols-outlined hover:text-primary cursor-pointer transition-all duration-300 hover:scale-110">wine_bar</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dish Database
+        const dishData = [
+            {
+                id: "tuna-tartare",
+                category: "starters",
+                name: "Atlantic Tuna Tartare",
+                price: "€28",
+                desc: "Yellowfin tuna hand-cut and seasoned with estate olive oil, fresh citrus juice, and sea salt. Structured delicately over a cold-pressed avocado mousse, sprinkled with micro-radish shoots and edible violas.",
+                ingredients: ["Yellowfin Tuna", "Hass Avocado", "Finger Lime", "Cold-Pressed Olive Oil", "Edible Violas"],
+                pairing: "Domaine Vacheron Sancerre (Sauvignon Blanc)",
+                allergens: ["Gluten-Free", "Nut-Free"]
+            },
+            {
+                id: "burrata",
+                category: "starters",
+                name: "Heirloom Burrata",
+                price: "€24",
+                desc: "Creamy Burrata di Bufala served with a selection of summer heirloom cherry tomatoes. Finished with a drizzle of house basil chlorophyll oil, micro-basil leaves, and aged modena balsamic reduction.",
+                ingredients: ["Burrata di Bufala", "Heirloom Tomatoes", "Basil Leaves", "Aged Balsamic", "Fleur de Sel"],
+                pairing: "Pieropan Soave Classico",
+                allergens: ["Gluten-Free", "Vegetarian", "Nut-Free"]
+            },
+            {
+                id: "mushroom-soup",
+                category: "starters",
+                name: "Velora Truffle Forest Chowder",
+                price: "€26",
+                desc: "Slow-roasted chanterelles, porcinis, and cremini mushrooms pureed with slow-cooked shallots and garlic. Served warm with a float of local white truffle oil and crispy golden parsnip skin flakes.",
+                ingredients: ["Chanterelles & Porcinis", "Vegetable Bouillon", "White Truffle Oil", "Golden Parsnip", "Fresh Thyme"],
+                pairing: "Louis Jadot Pouilly-Fuissé (Chardonnay)",
+                allergens: ["Gluten-Free", "Vegetarian", "Nut-Free"]
+            },
+            {
+                id: "beef-medallion",
+                category: "mains",
+                name: "Dry-Aged Beef Medallion",
+                price: "€58",
+                desc: "Center-cut prime beef tenderloin dry-aged for 32 days, pan-seared with butter and rosemary. Plated over smooth caramelized onion reduction, garnished with black winter truffle slices, baby carrots, and rich demiglace.",
+                ingredients: ["32-day Beef Tenderloin", "Winter Black Truffles", "Caramelized Red Onion", "Heritage Baby Carrots", "Bordeaux Demi-glace"],
+                pairing: "Château Talbot Saint-Julien (Cabernet Sauvignon)",
+                allergens: ["Gluten-Free", "Nut-Free"]
+            },
+            {
+                id: "sea-bass",
+                category: "mains",
+                name: "Roasted Patagonian Sea Bass",
+                price: "€52",
+                desc: "Flaky roasted sea bass loin, nestled in a light saffron-fennel infusion with fresh steamed surf clams, blanched sea beans, and charred cherry tomatoes. Evokes the fresh sensory aromas of the ocean breeze.",
+                ingredients: ["Patagonian Sea Bass", "Saffron Threads", "Surf Clams", "Sea Beans", "Fennel Bulb"],
+                pairing: "William Fèvre Chablis Premier Cru",
+                allergens: ["Gluten-Free", "Nut-Free"]
+            },
+            {
+                id: "tagliolini",
+                category: "mains",
+                name: "Wild Ramp & Pecorino Tagliolini",
+                price: "€42",
+                desc: "Handmade semolina egg pasta tossed in a light emulsified sauce of melted butter, fresh wild ramp paste, and Pecorino Sardo. Shaved over with summer truffles and toasted crushed pine nuts.",
+                ingredients: ["Egg Tagliolini Pasta", "Wild Ramp Garlic Pesto", "Pecorino Sardo", "Shaved Summer Truffles", "Toasted Pine Nuts"],
+                pairing: "Gaja Pieve Santa Restituta Brunello di Montalcino",
+                allergens: ["Vegetarian"]
+            },
+            {
+                id: "chocolate-sphere",
+                category: "desserts",
+                name: "Golden Valrhona Dome",
+                price: "€22",
+                desc: "A hand-crafted thin shell of 72% Valrhona dark chocolate. Melted tableside with a warm poured salted-caramel syrup to reveal a center of hazelnut praline mousse and gold leaf flakes.",
+                ingredients: ["Valrhona Chocolate 72%", "Hazelnut Praline", "Salted Butter Caramel", "Edible 24k Gold Leaf", "Tahitian Vanilla Ganache"],
+                pairing: "Taylor's 20 Year Old Tawny Port",
+                allergens: ["Vegetarian"]
+            },
+            {
+                id: "souffle",
+                category: "desserts",
+                name: "Madagascar Soufflé",
+                price: "€20",
+                desc: "Light and airy oven-risen vanilla soufflé incorporating premium Madagascar beans. Served hot with a side carafe of orange Grand Marnier sauce and wild raspberry coulis pour-over.",
+                ingredients: ["Madagascar Vanilla Beans", "Grand Marnier", "Free-Range Egg Whites", "Fresh Raspberries"],
+                pairing: "Château d'Yquem Sauternes",
+                allergens: ["Vegetarian", "Nut-Free", "Gluten-Free"]
+            },
+            {
+                id: "lemon-tart",
+                category: "desserts",
+                name: "Velora Lemon Basil Tart",
+                price: "€18",
+                desc: "Crisp almond shortbread crust filled with smooth, tangy yellow lemon curd. Patterned with drops of sweet basil whipped white chocolate ganache and candied lemon zest curls.",
+                ingredients: ["Almond Shortbread", "Yellow Lemons", "Sweet Basil Leaf", "Valrhona Opalys Chocolate", "Candied Zest Curls"],
+                pairing: "Disznókő Tokaji Aszú 5 Puttonyos",
+                allergens: ["Vegetarian"]
+            },
+            {
+                id: "old-fashioned",
+                category: "drinks",
+                name: "Smoked Rosemary Old Fashioned",
+                price: "€24",
+                desc: "Single-barrel Woodford Reserve Bourbon stirred with angostura bitters and organic demerara sugar syrup. Captured under a glass dome infused with burning rosemary smoke, served over a clear ice sphere.",
+                ingredients: ["Woodford Reserve Bourbon", "Angostura Bitters", "Demerara Syrup", "Fresh Rosemary Sprigs"],
+                pairing: "Charcuterie Board Selection",
+                allergens: ["Gluten-Free", "Nut-Free", "Vegan", "Vegetarian"]
+            },
+            {
+                id: "gold-nectar",
+                category: "drinks",
+                name: "Royal Gold Nectar",
+                price: "€26",
+                desc: "A luxurious champagne cocktail. Hennessy VSOP Cognac, St-Germain Elderflower liqueur, and Dom Pérignon champagne, sparkling with suspended, floating flakes of edible 24k gold leaf.",
+                ingredients: ["Dom Pérignon Champagne", "Hennessy Cognac", "St-Germain Elderflower Liqueur", "Edible Gold Flakes"],
+                pairing: "Oysters on the Half Shell",
+                allergens: ["Gluten-Free", "Nut-Free", "Vegan", "Vegetarian"]
+            },
+            {
+                id: "mojito",
+                category: "drinks",
+                name: "Lavender Fields Mojito",
+                price: "€20",
+                desc: "Havana Club rum muddled with fresh mint leaves, squeezed lime, and house-brewed lavender syrup. Topped with soda water and garnished with a sprig of fresh lavender flowers.",
+                ingredients: ["Havana Club Rum", "Organic Mint", "Fresh Lime", "House Lavender Syrup", "Club Soda"],
+                pairing: "Heirloom Tomato Burrata",
+                allergens: ["Gluten-Free", "Nut-Free", "Vegan", "Vegetarian"]
+            }
+        ];
+
+        // Switch category tabs
+        function switchTab(category) {
+            // Update Active Tab Style
+            const tabs = document.querySelectorAll('.menu-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('border-primary', 'text-primary');
+                tab.classList.add('border-transparent', 'text-on-surface-variant');
+            });
+            
+            // Highlight current tab
+            const activeTab = Array.from(tabs).find(tab => 
+                tab.getAttribute('onclick').includes(category)
+            );
+            if (activeTab) {
+                activeTab.classList.remove('border-transparent', 'text-on-surface-variant');
+                activeTab.classList.add('border-primary', 'text-primary');
+            }
+
+            renderMenu(category);
+        }
+
+        // Render menu items
+        function renderMenu(category) {
+            const container = document.getElementById('menuContainer');
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+                
+                const filtered = category === 'all' 
+                    ? dishData 
+                    : dishData.filter(d => d.category === category);
+                
+                filtered.forEach(dish => {
+                    const dishCard = document.createElement('div');
+                    dishCard.className = 'glass-card p-6 flex flex-col justify-between cursor-pointer hover:-translate-y-1 transition-all duration-300 reveal active';
+                    dishCard.onclick = () => openModal(dish.id);
+                    
+                    dishCard.innerHTML = `
+                        <div class="space-y-4">
+                            <div class="dotted-leader">
+                                <span class="name font-serif">${dish.name}</span>
+                                <span class="dots"></span>
+                                <span class="price">${dish.price}</span>
+                            </div>
+                            <p class="font-body-md text-sm text-on-surface-variant font-light line-clamp-2">${dish.desc}</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-4 text-xs uppercase tracking-widest text-primary font-semibold">
+                            <span>${dish.category}</span>
+                            <span class="inline-flex items-center gap-1">Details <span class="material-symbols-outlined text-sm">open_in_new</span></span>
+                        </div>
+                    `;
+                    container.appendChild(dishCard);
+                });
+                
+                container.style.opacity = '1';
+            }, 300);
+        }
+
+        // Modal triggers
+        function openModal(id) {
+            const dish = dishData.find(d => d.id === id);
+            if (!dish) return;
+
+            document.getElementById('modalCategory').textContent = dish.category;
+            document.getElementById('modalName').textContent = dish.name;
+            document.getElementById('modalPrice').textContent = dish.price;
+            document.getElementById('modalDesc').textContent = dish.desc;
+            document.getElementById('modalPairing').textContent = dish.pairing;
+
+            const ingList = document.getElementById('modalIngredients');
+            ingList.innerHTML = '';
+            dish.ingredients.forEach(ing => {
+                const li = document.createElement('li');
+                li.textContent = ing;
+                ingList.appendChild(li);
+            });
+
+            const allergenContainer = document.getElementById('modalAllergens');
+            allergenContainer.innerHTML = '';
+            dish.allergens.forEach(tag => {
+                const badge = document.createElement('span');
+                badge.className = 'bg-primary/20 text-primary-fixed-dim border border-primary/30 px-2 py-1 text-xs rounded-sm';
+                badge.textContent = tag;
+                allergenContainer.appendChild(badge);
+            });
+
+            const modal = document.getElementById('dishModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card-dark').classList.remove('translate-y-8');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('dishModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card-dark').classList.add('translate-y-8');
+        }
+
+        // Close modal when clicking outside card
+        document.getElementById('dishModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('dishModal')) {
+                closeModal();
+            }
+        });
+
+        // Mobile menu drawer
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                menuIcon.textContent = 'menu';
+            } else {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // Initialize state based on URL parameters
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const initialCat = params.get('cat') || 'all';
+            switchTab(initialCat);
+        });
+
+        // Back to Top button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
