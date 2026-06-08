@@ -235,45 +235,18 @@
                         </div>
                     </div>
 
-                    <!-- Services Checkboxes -->
                     <div class="flex flex-col gap-xs">
-                        <label class="font-code text-xs text-on-surface-variant uppercase tracking-wider mb-xs">Services of Interest</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">
-                            <label class="flex items-center gap-sm p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/10 cursor-pointer hover:border-primary/40 transition-colors">
-                                <input type="checkbox" class="rounded text-primary focus:ring-primary bg-surface-container border-outline-variant/20" value="Web Dev"/>
-                                <span>Website Development</span>
-                            </label>
-                            <label class="flex items-center gap-sm p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/10 cursor-pointer hover:border-primary/40 transition-colors">
-                                <input type="checkbox" class="rounded text-primary focus:ring-primary bg-surface-container border-outline-variant/20" value="App Dev"/>
-                                <span>App Development</span>
-                            </label>
-                            <label class="flex items-center gap-sm p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/10 cursor-pointer hover:border-primary/40 transition-colors">
-                                <input type="checkbox" class="rounded text-primary focus:ring-primary bg-surface-container border-outline-variant/20" value="AI Automation"/>
-                                <span>AI Automation &amp; Bots</span>
-                            </label>
-                            <label class="flex items-center gap-sm p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/10 cursor-pointer hover:border-primary/40 transition-colors">
-                                <input type="checkbox" class="rounded text-primary focus:ring-primary bg-surface-container border-outline-variant/20" value="UI UX"/>
-                                <span>UI/UX Design</span>
-                            </label>
-                        </div>
+                        <label class="font-code text-xs text-on-surface-variant uppercase tracking-wider">Subject</label>
+                        <input required class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-md focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Project Discussion" type="text" id="inq-subject"/>
                     </div>
 
                     <div class="flex flex-col gap-xs">
-                        <label class="font-code text-xs text-on-surface-variant uppercase tracking-wider">Timeline</label>
-                        <select class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-md focus:ring-primary focus:border-primary transition-all outline-none" id="inq-timeline">
-                            <option value="urgent">Urgent (&lt; 1 month)</option>
-                            <option value="standard">1 - 3 months</option>
-                            <option value="flexible">3+ months</option>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col gap-xs">
-                        <label class="font-code text-xs text-on-surface-variant uppercase tracking-wider">Project Description</label>
-                        <textarea required class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-md focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Provide details about what you want to construct..." rows="4" id="inq-desc"></textarea>
+                        <label class="font-code text-xs text-on-surface-variant uppercase tracking-wider">Your Message</label>
+                        <textarea required class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-md focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Provide details about what you want to construct..." rows="4" id="inq-message"></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-primary text-on-primary font-bold py-md rounded-lg btn-hover shadow-lg shadow-primary/20">
-                        Submit Inquiry
+                        Send Message
                     </button>
                 </form>
 
@@ -366,9 +339,8 @@
 
         const name = document.getElementById('inq-name').value;
         const email = document.getElementById('inq-email').value;
-        const services = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(el => el.value).join(', ');
-        const timeline = document.getElementById('inq-timeline').value;
-        const desc = document.getElementById('inq-desc').value;
+        const subject = document.getElementById('inq-subject').value;
+        const message = document.getElementById('inq-message').value;
 
         fetch("https://formsubmit.co/ajax/Cliqser73@gmail.com", {
             method: "POST",
@@ -379,26 +351,25 @@
             body: JSON.stringify({
                 name: name,
                 email: email,
-                "services of interest": services || "None selected",
-                timeline: timeline,
-                message: desc
+                subject: subject,
+                message: message
             })
         })
         .then(response => {
             submitBtn.disabled = false;
-            submitBtn.innerText = 'Submit Inquiry';
+            submitBtn.innerText = 'Send Message';
             if (response.ok) {
                 form.classList.add('hidden');
                 dialog.classList.remove('hidden');
             } else {
-                alert("Failed to send inquiry. Please try again.");
+                alert("Failed to send message. Please try again.");
             }
         })
         .catch(error => {
             submitBtn.disabled = false;
-            submitBtn.innerText = 'Submit Inquiry';
+            submitBtn.innerText = 'Send Message';
             console.error(error);
-            alert("Error sending inquiry. Please try again.");
+            alert("Error sending message. Please try again.");
         });
     }
 
